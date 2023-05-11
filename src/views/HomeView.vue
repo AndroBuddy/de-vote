@@ -1,9 +1,11 @@
 <script setup>
-import HelloWorld from '../components/HelloWorld.vue';
+// import HelloWorld from '../components/HelloWorld.vue';
+import SideBar from '../components/SideBar.vue';
 </script>
 
 <template>
   <main>
-    <HelloWorld />
+    <SideBar />
+    <!-- <HelloWorld /> -->
   </main>
 </template>
