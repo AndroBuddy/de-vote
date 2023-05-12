@@ -1,18 +1,15 @@
 @import './base.css';
 
 #app {
-  margin: 0;
-  font-weight: normal;
-  background-color: #FBFBFB;
-  height: 100vh;
+  @apply m-0 font-normal bg-[#f7f7f7f7] h-screen;
 }
 
 .router-link-active,
 .router-link-active > svg {
-  @apply text-[#42b983] stroke-black/60;
+  @apply text-[#aaaaaa] stroke-[#aaaaaa];
 }
 
 .router-link-exact-active,
 .router-link-exact-active > svg {
-  @apply text-black font-semibold stroke-black;
+  @apply text-black font-bold stroke-black;
 }

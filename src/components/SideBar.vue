@@ -9,6 +9,17 @@ import IconSettings from './icons/IconSettings.vue';
 
 import IconLogout from './icons/IconLogout.vue';
 
+import anime from 'animejs/lib/anime.es.js';
+
+const slideIn = () => {
+    anime({
+        targets: 'nav',
+        translateX: [0, '-100%'],
+        duration: 1000,
+        easing: 'linear'
+    });
+}
+
 const navGraph = [
     [
         {
@@ -75,10 +86,10 @@ const navGraph = [
                 </section>
 
                 <div>
-                    <a href='/' class='flex gap-4 items-center'>
+                    <div @click='slideIn' class='flex gap-4 items-center'>
                         <IconLogout />
                         <span class='text-red-600'>Logout</span>
-                    </a>
+                    </div>
                 </div>
             </section>
         </section>
