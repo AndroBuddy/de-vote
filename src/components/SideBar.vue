@@ -29,29 +29,29 @@ const navGraph = [
         },
         {
             name: 'Active Bids',
-            path: '/about',
+            path: '/active-bids',
             icon: IconActiveBids,
         },
         {
             name: 'Favorites',
-            path: '/about',
+            path: '/active-bids',
             icon: IconFavorites,
         },
     ],
     [
         {
             name: 'Add Product',
-            path: '/about',
+            path: '/active-bids',
             icon: IconAdd,
         },
         {
             name: 'Account',
-            path: '/about',
+            path: '/active-bids',
             icon: IconAccount,
         },
         {
             name: 'Settings',
-            path: '/about',
+            path: '/active-bids',
             icon: IconSettings,
         },
     ]
