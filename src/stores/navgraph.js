@@ -13,16 +13,19 @@ export const useNavGraphStore = defineStore('navgraph', () => {
     [
       {
         name: 'Home',
+        id: 'home',
         path: '/',
         icon: IconHome
       },
       {
         name: 'Active Bids',
+        id: 'active-bids',
         path: '/active-bids',
         icon: IconActiveBids
       },
       {
         name: 'Favorites',
+        id: 'favorites',
         path: '/active-bids',
         icon: IconFavorites
       }
@@ -30,16 +33,19 @@ export const useNavGraphStore = defineStore('navgraph', () => {
     [
       {
         name: 'Add Product',
+        id: 'add',
         path: '/active-bids',
         icon: IconAdd
       },
       {
         name: 'Account',
+        id: 'account',
         path: '/active-bids',
         icon: IconAccount
       },
       {
         name: 'Settings',
+        id: 'settings',
         path: '/active-bids',
         icon: IconSettings
       }

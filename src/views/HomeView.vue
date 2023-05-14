@@ -10,7 +10,7 @@ const testItems = [
 </script>
 
 <template>
-  <section class="flex flex-col px-24 py-14 flex-grow gap-12">
+  <section class="flex flex-col px-14 py-14 flex-grow gap-12 self-center">
     <section class="flex flex-col gap-10">
       <ContentPanel title="Recent Auctions" :items="testItems" />
       <ContentPanel title=" High Value Bids" :items="testItems" />
