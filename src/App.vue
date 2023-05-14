@@ -75,7 +75,7 @@ function slideInOut() {
   <main class="flex h-screen">
     <SideBar @slide-in-out="slideInOut" />
     <div class="flex flex-col flex-grow overflow-auto">
-      <SearchBar class="px-14 mt-10" />
+      <SearchBar class="px-4 md:px-14" />
       <RouterView />
     </div>
   </main>

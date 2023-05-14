@@ -15,7 +15,7 @@
     @apply font-semibold;
   }
   h4 {
-    @apply text-sm text-[#aaaaaa];
+    @apply text-xs lg:text-sm text-[#aaaaaa];
   }
 }
 
