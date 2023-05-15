@@ -5,6 +5,7 @@ import SearchBar from './components/SearchBar.vue'
 import { useMainStore } from './stores/main'
 
 import anime from 'animejs/lib/anime.es.js'
+import BottomBar from './components/BottomBar.vue'
 
 const store = useMainStore()
 function slideInOut() {
@@ -73,9 +74,10 @@ function slideInOut() {
 
 <template>
   <main class="flex h-screen">
-    <SideBar @slide-in-out="slideInOut" />
+    <SideBar class="hidden md:block" @slide-in-out="slideInOut" />
+    <BottomBar class="block md:hidden" />
     <div class="flex flex-col flex-grow overflow-auto">
-      <SearchBar class="px-4 md:px-14" />
+      <SearchBar />
       <RouterView />
     </div>
   </main>

@@ -1,24 +1,30 @@
 <script setup>
-import { useNavGraphStore } from '@/stores/navgraph'
+import { useNavGraphStore } from '../stores/navgraph'
 import { useMainStore } from '../stores/main'
 import IconLogout from './icons/IconLogout.vue'
+import { onMounted } from 'vue';
 
 const store = useNavGraphStore()
 const collapseState = useMainStore()
+
+onMounted(() => {
+  if (window.innerWidth < 1024) {
+    collapseState.setCollapse()
+  }
+})
 </script>
 
 <template>
-  <nav class="z-20 w-80 overflow-clip shrink-0">
-    <section class="flex flex-col gap-14 p-14 w-full bg-white h-screen rounded-t-3xl rounded-b-3xl">
-      <section id="brand" class="cursor-pointer" @click="$emit('slideInOut')">
-        <div
-          id="logo"
-          class="bg-black text-white py-[0.3rem] px-[0.4rem] rounded-lg font-semibold text-sm absolute"
-          :class="[collapseState.collapsed ? '' : 'hidden']"
-        >
+  <nav class="z-20 w-80 overflow-clip shrink-0" :class="[collapseState.collapsed ? 'w-[4.5rem]' : 'w-80']">
+    <section class="flex flex-col gap-14 p-14 w-full bg-white h-screen rounded-t-3xl rounded-b-3xl"
+      :class="[collapseState.collapsed ? 'px-6 py-14' : 'p-14']">
+      <section id="brand" class="cursor-pointer" :class="[collapseState.collapsed ? '-m-[0.4rem]' : 'm-0']"
+        @click="$emit('slideInOut')">
+        <div id="logo" class="bg-black text-white py-[0.3rem] px-[0.4rem] rounded-lg font-semibold text-sm absolute"
+          :class="[collapseState.collapsed ? 'scale-100' : 'scale-0']">
           !m
         </div>
-        <h1>!much</h1>
+        <h1 :class="[collapseState.collapsed ? 'opacity-0' : 'opacity-100']">!much</h1>
       </section>
       <section class="flex flex-col justify-between flex-grow">
         <section class="flex flex-col gap-8 overflow-clip">
