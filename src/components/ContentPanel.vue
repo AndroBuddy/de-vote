@@ -20,8 +20,8 @@ const store = useMainStore()
         <!-- Replace with img -->
         <h3>{{ item.name }}</h3>
         <div class="flex justify-between items-center">
-          <span>{{ item.price }}</span>
-          <span class="text-green-500 bg-green-500/10 px-2 py-1 rounded-lg">+{{ item.quickBid }}</span>
+          <h4>{{ item.price }}</h4>
+          <h4 class="text-green-500 bg-green-500/10 px-2 py-1 rounded-lg">+{{ item.quickBid }}</h4>
         </div>
       </div>
       <section class="sticky top-0 right-0 flex items-center h-full p-6 bg-gradient-to-l from-[#f7f7f7f7]"></section>

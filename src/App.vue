@@ -1,7 +1,7 @@
 <script setup>
 import { RouterView } from 'vue-router'
 import SideBar from './components/SideBar.vue'
-import SearchBar from './components/SearchBar.vue'
+import HeaderBar from './components/HeaderBar.vue'
 import { useMainStore } from './stores/main'
 
 import anime from 'animejs/lib/anime.es.js'
@@ -77,7 +77,7 @@ function slideInOut() {
     <SideBar class="hidden md:block" @slide-in-out="slideInOut" />
     <BottomBar class="block md:hidden" />
     <div class="flex flex-col flex-grow overflow-auto">
-      <SearchBar />
+      <HeaderBar />
       <RouterView />
     </div>
   </main>

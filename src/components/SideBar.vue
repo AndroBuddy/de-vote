@@ -1,8 +1,8 @@
 <script setup>
 import { useNavGraphStore } from '../stores/navgraph'
 import { useMainStore } from '../stores/main'
-import IconLogout from './icons/IconLogout.vue'
 import { onMounted } from 'vue';
+import LogoutControl from './parts/LogoutControl.vue';
 
 const store = useNavGraphStore()
 const collapseState = useMainStore()
@@ -28,7 +28,7 @@ onMounted(() => {
       </section>
       <section class="flex flex-col justify-between flex-grow">
         <section class="flex flex-col gap-8 overflow-clip">
-          <ul class="flex flex-col gap-8 text-black/60">
+          <ul class="flex flex-col gap-8 text-black/40">
             <li v-for="(navItem, index) in store.navGraph[0]" :key="index">
               <router-link :to="navItem.path" class="flex gap-4 items-center">
                 <component class="shrink-0" :is="navItem.icon" />
@@ -37,7 +37,7 @@ onMounted(() => {
             </li>
           </ul>
           <div class="border-[1px]" />
-          <ul class="flex flex-col gap-8 text-black/60">
+          <ul class="flex flex-col gap-8 text-black/40">
             <li v-for="(navItem, index) in store.navGraph[1]" :key="index">
               <router-link :to="navItem.path" class="flex gap-4 items-center">
                 <component class="shrink-0" :is="navItem.icon" />
@@ -47,11 +47,14 @@ onMounted(() => {
           </ul>
         </section>
 
-        <div class="flex gap-4 items-center overflow-clip">
-          <IconLogout class="shrink-0" />
-          <span class="text-red-600 flex-grow whitespace-nowrap">Logout</span>
-        </div>
+        <LogoutControl />
       </section>
     </section>
   </nav>
 </template>
+
+<style scoped>
+svg {
+  @apply stroke-black/30;
+}
+</style>

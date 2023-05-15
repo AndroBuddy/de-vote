@@ -9,10 +9,10 @@
     @apply text-2xl font-semibold;
   }
   h2 {
-    @apply text-xl font-semibold;
+    @apply text-base sm:text-xl font-semibold;
   }
   h3 {
-    @apply font-semibold;
+    @apply text-sm sm:text-base font-semibold;
   }
   h4 {
     @apply text-xs lg:text-sm text-[#aaaaaa];
