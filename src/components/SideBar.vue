@@ -1,6 +1,5 @@
 <script setup>
-import { useNavGraphStore } from '../stores/navgraph'
-import { useMainStore } from '../stores/main'
+import { useMainStore, useNavGraphStore } from '../stores/main'
 import { onMounted } from 'vue';
 import LogoutControl from './parts/LogoutControl.vue';
 

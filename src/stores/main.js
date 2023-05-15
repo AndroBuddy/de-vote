@@ -1,6 +1,15 @@
 import { defineStore } from 'pinia'
 import { ref, shallowRef } from 'vue'
 
+import anime from 'animejs/lib/anime.es.js'
+
+import IconHome from '../components/icons/IconHome.vue'
+import IconActiveBids from '../components/icons/IconActiveBids.vue'
+import IconFavorites from '../components/icons/IconFavorites.vue'
+import IconAdd from '../components/icons/IconAdd.vue'
+import IconAccount from '../components/icons/IconAccount.vue'
+import IconSettings from '../components/icons/IconSettings.vue'
+
 export const useMainStore = defineStore('main', () => {
   const isAuth = ref(true) // testing
   const userProfile = shallowRef({
@@ -40,4 +49,119 @@ export const useMainStore = defineStore('main', () => {
     setAuth,
     setProfileImg
   }
+})
+
+export const useNavGraphStore = defineStore('navgraph', () => {
+  const navGraph = shallowRef([
+    [
+      {
+        name: 'Home',
+        id: 'home',
+        path: '/',
+        icon: IconHome
+      },
+      {
+        name: 'Active Bids',
+        id: 'active-bids',
+        path: '/active-bids',
+        icon: IconActiveBids
+      },
+      {
+        name: 'Favorites',
+        id: 'favorites',
+        path: '/favorites',
+        icon: IconFavorites
+      }
+    ],
+    [
+      {
+        name: 'Add Product',
+        id: 'add',
+        path: '/add-product',
+        icon: IconAdd
+      },
+      {
+        name: 'Account',
+        id: 'account',
+        path: '/account',
+        icon: IconAccount
+      },
+      {
+        name: 'Settings',
+        id: 'settings',
+        path: '/settings',
+        icon: IconSettings
+      }
+    ]
+  ])
+
+  return { navGraph }
+})
+
+export const useAnimeStore = defineStore('anime', () => {
+  const store = useMainStore()
+  function slideInOut() {
+    if (!store.collapsed) {
+      anime
+        .timeline({
+          targets: 'nav',
+          width: ['20rem', '4.5rem'],
+          duration: 1000,
+          easing: 'easeInOutSine'
+        })
+        .add({
+          targets: 'nav > section',
+          padding: ['3.5rem 3.5rem 3.5rem 3.5rem', '3.5rem 1.5rem 3.5rem 1.5rem']
+        })
+
+      anime
+        .timeline({
+          targets: '#brand > h1',
+          opacity: [1, 0]
+        })
+        .add({
+          targets: '#brand',
+          margin: [0, '0 0 0 -0.4rem']
+        })
+
+      anime({
+        targets: '#logo',
+        scale: [0, 1],
+        delay: 600
+      })
+
+      store.setCollapse()
+    } else {
+      anime
+        .timeline({
+          targets: 'nav',
+          width: ['4.5rem', '20rem'],
+          duration: 1000,
+          easing: 'easeInOutSine'
+        })
+        .add({
+          targets: 'nav > section',
+          padding: ['3.5rem 1.5rem 3.5rem 1.5rem', '3.5rem 3.5rem 3.5rem 3.5rem']
+        })
+
+      anime({
+        targets: '#logo',
+        scale: [1, 0]
+      })
+
+      anime
+        .timeline({
+          targets: '#brand',
+          margin: ['0 0 0 -0.4rem', 0]
+        })
+        .add({
+          targets: '#brand > h1',
+          opacity: [0, 1]
+        })
+
+      store.setCollapse()
+    }
+  }
+
+  return { slideInOut }
 })

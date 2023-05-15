@@ -1,5 +1,5 @@
 <script setup>
-import { useNavGraphStore } from '../stores/navgraph'
+import { useNavGraphStore } from '../stores/main'
 
 const store = useNavGraphStore()
 </script>

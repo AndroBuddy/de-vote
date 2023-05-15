@@ -1,6 +1,5 @@
 <script setup>
-import { useNavGraphStore } from '../stores/navgraph'
-import { useMainStore } from '../stores/main'
+import { useMainStore, useNavGraphStore } from '../stores/main'
 import IconClose from './icons/IconClose.vue';
 
 import anime from 'animejs/lib/anime.es';
@@ -29,7 +28,8 @@ onMounted(() => {
           <h3>Guest</h3>
         </router-link>
         <router-link to="" class="flex gap-4 items-center" v-else>
-          <img :src="mainStore.setProfileImg()" class="w-12 h-12 rounded-full bg-white flex items-center justify-center" />
+          <img :src="mainStore.setProfileImg()"
+            class="w-12 h-12 rounded-full bg-white flex items-center justify-center" />
           <span class="flex flex-col">
             <h3>{{ mainStore.userProfile.name }}</h3>
             <h4>{{ mainStore.userProfile.username }}</h4>
@@ -49,3 +49,9 @@ onMounted(() => {
     </section>
   </nav>
 </template>
+
+<style scoped>
+svg {
+  @apply stroke-black/30;
+}
+</style>

@@ -13,6 +13,26 @@ const router = createRouter({
       path: '/active-bids',
       name: 'active-bids',
       component: () => import('../views/ActiveBidsView.vue')
+    },
+    {
+      path: '/favorites',
+      name: 'favorites',
+      component: () => import('../views/FavoritesView.vue')
+    },
+    {
+      path: '/add-product',
+      name: 'add-product',
+      component: () => import('../views/AddProductView.vue')
+    },
+    {
+      path: '/account',
+      name: 'account',
+      component: () => import('../views/AccountView.vue')
+    },
+    {
+      path: '/settings',
+      name: 'settings',
+      component: () => import('../views/SettingsView.vue')
     }
   ]
 })

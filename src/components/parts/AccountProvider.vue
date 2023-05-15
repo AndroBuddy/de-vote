@@ -16,7 +16,7 @@ const store = useMainStore()
       </div>
     </section>
     <section v-else>
-      <router-link to="" class="hidden lg:flex gap-4 items-center">
+      <router-link to="/account" class="hidden lg:flex gap-4 items-center">
         <img :src="store.setProfileImg()" class="w-12 h-12 rounded-full bg-white flex items-center justify-center" />
         <span class="flex flex-col">
           <h3>{{ store.userProfile.name }}</h3>
