@@ -27,8 +27,4 @@ const store = useNavGraphStore()
 .router-link-exact-active>* {
   @apply stroke-green-500 text-green-500 !important;
 }
-
-svg {
-  @apply stroke-black/30;
-}
 </style>

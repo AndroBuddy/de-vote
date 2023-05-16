@@ -1,17 +1,7 @@
 <template>
-  <svg
-    width="20"
-    height="21"
-    viewBox="0 0 20 21"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    class="stroke-black/60"
-  >
+  <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg" class="stroke-black/40">
     <path
       d="M10.516 17.8413C10.2327 17.9413 9.76601 17.9413 9.48268 17.8413C7.06601 17.0163 1.66602 13.5747 1.66602 7.74134C1.66602 5.16634 3.74102 3.08301 6.29935 3.08301C7.81601 3.08301 9.15768 3.81634 9.99935 4.94967C10.4275 4.37124 10.9852 3.90111 11.6277 3.57696C12.2702 3.25281 12.9797 3.08364 13.6993 3.08301C16.2577 3.08301 18.3327 5.16634 18.3327 7.74134C18.3327 13.5747 12.9327 17.0163 10.516 17.8413Z"
-      stroke-width="1.5"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-    />
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
   </svg>
 </template>

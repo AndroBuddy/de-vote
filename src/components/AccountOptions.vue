@@ -40,7 +40,7 @@ onMounted(() => {
         <li v-for="(navItem, index) in navStore.navGraph[1]" :key="index">
           <router-link :to="navItem.path" class="flex gap-4 items-center">
             <component class="shrink-0" :is="navItem.icon" />
-            <span class="flex-grow whitespace-nowrap">{{ navItem.name }}</span>
+            <span class="flex-grow whitespace-nowrap text-black/40">{{ navItem.name }}</span>
           </router-link>
         </li>
         <div class="border-[1px]" />
@@ -49,9 +49,3 @@ onMounted(() => {
     </section>
   </nav>
 </template>
-
-<style scoped>
-svg {
-  @apply stroke-black/30;
-}
-</style>

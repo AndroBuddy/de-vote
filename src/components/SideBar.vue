@@ -51,9 +51,3 @@ onMounted(() => {
     </section>
   </nav>
 </template>
-
-<style scoped>
-svg {
-  @apply stroke-black/30;
-}
-</style>
