@@ -1,5 +1,5 @@
 <script setup>
-import { useMainStore } from '../stores/main'
+import { useAnimeStore, useMainStore } from '../stores/main'
 
 defineProps({
   title: String,
@@ -7,6 +7,14 @@ defineProps({
 })
 
 const store = useMainStore()
+
+function slideIn() {
+  if (window.innerWidth >= 1024) {
+    const animeStore = useAnimeStore()
+    if (!store.collapsed)
+      animeStore.slideIn()
+  }
+}
 </script>
 
 <template>
@@ -15,7 +23,8 @@ const store = useMainStore()
     <div class="flex whitespace-nowrap flex-nowrap overflow-auto gap-8 relative -ml-20">
       <section class="sticky top-0 left-0 flex items-center h-full p-6 bg-gradient-to-r from-[#f7f7f7f7] z-10"
         :class="[store.collapsed ? '' : 'translate-x-6']"></section>
-      <div v-for="item in items" :key="item.id" class="flex flex-col bg-white p-4 md:p-6 rounded-2xl w-80 shrink-0">
+      <router-link :to="item.uri" @click="slideIn" v-for="item in items" :key="item.id"
+        class="flex flex-col bg-white p-4 md:p-6 rounded-2xl w-80 shrink-0">
         <div class="h-60 bg-black/5 rounded-xl mb-4"></div>
         <!-- Replace with img -->
         <h3>{{ item.name }}</h3>
@@ -23,7 +32,7 @@ const store = useMainStore()
           <h4>{{ item.price }}</h4>
           <h4 class="text-green-500 bg-green-500/10 px-2 py-1 rounded-lg">+{{ item.quickBid }}</h4>
         </div>
-      </div>
+      </router-link>
       <section class="sticky top-0 right-0 flex items-center h-full p-6 bg-gradient-to-l from-[#f7f7f7f7]"></section>
     </div>
   </div>

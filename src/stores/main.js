@@ -98,70 +98,84 @@ export const useNavGraphStore = defineStore('navgraph', () => {
   return { navGraph }
 })
 
+export const useProductStore = defineStore('products', () => {
+  const productsList = [
+    { name: 'Product 1', id: '1', uri: '/p/product1', img: '', price: '$10', quickBid: '$2' },
+    { name: 'Product 2', id: '2', uri: '/p/product2', img: '', price: '$20', quickBid: '$5' },
+    { name: 'Product 3', id: '3', uri: '/p/product3', img: '', price: '$13', quickBid: '$4' },
+    { name: 'Product 4', id: '4', uri: '/p/product4', img: '', price: '$15', quickBid: '$1' },
+    { name: 'Product 5', id: '5', uri: '/p/product5', img: '', price: '$15', quickBid: '$1' },
+    { name: 'Product 6', id: '6', uri: '/p/product6', img: '', price: '$15', quickBid: '$1' }
+  ]
+
+  return { productsList }
+})
+
 export const useAnimeStore = defineStore('anime', () => {
   const store = useMainStore()
-  function slideInOut() {
-    if (!store.collapsed) {
-      anime
-        .timeline({
-          targets: 'nav',
-          width: ['20rem', '4.5rem'],
-          duration: 1000,
-          easing: 'easeInOutSine'
-        })
-        .add({
-          targets: 'nav > section',
-          padding: ['3.5rem 3.5rem 3.5rem 3.5rem', '3.5rem 1.5rem 3.5rem 1.5rem']
-        })
 
-      anime
-        .timeline({
-          targets: '#brand > h1',
-          opacity: [1, 0]
-        })
-        .add({
-          targets: '#brand',
-          margin: [0, '0 0 0 -0.4rem']
-        })
-
-      anime({
-        targets: '#logo',
-        scale: [0, 1],
-        delay: 600
+  function slideIn() {
+    anime
+      .timeline({
+        targets: 'nav',
+        width: ['20rem', '4.5rem'],
+        duration: 1000,
+        easing: 'easeInOutSine'
+      })
+      .add({
+        targets: 'nav > section',
+        padding: ['3.5rem 3.5rem 3.5rem 3.5rem', '3.5rem 1.5rem 3.5rem 1.5rem']
       })
 
-      store.setCollapse()
-    } else {
-      anime
-        .timeline({
-          targets: 'nav',
-          width: ['4.5rem', '20rem'],
-          duration: 1000,
-          easing: 'easeInOutSine'
-        })
-        .add({
-          targets: 'nav > section',
-          padding: ['3.5rem 1.5rem 3.5rem 1.5rem', '3.5rem 3.5rem 3.5rem 3.5rem']
-        })
-
-      anime({
-        targets: '#logo',
-        scale: [1, 0]
+    anime
+      .timeline({
+        targets: '#brand > h1',
+        opacity: [1, 0]
+      })
+      .add({
+        targets: '#brand',
+        margin: [0, '0 0 0 -0.4rem']
       })
 
-      anime
-        .timeline({
-          targets: '#brand',
-          margin: ['0 0 0 -0.4rem', 0]
-        })
-        .add({
-          targets: '#brand > h1',
-          opacity: [0, 1]
-        })
+    anime({
+      targets: '#logo',
+      scale: [0, 1],
+      delay: 600
+    })
 
-      store.setCollapse()
-    }
+    store.setCollapse()
   }
 
-  return { slideInOut }
+  function slideOut() {
+    anime
+      .timeline({
+        targets: 'nav',
+        width: ['4.5rem', '20rem'],
+        duration: 1000,
+        easing: 'easeInOutSine'
+      })
+      .add({
+        targets: 'nav > section',
+        padding: ['3.5rem 1.5rem 3.5rem 1.5rem', '3.5rem 3.5rem 3.5rem 3.5rem']
+      })
+
+    anime({
+      targets: '#logo',
+      scale: [1, 0]
+    })
+
+    anime
+      .timeline({
+        targets: '#brand',
+        margin: ['0 0 0 -0.4rem', 0]
+      })
+      .add({
+        targets: '#brand > h1',
+        opacity: [0, 1]
+      })
+
+    store.setCollapse()
+  }
+
+  return { slideIn, slideOut }
 })
