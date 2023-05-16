@@ -3,9 +3,13 @@ import IconBrand from './icons/IconBrand.vue';
 import IconSearch from './icons/IconSearch.vue'
 import AccountOptions from './AccountOptions.vue'
 import AccountProvider from './parts/AccountProvider.vue'
+import SearchBar from './parts/SearchBar.vue';
+
 import { useMainStore } from '../stores/main';
+import { useSearchStore } from '../stores/search';
 
 const store = useMainStore()
+const searchStore = useSearchStore()
 </script>
 
 <template>
@@ -15,9 +19,10 @@ const store = useMainStore()
       <IconBrand />
     </router-link>
 
-    <div class="flex gap-4 p-3 lg:p-4 bg-white rounded-2xl items-center w-full lg:w-96">
+    <div @click="searchStore.setSearchActive()"
+      class="flex gap-2 lg:gap-4 p-3 lg:p-4 bg-white hover:bg-black/5 rounded-2xl items-center w-full lg:w-96 text-xs text-black/40 cursor-pointer">
       <IconSearch class="stroke-black w-3 h-3 md:w-5 md:h-5" />
-      <input type="text" name="search" placeholder="Search products" class="focus:outline-none w-full text-xs">
+      Search products...
     </div>
 
     <AccountProvider />
@@ -27,4 +32,11 @@ const store = useMainStore()
     <div class="absolute top-0 left-0 backdrop-blur-lg w-full h-full"></div>
     <AccountOptions />
   </section>
+
+  <Teleport to="main" v-if="searchStore.searchActive">
+    <section class="flex items-center justify-center absolute z-30 h-screen w-screen px-6">
+      <div @click="searchStore.setSearchActive()" class="absolute top-0 left-0 backdrop-blur-lg w-full h-full"></div>
+      <SearchBar />
+    </section>
+  </Teleport>
 </template>
