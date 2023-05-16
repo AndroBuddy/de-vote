@@ -1,5 +1,6 @@
 <script setup>
-import { useAnimeStore, useMainStore } from '../stores/main'
+import { useAnimeStore, useMainStore, useProductStore } from '../stores/main'
+import IconFavorite from './icons/IconFavorite.vue';
 
 defineProps({
   title: String,
@@ -15,6 +16,11 @@ function slideIn() {
       animeStore.slideIn()
   }
 }
+
+function setFav(product) {
+  const prodStore = useProductStore()
+  prodStore.setFavorite(product)
+}
 </script>
 
 <template>
@@ -22,17 +28,20 @@ function slideIn() {
     <h2>{{ title }}</h2>
     <div class="flex whitespace-nowrap flex-nowrap overflow-auto gap-8 relative -ml-20">
       <section class="sticky top-0 left-0 flex items-center h-full p-6 bg-gradient-to-r from-[#f7f7f7f7] z-10"
-        :class="[store.collapsed ? '' : 'translate-x-6']"></section>
-      <router-link :to="item.uri" @click="slideIn" v-for="item in items" :key="item.id"
-        class="flex flex-col bg-white p-4 md:p-6 rounded-2xl w-80 shrink-0">
-        <div class="h-60 bg-black/5 rounded-xl mb-4"></div>
+        :class="[store.collapsed ? '' : 'lg:translate-x-6']"></section>
+      <div v-for="item in  items " :key="item.id" class="flex flex-col gap-4 bg-white p-4 md:p-6 rounded-2xl w-80 shrink-0">
+        <div class="h-60 bg-black/5 rounded-xl"></div>
         <!-- Replace with img -->
-        <h3>{{ item.name }}</h3>
+        <h3 class="text-lg">{{ item.name }}</h3>
         <div class="flex justify-between items-center">
-          <h4>{{ item.price }}</h4>
-          <h4 class="text-green-500 bg-green-500/10 px-2 py-1 rounded-lg">+{{ item.quickBid }}</h4>
+          <router-link :to="item.uri" @click="slideIn"
+            class="bg-blue-500/20 text-blue-500 py-3 px-6 rounded-xl text-sm text-center hover:scale-95 transition-transform w-min">
+            <span class="font-semibold">{{ item.price }}</span> • Bid Now
+          </router-link>
+          <IconFavorite class="stroke-red-500/40 w-6 h-6 cursor-pointer hover:fill-red-500 transition-colors"
+            :class="[item.favorite ? 'fill-red-500' : '']" @click="setFav(item)" />
         </div>
-      </router-link>
+      </div>
       <section class="sticky top-0 right-0 flex items-center h-full p-6 bg-gradient-to-l from-[#f7f7f7f7]"></section>
     </div>
   </div>

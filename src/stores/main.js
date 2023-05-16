@@ -129,14 +129,14 @@ export const useBidderStore = defineStore('bidder', () => {
 })
 
 export const useProductStore = defineStore('products', () => {
-  const productsList = [
+  const productsList = ref([
     {
       name: 'Product 1',
       id: '1',
       uri: '/p/product1',
       img: 'https://github.com/AndroBuddy.png',
       price: '$10',
-      quickBid: '$2'
+      favorite: false
     },
     {
       name: 'Product 2',
@@ -144,7 +144,7 @@ export const useProductStore = defineStore('products', () => {
       uri: '/p/product2',
       img: 'https://github.com/AndroBuddy.png',
       price: '$20',
-      quickBid: '$5'
+      favorite: false
     },
     {
       name: 'Product 3',
@@ -152,7 +152,7 @@ export const useProductStore = defineStore('products', () => {
       uri: '/p/product3',
       img: 'https://github.com/AndroBuddy.png',
       price: '$13',
-      quickBid: '$4'
+      favorite: false
     },
     {
       name: 'Product 4',
@@ -160,7 +160,7 @@ export const useProductStore = defineStore('products', () => {
       uri: '/p/product4',
       img: 'https://github.com/AndroBuddy.png',
       price: '$15',
-      quickBid: '$1'
+      favorite: false
     },
     {
       name: 'Product 5',
@@ -168,7 +168,7 @@ export const useProductStore = defineStore('products', () => {
       uri: '/p/product5',
       img: 'https://github.com/AndroBuddy.png',
       price: '$15',
-      quickBid: '$1'
+      favorite: false
     },
     {
       name: 'Product 6',
@@ -176,11 +176,17 @@ export const useProductStore = defineStore('products', () => {
       uri: '/p/product6',
       img: 'https://github.com/AndroBuddy.png',
       price: '$15',
-      quickBid: '$1'
+      favorite: false
     }
-  ]
+  ])
 
-  return { productsList }
+  function setFavorite(prod) {
+    const product = prod
+    const index = productsList.value.indexOf(product)
+    productsList.value[index].favorite = !productsList.value[index].favorite
+  }
+
+  return { productsList, setFavorite }
 })
 
 export const useProductInfoStore = defineStore('productinfo', () => {
