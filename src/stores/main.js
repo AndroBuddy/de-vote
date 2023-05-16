@@ -98,17 +98,138 @@ export const useNavGraphStore = defineStore('navgraph', () => {
   return { navGraph }
 })
 
+export const useBidderStore = defineStore('bidder', () => {
+  const biddersList = shallowRef([
+    {
+      name: 'George Kolli',
+      timestamp: '123456',
+      bid: '$200',
+      profileUri: 'https://github.com/AndroBuddy.png'
+    },
+    {
+      name: 'Maneesh Matthew',
+      timestamp: '123456',
+      bid: '$200',
+      profileUri: 'https://github.com/AndroBuddy.png'
+    },
+    {
+      name: 'Leela Paka',
+      timestamp: '123456',
+      bid: '$200',
+      profileUri: 'https://github.com/AndroBuddy.png'
+    }
+  ])
+
+  function profileUrl(src) {
+    const url = src
+    return url
+  }
+
+  return { biddersList, profileUrl }
+})
+
 export const useProductStore = defineStore('products', () => {
   const productsList = [
-    { name: 'Product 1', id: '1', uri: '/p/product1', img: '', price: '$10', quickBid: '$2' },
-    { name: 'Product 2', id: '2', uri: '/p/product2', img: '', price: '$20', quickBid: '$5' },
-    { name: 'Product 3', id: '3', uri: '/p/product3', img: '', price: '$13', quickBid: '$4' },
-    { name: 'Product 4', id: '4', uri: '/p/product4', img: '', price: '$15', quickBid: '$1' },
-    { name: 'Product 5', id: '5', uri: '/p/product5', img: '', price: '$15', quickBid: '$1' },
-    { name: 'Product 6', id: '6', uri: '/p/product6', img: '', price: '$15', quickBid: '$1' }
+    {
+      name: 'Product 1',
+      id: '1',
+      uri: '/p/product1',
+      img: 'https://github.com/AndroBuddy.png',
+      price: '$10',
+      quickBid: '$2'
+    },
+    {
+      name: 'Product 2',
+      id: '2',
+      uri: '/p/product2',
+      img: 'https://github.com/AndroBuddy.png',
+      price: '$20',
+      quickBid: '$5'
+    },
+    {
+      name: 'Product 3',
+      id: '3',
+      uri: '/p/product3',
+      img: 'https://github.com/AndroBuddy.png',
+      price: '$13',
+      quickBid: '$4'
+    },
+    {
+      name: 'Product 4',
+      id: '4',
+      uri: '/p/product4',
+      img: 'https://github.com/AndroBuddy.png',
+      price: '$15',
+      quickBid: '$1'
+    },
+    {
+      name: 'Product 5',
+      id: '5',
+      uri: '/p/product5',
+      img: 'https://github.com/AndroBuddy.png',
+      price: '$15',
+      quickBid: '$1'
+    },
+    {
+      name: 'Product 6',
+      id: '6',
+      uri: '/p/product6',
+      img: 'https://github.com/AndroBuddy.png',
+      price: '$15',
+      quickBid: '$1'
+    }
   ]
 
   return { productsList }
+})
+
+export const useProductInfoStore = defineStore('productinfo', () => {
+  const productInfoList = [
+    {
+      name: 'Product 1',
+      id: 'product1',
+      description: 'Product description',
+      img: 'https://github.com/AndroBuddy.png',
+      price: '$10'
+    },
+    {
+      name: 'Product 2',
+      id: 'product2',
+      description: 'Product description',
+      img: 'https://github.com/AndroBuddy.png',
+      price: '$20'
+    },
+    {
+      name: 'Product 3',
+      id: 'product3',
+      description: 'Product description',
+      img: 'https://github.com/AndroBuddy.png',
+      price: '$13'
+    },
+    {
+      name: 'Product 4',
+      id: 'product4',
+      description: 'Product description',
+      img: 'https://github.com/AndroBuddy.png',
+      price: '$15'
+    },
+    {
+      name: 'Product 5',
+      id: 'product5',
+      description: 'Product description',
+      img: 'https://github.com/AndroBuddy.png',
+      price: '$15'
+    },
+    {
+      name: 'Product 6',
+      id: 'product6',
+      description: 'Product description',
+      img: 'https://github.com/AndroBuddy.png',
+      price: '$15'
+    }
+  ]
+
+  return { productInfoList }
 })
 
 export const useAnimeStore = defineStore('anime', () => {

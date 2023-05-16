@@ -15,7 +15,7 @@ onMounted(() => {
 
 <template>
   <nav class="z-20 w-80 overflow-clip shrink-0" :class="[collapseState.collapsed ? 'w-[4.5rem]' : 'w-80']">
-    <section class="flex flex-col gap-14 p-14 w-full bg-white h-screen rounded-t-3xl rounded-b-3xl"
+    <section class="flex flex-col gap-14 p-14 w-full bg-white h-screen rounded-tr-3xl rounded-br-3xl"
       :class="[collapseState.collapsed ? 'px-6 py-14' : 'p-14']">
       <section id="brand" class="cursor-pointer" :class="[collapseState.collapsed ? '-m-[0.4rem]' : 'm-0']"
         @click="$emit('slideInOut')">

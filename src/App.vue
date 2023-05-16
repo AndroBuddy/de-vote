@@ -27,6 +27,7 @@ document.title = "!much | The auction site"
       <HeaderBar />
       <RouterView />
     </div>
+    <RouterView name="RightPanel" class="hidden lg:block" />
   </main>
 </template>
 
