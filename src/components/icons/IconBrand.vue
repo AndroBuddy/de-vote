@@ -1,5 +1,5 @@
 <template>
-  <div id="logo" class="bg-black text-white py-[0.3rem] px-[0.4rem] rounded-lg font-semibold text-sm">
+  <div id="logo" class="bg-black text-white py-[0.3rem] px-[0.4rem] rounded-lg font-semibold text-sm w-min">
     !m
   </div>
 </template>

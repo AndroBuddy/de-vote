@@ -37,7 +37,6 @@ const router = createRouter({
     {
       path: '/p/:product',
       name: 'product',
-      component: () => import('../views/ProductView.vue'),
       components: {
         default: () => import('../views/ProductView.vue'),
         RightPanel: () => import('../components/RightPanel.vue')
@@ -47,6 +46,13 @@ const router = createRouter({
       path: '/:pathMatch(.*)*',
       name: 'NotFound',
       component: () => import('../views/NotFound.vue')
+    },
+    {
+      path: '/login',
+      name: 'login',
+      components: {
+        Login: () => import('../views/LoginView.vue')
+      }
     }
   ]
 })

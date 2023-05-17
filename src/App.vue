@@ -6,9 +6,9 @@ import BottomBar from './components/BottomBar.vue'
 
 import { useMainStore } from './stores/main'
 
+const store = useMainStore()
 
 function slideInOut() {
-  const store = useMainStore()
   const animeStore = store.useAnimeStore()
   if (!store.collapseHelper().collapsed)
     animeStore.slideIn()
@@ -20,7 +20,8 @@ document.title = "!much | The auction site"
 </script>
 
 <template>
-  <main class="flex h-screen">
+  <RouterView name="Login" v-if="!store.authHelper().isLogged" />
+  <main class="flex h-screen bg-[#f7f7f7]" v-else>
     <SideBar class="hidden md:block" @slide-in-out="slideInOut()" />
     <BottomBar class="block md:hidden" />
     <div class="flex flex-col flex-grow overflow-auto">

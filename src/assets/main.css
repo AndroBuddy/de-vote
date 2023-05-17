@@ -1,7 +1,7 @@
 @import './base.css';
 
 #app {
-  @apply m-0 font-normal bg-[#f7f7f7f7] h-screen;
+  @apply m-0 font-normal h-screen;
 }
 
 .router-link-exact-active {
