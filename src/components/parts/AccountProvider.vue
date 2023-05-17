@@ -1,5 +1,6 @@
 <script setup>
 import { useMainStore } from '../../stores/main';
+import GuestProvider from './GuestProvider.vue';
 const store = useMainStore()
 const authStore = store.authHelper()
 const profileStore = store.useProfileStore()
@@ -9,12 +10,10 @@ const profileStore = store.useProfileStore()
   <div class="shrink-0">
     <section v-if="!authStore.isAuth">
       <router-link to="/" class="hidden lg:flex gap-4 items-center">
-        <div class="w-14 h-14 rounded-full bg-white flex items-center justify-center">G
-        </div>
-        <h3>Guest</h3>
+        <GuestProvider />
       </router-link>
       <div @click="store.accountMenuHelper().setAccountMenu"
-        class="w-10 h-10 rounded-full bg-white flex items-center justify-center lg:hidden">G
+        class="w-10 h-10 rounded-full bg-blue-500/20 text-blue-500 flex items-center justify-center lg:hidden">GU
       </div>
     </section>
     <section v-else>
