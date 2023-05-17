@@ -1,5 +1,5 @@
 <script setup>
-import { useAnimeStore, useMainStore, useProductStore } from '../stores/main'
+import { useMainStore } from '../stores/main'
 import IconFavorite from './icons/IconFavorite.vue';
 
 defineProps({
@@ -11,14 +11,14 @@ const store = useMainStore()
 
 function slideIn() {
   if (window.innerWidth >= 1024) {
-    const animeStore = useAnimeStore()
-    if (!store.collapsed)
+    const animeStore = store.useAnimeStore()
+    if (!store.collapseHelper().collapsed)
       animeStore.slideIn()
   }
 }
 
 function setFav(product) {
-  const prodStore = useProductStore()
+  const prodStore = useMainStore().useProductStore()
   prodStore.setFavorite(product)
 }
 </script>
@@ -28,8 +28,9 @@ function setFav(product) {
     <h2>{{ title }}</h2>
     <div class="flex whitespace-nowrap flex-nowrap overflow-auto gap-8 relative -ml-20">
       <section class="sticky top-0 left-0 flex items-center h-full p-6 bg-gradient-to-r from-[#f7f7f7f7] z-10"
-        :class="[store.collapsed ? '' : 'lg:translate-x-6']"></section>
-      <div v-for="item in  items " :key="item.id" class="flex flex-col gap-4 bg-white p-4 md:p-6 rounded-2xl w-80 shrink-0">
+        :class="[store.collapseHelper().collapsed ? '' : 'lg:translate-x-6']"></section>
+      <div v-for="item in items" :key="item.id"
+        class="flex flex-col gap-4 bg-white p-4 md:p-6 rounded-2xl w-80 shrink-0">
         <div class="h-60 bg-black/5 rounded-xl"></div>
         <!-- Replace with img -->
         <h3 class="text-lg">{{ item.name }}</h3>

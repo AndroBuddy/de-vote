@@ -1,8 +1,8 @@
 <script setup>
 import ContentPanel from '../components/ContentPanel.vue'
-import { useProductStore } from '../stores/main';
+import { useMainStore } from '../stores/main';
 
-const store = useProductStore();
+const store = useMainStore().useProductStore();
 </script>
 
 <template>

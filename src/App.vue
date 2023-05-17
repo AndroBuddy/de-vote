@@ -4,13 +4,13 @@ import SideBar from './components/SideBar.vue'
 import HeaderBar from './components/HeaderBar.vue'
 import BottomBar from './components/BottomBar.vue'
 
-import { useAnimeStore, useMainStore } from './stores/main'
+import { useMainStore } from './stores/main'
 
 
 function slideInOut() {
   const store = useMainStore()
-  const animeStore = useAnimeStore()
-  if (!store.collapsed)
+  const animeStore = store.useAnimeStore()
+  if (!store.collapseHelper().collapsed)
     animeStore.slideIn()
   else
     animeStore.slideOut()

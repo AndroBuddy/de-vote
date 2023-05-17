@@ -6,10 +6,9 @@ import AccountProvider from './parts/AccountProvider.vue'
 import SearchBar from './parts/SearchBar.vue';
 
 import { useMainStore } from '../stores/main';
-import { useSearchStore } from '../stores/search';
 
 const store = useMainStore()
-const searchStore = useSearchStore()
+const searchStore = store.useSearchStore()
 </script>
 
 <template>
@@ -28,7 +27,7 @@ const searchStore = useSearchStore()
     <AccountProvider />
   </header>
 
-  <section class="flex items-center justify-center fixed z-30 h-screen w-screen" v-if="store.accountMenu">
+  <section class="flex items-center justify-center fixed z-30 h-screen w-screen" v-if="store.accountMenuHelper().accountMenu">
     <div class="absolute top-0 left-0 backdrop-blur-lg w-full h-full"></div>
     <AccountOptions />
   </section>

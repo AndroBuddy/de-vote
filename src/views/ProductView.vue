@@ -1,6 +1,6 @@
 <script setup>
 import { onMounted, ref } from 'vue';
-import { useMainStore, useProductInfoStore } from '../stores/main';
+import { useMainStore } from '../stores/main';
 
 import IconArrow from '../components/icons/IconArrow.vue'
 
@@ -16,16 +16,16 @@ const productDet = ref({
 
 onMounted(() => {
   const route = useRoute().params.product
-  const productInfo = useProductInfoStore()
+  const store = useMainStore()
+  const productInfo = store.useProductInfoStore()
 
   productInfo.productInfoList.filter((p) => {
     if (p.id === route)
       productDet.value = p
   })
 
-  const store = useMainStore()
-  if (!store.collapsed)
-    store.setCollapse()
+  if (!store.collapseHelper().collapsed)
+    store.collapseHelper().setCollapse()
 })
 
 function routeBack() {

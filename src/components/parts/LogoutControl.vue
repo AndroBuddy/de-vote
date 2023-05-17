@@ -2,7 +2,7 @@
 import IconLogout from '../icons/IconLogout.vue';
 import { useMainStore } from '../../stores/main';
 
-const store = useMainStore()
+const store = useMainStore().authHelper()
 </script>
 
 <template>

@@ -1,10 +1,11 @@
 <script setup>
-import { useMainStore, useNavGraphStore } from '../stores/main'
+import { useMainStore } from '../stores/main'
 import { onMounted } from 'vue';
 import LogoutControl from './parts/LogoutControl.vue';
 
-const store = useNavGraphStore()
-const collapseState = useMainStore()
+const store = useMainStore()
+const navGraphStore = store.useNavGraphStore()
+const collapseState = store.collapseHelper()
 
 onMounted(() => {
   if (window.innerWidth < 1024) {
@@ -28,7 +29,7 @@ onMounted(() => {
       <section class="flex flex-col justify-between flex-grow">
         <section class="flex flex-col gap-8 overflow-clip">
           <ul class="flex flex-col gap-8 text-black/40">
-            <li v-for="(navItem, index) in store.navGraph[0]" :key="index">
+            <li v-for="(navItem, index) in navGraphStore.navGraph[0]" :key="index">
               <router-link :to="navItem.path" class="flex gap-4 items-center">
                 <component class="shrink-0" :is="navItem.icon" />
                 <span class="flex-grow whitespace-nowrap">{{ navItem.name }}</span>
@@ -37,7 +38,7 @@ onMounted(() => {
           </ul>
           <div class="border-[1px]" />
           <ul class="flex flex-col gap-8 text-black/40">
-            <li v-for="(navItem, index) in store.navGraph[1]" :key="index">
+            <li v-for="(navItem, index) in navGraphStore.navGraph[1]" :key="index">
               <router-link :to="navItem.path" class="flex gap-4 items-center">
                 <component class="shrink-0" :is="navItem.icon" />
                 <span class="flex-grow whitespace-nowrap">{{ navItem.name }}</span>

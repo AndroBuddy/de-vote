@@ -1,11 +1,11 @@
 <script setup>
-import { useBidderStore } from '../stores/main'
+import { useMainStore } from '../stores/main'
 import { onMounted } from 'vue';
-import BidderInfo from './parts/BidderInfo.vue';
 
+import BidderInfo from './parts/BidderInfo.vue';
 import anime from 'animejs/lib/anime.es';
 
-const store = useBidderStore()
+const store = useMainStore().useBidderStore()
 
 onMounted(() => {
   anime({

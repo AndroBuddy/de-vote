@@ -1,10 +1,10 @@
 <script setup>
 import { onMounted, ref } from 'vue';
 import ContentPanel from '../components/ContentPanel.vue'
-import { useProductStore } from '../stores/main';
+import { useMainStore } from '../stores/main';
 import IconFavoriteNone from '../components/icons/IconFavoriteNone.vue';
 
-const store = useProductStore();
+const store = useMainStore().useProductStore();
 const favoriteList = ref([])
 
 onMounted(() => {
