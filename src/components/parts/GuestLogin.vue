@@ -1,5 +1,8 @@
 <script setup>
+import { useMainStore } from '../../stores/main';
 import IconGuest from '../icons/IconGuest.vue'
+
+const store = useMainStore().authHelper()
 </script>
 
 <template>
@@ -8,8 +11,8 @@ import IconGuest from '../icons/IconGuest.vue'
     <div class="flex flex-col items-center text-black/40">
       <h3>You are not logged in.</h3>
       <p>
-        <router-link to="/" class="text-blue-500">Login</router-link> or
-        <router-link to="/" class="text-blue-500">Sign up</router-link>
+        <router-link to="/login" class="text-blue-500">Login</router-link> or
+        <router-link @click="store.setSignUp()" to="/signup" class="text-blue-500">Sign up</router-link>
       </p>
     </div>
   </div>
