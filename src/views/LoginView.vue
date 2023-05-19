@@ -1,6 +1,7 @@
 <script setup>
-import { onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useMainStore } from '../stores/main'
+import { loginManager } from '../stores/helpers/login'
 import LoginHeader from '../components/login/LoginHeader.vue'
 
 import IconGoogle from '../components/icons/IconGoogle.vue'
@@ -11,6 +12,19 @@ onMounted(() => {
   store.setLogOut()
 })
 
+const isValid = ref('Log in')
+const valControl = ref(false)
+
+const authStore = loginManager()
+function verifyLogin() {
+  if (authStore.verifyUser()) {
+    store.isAuth = true
+    store.setLogIn()
+  } else {
+    isValid.value = 'Invalid credentials • Try again'
+    valControl.value = true
+  }
+}
 </script>
 
 <template>
@@ -31,8 +45,9 @@ onMounted(() => {
             <h3>Log in with Google</h3>
           </button>
 
-          <router-link to="/"
-            @click="store.setLogIn()"
+          <router-link
+            to="/"
+            @click="store.setGuest()"
             class="flex gap-3 items-center justify-center border-black/20 border p-2 rounded-lg sm:w-96 hover:bg-black/5 transition-colors"
           >
             <IconGuest />
@@ -47,12 +62,13 @@ onMounted(() => {
         </section>
 
         <section class="flex flex-col justify-center">
-          <form class="flex flex-col gap-4" action="#" method="POST">
+          <div class="flex flex-col gap-4">
             <div class="flex flex-col gap-2">
               <label for="email" class="block text-sm font-medium leading-6 text-gray-900">
                 Email*
               </label>
               <input
+                v-model="authStore.userMail"
                 id="email"
                 name="email"
                 type="email"
@@ -75,6 +91,7 @@ onMounted(() => {
               </div>
               <div class="mt-2">
                 <input
+                  v-model="authStore.userPassword"
                   id="password"
                   name="password"
                   type="password"
@@ -85,17 +102,24 @@ onMounted(() => {
               </div>
             </div>
 
-            <button
+            <router-link
+              to="/"
+              @click="verifyLogin()"
               type="submit"
               class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              :class="{ 'bg-red-600 hover:bg-red-500': valControl }"
             >
-              Log in
-            </button>
-          </form>
+              {{ isValid }}
+            </router-link>
+          </div>
 
           <p class="mt-6 text-center text-sm text-gray-500">
             New here?
-            <router-link to="/signup" @click="store.setSignUp()" class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
+            <router-link
+              to="/signup"
+              @click="store.setSignUp()"
+              class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
+            >
               Sign up now!
             </router-link>
           </p>

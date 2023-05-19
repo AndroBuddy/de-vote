@@ -3,6 +3,7 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 
 export const authHelper = defineStore('auth', () => {
+  const isAuth = ref(false)
   const isLogged = ref(false)
   const isNew = ref(false)
 
@@ -19,7 +20,11 @@ export const authHelper = defineStore('auth', () => {
     isNew.value = !isNew.value
   }
 
-  const isAuth = ref(false) // testing
+  function setGuest() {
+    setLogIn()
+    isAuth.value = false
+  }
+
   function setAuth() {
     // Auth logic here
     isAuth.value = !isAuth.value
@@ -28,8 +33,7 @@ export const authHelper = defineStore('auth', () => {
   const router = useRouter()
   router.beforeEach(async (to, from) => {
     if (!isNew.value && to.name !== 'login') {
-      if (!isLogged.value)
-        return { name: 'login' }
+      if (!isLogged.value) return { name: 'login' }
     }
 
     if (to.name === 'login' && isLogged.value) {
@@ -38,5 +42,5 @@ export const authHelper = defineStore('auth', () => {
     }
   })
 
-  return { isLogged, isAuth, isNew, setLogIn, setLogOut, setAuth, setSignUp }
+  return { isLogged, isAuth, isNew, setLogIn, setLogOut, setAuth, setSignUp, setGuest }
 })
