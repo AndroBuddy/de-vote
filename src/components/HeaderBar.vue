@@ -6,9 +6,18 @@ import AccountProvider from './parts/AccountProvider.vue'
 import SearchBar from './parts/SearchBar.vue';
 
 import { useMainStore } from '../stores/main';
+import { onMounted } from 'vue';
 
 const store = useMainStore()
 const searchStore = store.useSearchStore()
+
+onMounted(() => {
+  window.addEventListener('keyup', (e) => {
+    if (e.key === 'Escape') {
+      searchStore.setSearchActive()
+    }
+  })
+})
 </script>
 
 <template>
@@ -33,7 +42,7 @@ const searchStore = store.useSearchStore()
   </section>
 
   <Teleport to="main" v-if="searchStore.searchActive">
-    <section class="flex items-center justify-center absolute z-30 h-screen w-screen px-6">
+    <section class="flex justify-center absolute z-30 h-screen w-screen p-6">
       <div @click="searchStore.setSearchActive()" class="absolute top-0 left-0 backdrop-blur-lg w-full h-full"></div>
       <SearchBar />
     </section>
