@@ -25,16 +25,16 @@ onMounted(() => {
       <div class="shrink-0 mt-8">
         <div class="flex gap-4 items-center">
           <img
-            :src="profileStore.setProfileImg()"
+            :src="profileStore.userAccount.profileUrl"
             class="w-12 h-12 rounded-full flex items-center justify-center"
-            v-if="profileStore.setProfileImg()"
+            v-if="profileStore.userAccount.profileUrl"
           />
-          <div class="w-12 h-12 rounded-full bg-black/10 flex items-center justify-center" v-else>
-            {{ profileStore.userProfile.name[0] }}
+          <div class="w-12 h-12 rounded-full bg-black/10 flex items-center justify-center capitalize" v-else>
+            {{ profileStore.userAccount.name[0] }}
           </div>
           <span class="flex flex-col">
-            <h3>{{ profileStore.userProfile.name }}</h3>
-            <h4>{{ profileStore.userProfile.username }}</h4>
+            <h3>{{ profileStore.userAccount.name }}</h3>
+            <h4>{{ profileStore.userAccount.username }}</h4>
           </span>
         </div>
       </div>

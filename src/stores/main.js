@@ -2,7 +2,7 @@ import { defineStore } from 'pinia'
 
 import { authHelper } from './helpers/auth'
 import { collapseHelper } from './helpers/collapse'
-import { accountMenuHelper } from './helpers/account'
+import { accountMenuHelper } from './helpers/popup'
 
 import { useProfileStore } from './api/profile'
 import { useProductStore } from './api/products'

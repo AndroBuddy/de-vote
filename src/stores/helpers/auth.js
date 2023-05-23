@@ -1,6 +1,9 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import { useRouter } from 'vue-router'
+
+import router from '../../router'
+import { loginManager } from './login'
+import { accountMenuHelper } from './popup'
 
 export const authHelper = defineStore('auth', () => {
   const isAuth = ref(false)
@@ -13,11 +16,20 @@ export const authHelper = defineStore('auth', () => {
 
   function setLogOut() {
     isLogged.value = false
+    isAuth.value = false
+
+    accountMenuHelper().accountMenu = false
+
+    loginManager().resetFields()
+    router.push({ name: 'login' })
   }
 
   function setSignUp() {
-    setLogOut()
-    isNew.value = !isNew.value
+    isLogged.value = false
+    isAuth.value = false
+    isNew.value = true
+
+    router.push({ name: 'signup' })
   }
 
   function setGuest() {
@@ -26,19 +38,13 @@ export const authHelper = defineStore('auth', () => {
   }
 
   function setAuth() {
-    // Auth logic here
     isAuth.value = !isAuth.value
   }
 
-  const router = useRouter()
+  // eslint-disable-next-line no-unused-vars
   router.beforeEach(async (to, from) => {
     if (!isNew.value && to.name !== 'login') {
       if (!isLogged.value) return { name: 'login' }
-    }
-
-    if (to.name === 'login' && isLogged.value) {
-      isLogged.value = false
-      return { name: 'login' }
     }
   })
 

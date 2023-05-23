@@ -1,30 +1,25 @@
 <script setup>
 import { onMounted, ref } from 'vue'
-import { useMainStore } from '../../stores/main'
+
+import { authHelper } from '../../stores/helpers/auth'
 import { loginManager } from '../../stores/helpers/login'
 
 import IconGuest from '../../components/icons/IconGuest.vue'
+import IconHide from '../../components/icons/IconHide.vue'
+import IconShow from '../../components/icons/IconShow.vue'
+import IconLoader from '../../components/icons/IconLoader.vue'
 
-const store = useMainStore().authHelper()
+import { useProfileStore } from '../../stores/api/profile'
+
+const store = authHelper()
 onMounted(() => {
   store.setLogOut()
 })
 
-const isValid = ref('Log in')
-const valControl = ref(false)
+const loginAuth = loginManager()
+const profileStore = useProfileStore()
 
-const authStore = loginManager()
-function verifyLogin() {
-  if (authStore.verifyUser()) {
-    store.isAuth = true
-    store.setLogIn()
-  } else if (authStore.userMail === '' || authStore.userPassword === '') {
-    isValid.value = 'Please fill in all fields'
-  } else {
-    isValid.value = 'Invalid credentials • Try again'
-    valControl.value = true
-  }
-}
+const show = ref(false)
 </script>
 
 <template>
@@ -57,7 +52,7 @@ function verifyLogin() {
               Email*
             </label>
             <input
-              v-model="authStore.userMail"
+              v-model="loginAuth.userMail"
               id="email"
               name="email"
               type="email"
@@ -72,45 +67,45 @@ function verifyLogin() {
               <label for="password" class="block text-sm font-medium leading-6 text-gray-900">
                 Password*
               </label>
-              <div class="text-sm">
-                <a href="#" class="font-semibold text-indigo-600 hover:text-indigo-500">
-                  Forgot password?
-                </a>
-              </div>
             </div>
-            <div class="mt-2">
+            <div class="mt-2 relative">
               <input
-                v-model="authStore.userPassword"
+                v-model="loginAuth.userPassword"
                 id="password"
                 name="password"
-                type="password"
+                :type="[show ? 'text' : 'password']"
                 autocomplete="current-password"
                 required=""
                 class="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:border-spacing-0 sm:text-sm sm:leading-6"
               />
+              <div
+                class="absolute inset-y-0 right-0 p-3 flex items-center text-sm leading-5 cursor-pointer"
+              >
+                <IconHide @click="show = true" :class="[show ? 'hidden' : 'block']" />
+                <IconShow @click="show = false" :class="[show ? 'block' : 'hidden']" />
+              </div>
             </div>
           </div>
 
-          <router-link
-            to="/"
-            @click="verifyLogin()"
+          <button
+            @click="profileStore.validateUser()"
             type="submit"
-            class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-            :class="{ 'bg-red-600 hover:bg-red-500': valControl }"
+            class="flex w-full justify-center items-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            :class="{ 'bg-red-600 hover:bg-red-500': profileStore.btnWarn }"
           >
-            {{ isValid }}
-          </router-link>
+            <IconLoader v-if="profileStore.isLoaded" />
+            <span v-else>{{ profileStore.loginMessage }}</span>
+          </button>
         </div>
 
         <p class="mt-6 text-center text-sm text-gray-500">
           New here?
-          <router-link
-            to="/auth/signup"
+          <button
             @click="store.setSignUp()"
             class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
           >
             Sign up now!
-          </router-link>
+          </button>
         </p>
       </section>
     </section>

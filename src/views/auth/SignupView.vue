@@ -1,7 +1,12 @@
 <script setup>
+import { ref } from 'vue'
 import { useMainStore } from '../../stores/main'
 
+import IconHide from '../../components/icons/IconHide.vue'
+import IconShow from '../../components/icons/IconShow.vue'
+
 const store = useMainStore().authHelper()
+const show = ref(false)
 </script>
 
 <template>
@@ -34,15 +39,21 @@ const store = useMainStore().authHelper()
                 Password*
               </label>
             </div>
-            <div class="mt-2">
+            <div class="mt-2 relative">
               <input
                 id="new-password"
                 name="password"
-                type="password"
+                :type="[show ? 'text' : 'password']"
                 autocomplete="current-password"
                 required="3"
                 class="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:border-spacing-0 sm:text-sm sm:leading-6"
               />
+              <div
+                class="absolute inset-y-0 right-0 p-3 flex items-center text-sm leading-5 cursor-pointer"
+              >
+                <IconHide @click="show = true" :class="[show ? 'hidden' : 'block']" />
+                <IconShow @click="show = false" :class="[show ? 'block' : 'hidden']" />
+              </div>
             </div>
           </div>
 
@@ -74,13 +85,12 @@ const store = useMainStore().authHelper()
 
         <p class="mt-6 text-center text-sm text-gray-500">
           Already a member?
-          <router-link
-            to="/auth/login"
-            @click="store.setSignUp()"
+          <button
+            @click="store.setLogOut()"
             class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
           >
             Log in here!
-          </router-link>
+          </button>
         </p>
       </section>
     </section>
