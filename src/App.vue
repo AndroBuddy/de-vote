@@ -20,7 +20,7 @@ document.title = "!much | The auction site"
 </script>
 
 <template>
-  <RouterView name="Login" v-if="!store.authHelper().isLogged" />
+  <RouterView name="FullPage" v-if="!store.authHelper().isLogged" />
   <main class="flex h-screen bg-[#f7f7f7]" v-else>
     <SideBar class="hidden md:block" @slide-in-out="slideInOut()" />
     <BottomBar class="block md:hidden" />

@@ -1,12 +1,14 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 
+import { loginManager } from '../helpers/login'
+
 export const useProfileStore = defineStore('profile', () => {
   const userProfile = ref({
-    name: 'Tron Nemesis',
-    username: 'tronemesis07',
-    id: 1,
-    profileUri: 'https://github.com/Auctioneer-SEP.png'
+    name: String,
+    username: String,
+    id: String,
+    profileUri: String
   })
 
   function setProfileImg() {
@@ -14,5 +16,21 @@ export const useProfileStore = defineStore('profile', () => {
     return img
   }
 
-  return { userProfile, setProfileImg }
+  function setProfile() {
+    const user = loginManager().verifyUser()
+    if (user) {
+      userProfile.value = user
+    }
+  }
+
+  function setGuest() {
+    userProfile.value = {
+      name: 'Guest',
+      username: 'Not Logged In',
+      id: 'guest1234',
+      profileUri: ''
+    }
+  }
+
+  return { userProfile, setProfileImg, setProfile, setGuest }
 })

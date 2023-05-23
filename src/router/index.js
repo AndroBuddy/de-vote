@@ -1,5 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import AuthView from '../views/AuthView.vue'
+
 import HomeView from '../views/HomeView.vue'
+import ActiveBidsView from '../views/ActiveBidsView.vue'
+import FavoritesView from '../views/FavoritesView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -12,12 +16,12 @@ const router = createRouter({
     {
       path: '/active-bids',
       name: 'active-bids',
-      component: () => import('../views/ActiveBidsView.vue')
+      component: ActiveBidsView
     },
     {
       path: '/favorites',
       name: 'favorites',
-      component: () => import('../views/FavoritesView.vue')
+      component: FavoritesView
     },
     {
       path: '/add-product',
@@ -45,21 +49,28 @@ const router = createRouter({
     {
       path: '/:pathMatch(.*)*',
       name: 'NotFound',
-      component: () => import('../views/NotFound.vue')
-    },
-    {
-      path: '/login',
-      name: 'login',
       components: {
-        Login: () => import('../views/LoginView.vue')
+        FullPage: () => import('../views/NotFound.vue')
       }
     },
     {
-      path: '/signup',
-      name: 'signup',
+      path: '/auth',
+      name: 'auth',
       components: {
-        Login: () => import('../views/SignupView.vue')
-      }
+        FullPage: AuthView
+      },
+      children: [
+        {
+          path: 'login',
+          name: 'login',
+          component: () => import('../views/auth/LoginView.vue')
+        },
+        {
+          path: 'signup',
+          name: 'signup',
+          component: () => import('../views/auth/SignupView.vue')
+        }
+      ]
     }
   ]
 })
