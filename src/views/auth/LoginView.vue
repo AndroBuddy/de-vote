@@ -20,6 +20,10 @@ const loginAuth = loginManager()
 const profileStore = useProfileStore()
 
 const show = ref(false)
+
+async function submit() {
+  await profileStore.validateUser()
+}
 </script>
 
 <template>
@@ -36,7 +40,7 @@ const show = ref(false)
         class="flex gap-3 items-center justify-center border-black/20 border p-2 rounded-lg sm:w-96 hover:bg-black/5 transition-colors"
       >
         <IconGuest />
-        <h3>Sign in as Guest User</h3>
+        <h3>Log in as Guest User</h3>
       </router-link>
 
       <section class="flex gap-4 items-center justify-center">
@@ -46,10 +50,13 @@ const show = ref(false)
       </section>
 
       <section class="flex flex-col justify-center">
-        <div class="flex flex-col gap-4">
+        <form class="flex flex-col gap-4" @submit.prevent="submit">
           <div class="flex flex-col gap-2">
-            <label for="email" class="block text-sm font-medium leading-6 text-gray-900">
-              Email*
+            <label
+              for="email"
+              class="block text-sm font-medium leading-6 text-gray-900 after:content-['*']"
+            >
+              Email
             </label>
             <input
               v-model="loginAuth.userMail"
@@ -58,14 +65,17 @@ const show = ref(false)
               type="email"
               autocomplete="email"
               required=""
-              class="block rounded-md border-0 py-1.5 px-2 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              class="block rounded-md border border-slate-300 py-1.5 px-2 placeholder:text-gray-900 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-200 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500 sm:leading-6"
             />
           </div>
 
           <div class="flex flex-col">
             <div class="flex items-center justify-between">
-              <label for="password" class="block text-sm font-medium leading-6 text-gray-900">
-                Password*
+              <label
+                for="password"
+                class="block text-sm font-medium leading-6 text-gray-900 after:content-['*']"
+              >
+                Password
               </label>
             </div>
             <div class="mt-2 relative">
@@ -75,8 +85,8 @@ const show = ref(false)
                 name="password"
                 :type="[show ? 'text' : 'password']"
                 autocomplete="current-password"
-                required=""
-                class="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:border-spacing-0 sm:text-sm sm:leading-6"
+                required="8"
+                class="block w-full rounded-md border border-slate-300 py-1.5 px-2 placeholder:text-gray-900 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-200 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500 sm:leading-6"
               />
               <div
                 class="absolute inset-y-0 right-0 p-3 flex items-center text-sm leading-5 cursor-pointer"
@@ -88,15 +98,14 @@ const show = ref(false)
           </div>
 
           <button
-            @click="profileStore.validateUser()"
             type="submit"
-            class="flex w-full justify-center items-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            class="flex w-full justify-center items-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline-none"
             :class="{ 'bg-red-600 hover:bg-red-500': profileStore.btnWarn }"
           >
             <IconLoader v-if="profileStore.isLoaded" />
             <span v-else>{{ profileStore.loginMessage }}</span>
           </button>
-        </div>
+        </form>
 
         <p class="mt-6 text-center text-sm text-gray-500">
           New here?

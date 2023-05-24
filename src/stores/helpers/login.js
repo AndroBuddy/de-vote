@@ -25,7 +25,7 @@ export const loginManager = defineStore('login', () => {
         password: userPassword.value
       })
 
-      if (data.data.request) userAccount.value = data.data
+      if (data.status === 200 && 'request' in data.data) userAccount.value = data.data
       else return (userAccount.value.request = false)
 
       return userAccount.value

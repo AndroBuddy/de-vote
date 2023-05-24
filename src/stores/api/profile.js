@@ -16,32 +16,27 @@ export const useProfileStore = defineStore('profile', () => {
     request: Boolean
   })
 
-  const loginMessage = ref('Log in')
+  const loginMessage = ref('Continue')
   const btnWarn = ref(false)
   const isLoaded = ref(false)
 
   async function validateUser() {
-    if (loginManager().userMail === '' || loginManager().userPassword === '') {
-      loginMessage.value = 'Please fill all the fields'
-      btnWarn.value = false
-    } else {
-      isLoaded.value = true
-      try {
-        const user = await loginManager().userAuth()
-        if (user) {
-          isLoaded.value = false
-          userAccount.value = user
-          authHelper().setAuth()
-          authHelper().setLogIn()
-          router.push({ name: 'home' })
-        } else {
-          isLoaded.value = false
-          loginMessage.value = 'Invalid Credentials • Try again'
-          btnWarn.value = true
-        }
-      } catch (error) {
-        console.log('Authentication Failure')
+    isLoaded.value = true
+    try {
+      const user = await loginManager().userAuth()
+      if (user) {
+        isLoaded.value = false
+        userAccount.value = user
+        authHelper().setAuth()
+        authHelper().setLogIn()
+        router.push({ name: 'home' })
+      } else {
+        isLoaded.value = false
+        loginMessage.value = 'Invalid Credentials • Try again'
+        btnWarn.value = true
       }
+    } catch (error) {
+      console.log('Authentication Failure')
     }
   }
 
