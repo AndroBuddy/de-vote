@@ -1,15 +1,24 @@
 <script setup>
+import { onMounted } from 'vue'
 import ContentPanel from '../components/ContentPanel.vue'
-import { useMainStore } from '../stores/main';
+import { useProductStore } from '../stores/api/products'
 
-const store = useMainStore().useProductStore();
+
+const store = useProductStore()
+
+onMounted(() => {
+  store.getProducts()
+})
 </script>
 
 <template>
   <section class="flex flex-col px-4 pb-32 lg:pb-12 lg:px-14 flex-grow gap-12">
-    <section class="flex flex-col gap-10 xl:self-center container">
-      <ContentPanel title="Recent Auctions" :items="store.productsList" />
-      <ContentPanel title=" High Value Bids" :items="store.productsList" />
+    <section class="relative flex flex-col gap-10 xl:self-center container">
+      <h2>Recent Auctions</h2>
+      <ContentPanel :items="store.productsList" />
+
+      <h2>High Value Bids</h2>
+      <ContentPanel :items="store.productsList" />
     </section>
   </section>
 </template>

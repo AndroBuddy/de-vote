@@ -1,57 +1,58 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 
+import axios from 'axios'
+
 export const useProductStore = defineStore('products', () => {
+  const baseURL = 'https://auctionsite.onrender.com'
   const productsList = ref([
     {
-      name: 'Product 1',
-      id: '1',
-      uri: '/p/product1',
-      img: 'https://github.com/AndroBuddy.png',
-      price: '$10',
-      favorite: false
-    },
-    {
-      name: 'Product 2',
-      id: '2',
-      uri: '/p/product2',
-      img: 'https://github.com/AndroBuddy.png',
-      price: '$20',
-      favorite: false
-    },
-    {
-      name: 'Product 3',
-      id: '3',
-      uri: '/p/product3',
-      img: 'https://github.com/AndroBuddy.png',
-      price: '$13',
-      favorite: false
-    },
-    {
-      name: 'Product 4',
-      id: '4',
-      uri: '/p/product4',
-      img: 'https://github.com/AndroBuddy.png',
-      price: '$15',
-      favorite: false
-    },
-    {
-      name: 'Product 5',
-      id: '5',
-      uri: '/p/product5',
-      img: 'https://github.com/AndroBuddy.png',
-      price: '$15',
-      favorite: false
-    },
-    {
-      name: 'Product 6',
-      id: '6',
-      uri: '/p/product6',
-      img: 'https://github.com/AndroBuddy.png',
-      price: '$15',
-      favorite: false
+      _id: String,
+      name: String,
+      description: String,
+      img: String,
+      price: String,
+      postedBy: String,
+      createdAt: String,
+      updatedAt: String,
+      __v: Number
     }
   ])
+
+  const productInfo = ref({
+    img: String,
+    productname: String,
+    username: String,
+    email: String,
+    id: String,
+    price: String,
+    description: String,
+    request: Boolean
+  })
+
+  const loader = ref(false)
+
+  async function getProducts() {
+    loader.value = true
+    try {
+      const data = await axios.get(`${baseURL}/auction/product`)
+      productsList.value = data.data
+      loader.value = false
+    } catch (error) {
+      console.log('Something went wrong')
+    }
+  }
+
+  async function setProduct(pid) {
+    loader.value = true
+    try {
+      const data = await axios.get(`${baseURL}/auction/product/${pid}`)
+      productInfo.value = data.data
+      loader.value = false
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   function setFavorite(prod) {
     const product = prod
@@ -59,5 +60,5 @@ export const useProductStore = defineStore('products', () => {
     productsList.value[index].favorite = !productsList.value[index].favorite
   }
 
-  return { productsList, setFavorite }
+  return { productsList, productInfo, loader, getProducts, setProduct, setFavorite }
 })
