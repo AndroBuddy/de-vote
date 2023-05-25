@@ -1,10 +1,12 @@
 <script setup>
 import { onMounted } from 'vue'
 import { useMainStore } from '../../stores/main'
+import { authHelper } from '../../stores/helpers/auth'
+import { useProfileStore } from '../../stores/api/profile'
 
 const store = useMainStore()
-const authStore = store.authHelper()
-const profileStore = store.useProfileStore()
+const authStore = authHelper()
+const profileStore = useProfileStore()
 
 onMounted(() => {
   if (!authStore.isAuth) profileStore.setGuest()
@@ -20,7 +22,10 @@ onMounted(() => {
           class="w-12 h-12 rounded-full bg-white flex items-center justify-center"
           v-if="profileStore.userAccount.profileUrl"
         />
-        <div class="w-12 h-12 rounded-full bg-white flex items-center justify-center capitalize" v-else>
+        <div
+          class="w-12 h-12 rounded-full bg-white flex items-center justify-center capitalize"
+          v-else
+        >
           {{ profileStore.userAccount.name[0] }}
         </div>
         <span class="flex flex-col">

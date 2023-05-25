@@ -102,7 +102,7 @@ async function submit() {
             class="flex w-full justify-center items-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline-none"
             :class="{ 'bg-red-600 hover:bg-red-500': profileStore.btnWarn }"
           >
-            <IconLoader v-if="profileStore.isLoaded" />
+            <IconLoader class="text-white" v-if="profileStore.isLoaded" />
             <span v-else>{{ profileStore.loginMessage }}</span>
           </button>
         </form>

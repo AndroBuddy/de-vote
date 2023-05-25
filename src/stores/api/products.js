@@ -36,7 +36,7 @@ export const useProductStore = defineStore('products', () => {
     loader.value = true
     try {
       const data = await axios.get(`${baseURL}/auction/product`)
-      productsList.value = data.data
+      if (data.status === 200) productsList.value = data.data
       loader.value = false
     } catch (error) {
       console.log('Something went wrong')
@@ -47,7 +47,7 @@ export const useProductStore = defineStore('products', () => {
     loader.value = true
     try {
       const data = await axios.get(`${baseURL}/auction/product/${pid}`)
-      productInfo.value = data.data
+      if (data.status === 200) productInfo.value = data.data
       loader.value = false
     } catch (error) {
       console.log(error)

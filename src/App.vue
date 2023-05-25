@@ -5,22 +5,22 @@ import HeaderBar from './components/HeaderBar.vue'
 import BottomBar from './components/BottomBar.vue'
 
 import { useMainStore } from './stores/main'
+import { authHelper } from './stores/helpers/auth'
 
+const auth = authHelper()
 const store = useMainStore()
 
 function slideInOut() {
   const animeStore = store.useAnimeStore()
-  if (!store.collapseHelper().collapsed)
-    animeStore.slideIn()
-  else
-    animeStore.slideOut()
+  if (!store.collapseHelper().collapsed) animeStore.slideIn()
+  else animeStore.slideOut()
 }
 
-document.title = "!much | The auction site"
+document.title = '!much | The auction site'
 </script>
 
 <template>
-  <RouterView name="FullPage" v-if="!store.authHelper().isLogged" />
+  <RouterView name="FullPage" v-if="!auth.isLogged" />
   <main class="flex h-screen bg-[#f7f7f7]" v-else>
     <SideBar class="hidden md:block" @slide-in-out="slideInOut()" />
     <BottomBar class="block md:hidden" />

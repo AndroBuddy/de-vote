@@ -25,7 +25,10 @@ function routeBack() {
 
 <template>
   <section class="flex flex-col px-4 pb-32 lg:pb-12 lg:px-14 flex-grow gap-12">
-    <IconLoader class="self-center text-blue-600" v-if="productStore.loader" />
+    <section class="flex items-center justify-center h-full container" v-if="productStore.loader">
+      <IconLoader class="self-center text-blue-500" />
+    </section>
+
     <section class="flex flex-col gap-10 xl:self-center container" v-else>
       <button @click="routeBack" class="bg-white p-4 rounded-2xl w-min">
         <IconArrow class="rotate-180" />

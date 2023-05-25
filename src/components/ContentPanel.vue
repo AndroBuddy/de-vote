@@ -10,7 +10,7 @@ defineProps({
 })
 
 const store = useMainStore()
-const loader = useProductStore()
+const productStore = useProductStore()
 
 function slideIn() {
   if (window.innerWidth >= 1024) {
@@ -26,7 +26,7 @@ function setFav(product) {
 </script>
 
 <template>
-  <SkeletonLoader v-if="loader.loader" />
+  <SkeletonLoader v-if="productStore.loader" />
   <div class="flex flex-col gap-6 transition-transform" v-else>
     <div class="flex whitespace-nowrap flex-nowrap overflow-auto gap-8 relative -ml-20">
       <section
