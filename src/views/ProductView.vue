@@ -24,7 +24,7 @@ function routeBack() {
 </script>
 
 <template>
-  <section class="flex flex-col px-4 pb-32 lg:pb-12 lg:px-14 flex-grow gap-12">
+  <section class="flex flex-col px-4 pb-32 lg:pb-12 lg:px-14 flex-grow min-h-screen gap-12">
     <section class="flex items-center justify-center h-full container" v-if="productStore.loader">
       <IconLoader class="self-center text-blue-500" />
     </section>

@@ -64,7 +64,7 @@ async function submit() {
               name="email"
               type="email"
               autocomplete="email"
-              required=""
+              required="true"
               class="block rounded-md border border-slate-300 py-1.5 px-2 placeholder:text-gray-900 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-200 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500 sm:leading-6"
             />
           </div>
@@ -85,7 +85,7 @@ async function submit() {
                 name="password"
                 :type="[show ? 'text' : 'password']"
                 autocomplete="current-password"
-                required="8"
+                required="true"
                 class="block w-full rounded-md border border-slate-300 py-1.5 px-2 placeholder:text-gray-900 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-200 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500 sm:leading-6"
               />
               <div
@@ -99,11 +99,11 @@ async function submit() {
 
           <button
             type="submit"
-            class="flex w-full justify-center items-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline-none"
+            class="flex w-full justify-center items-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline-none"
             :class="{ 'bg-red-600 hover:bg-red-500': profileStore.btnWarn }"
           >
             <IconLoader class="text-white" v-if="profileStore.isLoaded" />
-            <span v-else>{{ profileStore.loginMessage }}</span>
+            <span class="font-semibold" v-else>{{ profileStore.loginMessage }}</span>
           </button>
         </form>
 

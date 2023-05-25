@@ -1,8 +1,8 @@
 <script setup>
-import { useMainStore } from '../../stores/main';
+import { authHelper } from '../../stores/helpers/auth';
 import IconGuest from '../icons/IconGuest.vue'
 
-const store = useMainStore().authHelper()
+const store = authHelper()
 </script>
 
 <template>

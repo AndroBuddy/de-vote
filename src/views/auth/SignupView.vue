@@ -1,92 +1,181 @@
 <script setup>
 import { ref } from 'vue'
-import { useMainStore } from '../../stores/main'
+import { authHelper } from '../../stores/helpers/auth'
+import { useSignupStore } from '../../stores/auth/signup'
 
 import IconHide from '../../components/icons/IconHide.vue'
 import IconShow from '../../components/icons/IconShow.vue'
+import IconArrow from '../../components/icons/IconArrow.vue'
+import anime from 'animejs'
+import IconLoader from '../../components/icons/IconLoader.vue'
 
-const store = useMainStore().authHelper()
+const authStore = authHelper()
+const signupStore = useSignupStore()
 const show = ref(false)
+
+function testPass() {
+  if (signupStore.password !== signupStore.confirmPassword) {
+    return true
+  } else {
+    return false
+  }
+}
+
+async function submit() {
+  if (signupStore.nextStep) {
+    await signupStore.signupUser()
+  } else {
+    signupStore.setNextStep()
+  }
+}
+
+function onEnter(el, done) {
+  anime({
+    targets: el,
+    opacity: [0, 1],
+    translateX: [100, 0],
+    duration: 300,
+    easing: 'easeOutQuad',
+    complete: done
+  })
+}
+
+function onLeave(el, done) {
+  anime({
+    targets: el,
+    opacity: [1, 0],
+    translateX: [0, -100],
+    duration: 300,
+    easing: 'easeOutQuad',
+    complete: done
+  })
+}
 </script>
 
 <template>
   <section class="flex flex-col sm:items-center justify-center w-full h-full">
     <section class="flex flex-col gap-8">
-      <div class="flex flex-col gap-1">
-        <h1>Sign up</h1>
-        <h2 class="font-normal text-black/50">Create a new !much account</h2>
+      <div class="flex flex-col gap-1 transition-all">
+        <h1>Get Started</h1>
+        <h2 class="font-normal text-black/50">Create your !much account</h2>
       </div>
 
       <section class="flex flex-col justify-center sm:w-96">
-        <form class="flex flex-col gap-4" action="#" method="POST">
-          <div class="flex flex-col gap-2">
-            <label for="email" class="block text-sm font-medium leading-6 text-gray-900">
-              Email*
-            </label>
-            <input
-              id="email"
-              name="email"
-              type="email"
-              autocomplete="email"
-              required=""
-              class="block rounded-md border-0 py-1.5 px-2 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-            />
-          </div>
-
-          <div class="flex flex-col">
-            <div class="flex items-center justify-between">
-              <label for="password" class="block text-sm font-medium leading-6 text-gray-900">
-                Password*
-              </label>
-            </div>
-            <div class="mt-2 relative">
-              <input
-                id="new-password"
-                name="password"
-                :type="[show ? 'text' : 'password']"
-                autocomplete="current-password"
-                required="3"
-                class="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:border-spacing-0 sm:text-sm sm:leading-6"
-              />
-              <div
-                class="absolute inset-y-0 right-0 p-3 flex items-center text-sm leading-5 cursor-pointer"
-              >
-                <IconHide @click="show = true" :class="[show ? 'hidden' : 'block']" />
-                <IconShow @click="show = false" :class="[show ? 'block' : 'hidden']" />
+        <form class="flex flex-col gap-4" @submit.prevent="submit" key="1">
+          <Transition @enter="onEnter" @leave="onLeave" mode="out-in">
+            <section v-if="!signupStore.nextStep">
+              <div class="flex flex-col gap-2">
+                <label for="email" class="block text-sm font-medium leading-6 text-gray-900">
+                  Email
+                </label>
+                <input
+                  v-model="signupStore.email"
+                  id="email"
+                  name="email"
+                  type="email"
+                  autocomplete="email"
+                  required="true"
+                  class="block rounded-md border border-slate-300 py-1.5 px-2 placeholder:text-gray-900 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-red-200 invalid:text-red-600 focus:invalid:border-red-500 focus:invalid:ring-red-500 sm:leading-6"
+                />
               </div>
-            </div>
-          </div>
 
-          <div class="flex flex-col">
-            <div class="flex items-center justify-between">
-              <label for="password" class="block text-sm font-medium leading-6 text-gray-900">
-                Re enter Password*
-              </label>
-            </div>
-            <div class="mt-2">
-              <input
-                id="retype-password"
-                name="password"
-                type="password"
-                autocomplete="current-password"
-                required=""
-                class="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:border-spacing-0 sm:text-sm sm:leading-6"
-              />
-            </div>
-          </div>
+              <div class="flex flex-col gap-2 mt-2">
+                <div class="flex items-center justify-between">
+                  <label for="password" class="block text-sm font-medium leading-6 text-gray-900">
+                    Password
+                  </label>
+                </div>
+                <div class="relative">
+                  <input
+                    v-model="signupStore.password"
+                    id="password"
+                    name="password"
+                    :type="[show ? 'text' : 'password']"
+                    autocomplete="current-password"
+                    required="true"
+                    class="block w-full rounded-md border border-slate-300 py-1.5 px-2 placeholder:text-gray-900 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-red-200 invalid:text-red-600 focus:invalid:border-red-500 focus:invalid:ring-red-500 sm:leading-6"
+                  />
+                  <div
+                    class="absolute inset-y-0 right-0 p-3 flex items-center text-sm leading-5 cursor-pointer"
+                  >
+                    <IconHide @click="show = true" :class="[show ? 'hidden' : 'block']" />
+                    <IconShow @click="show = false" :class="[show ? 'block' : 'hidden']" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="flex flex-col gap-2 mt-2">
+                <div class="flex items-center justify-between">
+                  <label for="password" class="block text-sm font-medium leading-6 text-gray-900">
+                    Retype Password
+                  </label>
+                  <h4 class="text-red-600 font-semibold" v-if="testPass()">
+                    Passwords do not match
+                  </h4>
+                </div>
+                <input
+                  v-model="signupStore.confirmPassword"
+                  id="new-password"
+                  name="password"
+                  type="password"
+                  autocomplete="current-password"
+                  required="true"
+                  class="block w-full rounded-md border border-slate-300 py-1.5 px-2 placeholder:text-gray-900 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-red-200 invalid:text-red-600 focus:invalid:border-red-500 focus:invalid:ring-red-500 sm:leading-6"
+                />
+              </div>
+            </section>
+
+            <section v-else key="2">
+              <div @click="signupStore.setPrevStep()" class="w-min pb-4">
+                <IconArrow class="rotate-180" />
+              </div>
+
+              <div class="flex flex-col gap-2">
+                <label for="email" class="block text-sm font-medium leading-6 text-gray-900">
+                  Name
+                </label>
+                <input
+                  v-model="signupStore.name"
+                  id="name"
+                  name="name"
+                  type="name"
+                  autocomplete="name"
+                  required="true"
+                  class="block rounded-md border border-slate-300 py-1.5 px-2 placeholder:text-gray-900 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-red-200 invalid:text-red-600 focus:invalid:border-red-500 focus:invalid:ring-red-500 sm:leading-6"
+                />
+              </div>
+
+              <div class="flex flex-col gap-2 mt-2">
+                <label for="email" class="block text-sm font-medium leading-6 text-gray-900">
+                  Username
+                </label>
+                <input
+                  v-model="signupStore.username"
+                  id="username"
+                  name="username"
+                  type="username"
+                  autocomplete="username"
+                  required="true"
+                  class="block rounded-md border border-slate-300 py-1.5 px-2 placeholder:text-gray-900 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-red-200 invalid:text-red-600 focus:invalid:border-red-500 focus:invalid:ring-red-500 sm:leading-6"
+                />
+              </div>
+            </section>
+          </Transition>
 
           <button
             type="submit"
-            class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            class="flex w-full justify-center items-center gap-2 rounded-md bg-indigo-600 px-3 py-1.5 text-sm leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
           >
-            Sign Up
+            <IconLoader v-if="signupStore.loader" />
+            <span class="font-semibold" v-else>{{ signupStore.btnVal }}</span>
+            <IconArrow class="stroke-white" v-if="!signupStore.nextStep" />
           </button>
         </form>
 
         <p class="mt-6 text-center text-sm text-gray-500">
           Already a member?
           <button
-            @click="store.setLogOut()"
+            @click="authStore.setLogOut()"
             class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
           >
             Log in here!

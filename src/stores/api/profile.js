@@ -27,7 +27,6 @@ export const useProfileStore = defineStore('profile', () => {
       if (user) {
         isLoaded.value = false
         userAccount.value = user
-        authHelper().setAuth()
         authHelper().setLogIn()
         router.push({ name: 'home' })
       } else {

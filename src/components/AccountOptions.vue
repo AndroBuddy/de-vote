@@ -1,5 +1,6 @@
 <script setup>
 import { useMainStore } from '../stores/main'
+import { useProfileStore } from '../stores/api/profile'
 import IconClose from './icons/IconClose.vue'
 
 import anime from 'animejs/lib/anime.es'
@@ -8,7 +9,7 @@ import LogoutControl from './parts/LogoutControl.vue'
 
 const store = useMainStore()
 const navStore = store.useNavGraphStore()
-const profileStore = store.useProfileStore()
+const profileStore = useProfileStore()
 
 onMounted(() => {
   anime({

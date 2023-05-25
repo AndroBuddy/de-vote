@@ -6,6 +6,7 @@ import { loginManager } from './login'
 import { accountMenuHelper } from './popup'
 
 import { useProductStore } from '../api/products'
+import { useSignupStore } from '../auth/signup'
 
 export const authHelper = defineStore('auth', () => {
   const isAuth = ref(false)
@@ -14,6 +15,7 @@ export const authHelper = defineStore('auth', () => {
 
   function setLogIn() {
     isLogged.value = true
+    isAuth.value = true
 
     const productStore = useProductStore()
     productStore.getProducts()
@@ -26,6 +28,7 @@ export const authHelper = defineStore('auth', () => {
     accountMenuHelper().accountMenu = false
 
     loginManager().resetFields()
+    if (isNew.value) useSignupStore().resetFields()
     router.push({ name: 'login' })
   }
 
