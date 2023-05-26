@@ -46,7 +46,7 @@ const filteredList = () => {
             :key="i"
             class="bg-slate-100 rounded-lg p-3 hover:bg-slate-200 hover:rounded-3xl transition-all"
           >
-            <router-link to="">
+            <router-link :to="`/p/${product._id}`">
               <h3 class="font-normal">{{ product.name }}</h3>
               <h4>{{ product.price }}</h4>
             </router-link>

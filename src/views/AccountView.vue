@@ -78,7 +78,7 @@ const pUpdate = profileUpdate()
                 name="name"
                 type="name"
                 :disabled="!pUpdate.updateFields"
-                class="rounded-md border border-slate-300 py-1.5 px-2 placeholder:text-gray-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-200 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500 sm:leading-6 text-sm text-gray-500 w-72"
+                class="rounded-md border border-slate-300 py-1.5 px-2 placeholder:text-gray-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-200 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500 sm:leading-6 text-sm text-gray-500 sm:w-72"
               />
             </div>
             <div class="flex flex-col sm:flex-row sm:items-center gap-4 sm:justify-between">
@@ -93,7 +93,7 @@ const pUpdate = profileUpdate()
                 name="username"
                 type="username"
                 :disabled="!pUpdate.updateFields"
-                class="rounded-md border border-slate-300 py-1.5 px-2 placeholder:text-gray-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-200 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500 sm:leading-6 text-sm text-gray-500 w-72"
+                class="rounded-md border border-slate-300 py-1.5 px-2 placeholder:text-gray-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-200 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500 sm:leading-6 text-sm text-gray-500 sm:w-72"
               />
             </div>
             <div class="flex flex-col sm:flex-row sm:items-center gap-4 sm:justify-between">
@@ -108,7 +108,7 @@ const pUpdate = profileUpdate()
                 name="email"
                 type="email"
                 :disabled="!pUpdate.updateFields"
-                class="rounded-md border border-slate-300 py-1.5 px-2 placeholder:text-gray-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-200 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500 sm:leading-6 text-sm text-gray-500 w-72"
+                class="rounded-md border border-slate-300 py-1.5 px-2 placeholder:text-gray-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-200 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500 sm:leading-6 text-sm text-gray-500 sm:w-72"
               />
             </div>
 

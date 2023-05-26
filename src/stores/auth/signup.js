@@ -5,7 +5,7 @@ import axios from 'axios'
 import router from '../../router'
 
 export const useSignupStore = defineStore('signup', () => {
-  const baseURL = 'http://143.110.181.19'
+  const baseURL = 'https://auctionsite.onrender.com'
 
   const name = ref('')
   const username = ref('')
