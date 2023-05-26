@@ -16,6 +16,7 @@ export const useProfileStore = defineStore('profile', () => {
   })
 
   userAccount.value = JSON.parse(localStorage.getItem('session_token'))
+  const returnUrl = ref(null)
 
   const userMail = ref('')
   const userPassword = ref('')
@@ -42,5 +43,5 @@ export const useProfileStore = defineStore('profile', () => {
     userPassword.value = ''
   }
 
-  return { userMail, userPassword, userAccount, userAuth, resetFields }
+  return { userMail, userPassword, userAccount, userAuth, resetFields, returnUrl }
 })

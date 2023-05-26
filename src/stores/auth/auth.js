@@ -41,11 +41,5 @@ export const authHelper = defineStore('auth', () => {
     productStore.getProducts()
   }
 
-  router.beforeEach(async (to) => {
-    if (!isNew.value && to.name !== 'login') {
-      if (!useProfileStore().userAccount) return { name: 'login' }
-    }
-  })
-
   return { isNew, setLogIn, setLogOut, setSignUp, setGuest }
 })

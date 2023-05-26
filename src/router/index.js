@@ -4,6 +4,7 @@ import AuthView from '../views/AuthView.vue'
 import HomeView from '../views/HomeView.vue'
 import ActiveBidsView from '../views/ActiveBidsView.vue'
 import FavoritesView from '../views/FavoritesView.vue'
+import { useProfileStore } from '../stores/api/profile'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -73,6 +74,17 @@ const router = createRouter({
       ]
     }
   ]
+})
+
+router.beforeEach(async (to) => {
+  const publicRoutes = ['/auth/login', '/auth/signup']
+  const authRequired = !publicRoutes.includes(to.path)
+  const auth = useProfileStore()
+
+  if (authRequired && !auth.userAccount) {
+    auth.returnUrl = to.fullPath
+    return { name: 'login' }
+  }
 })
 
 export default router
