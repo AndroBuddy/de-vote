@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue'
-import { authHelper } from '../../stores/helpers/auth'
+import { authHelper } from '../../stores/auth/auth'
 import { useSignupStore } from '../../stores/auth/signup'
 
 import IconHide from '../../components/icons/IconHide.vue'

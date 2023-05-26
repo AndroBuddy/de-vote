@@ -5,9 +5,9 @@ import HeaderBar from './components/HeaderBar.vue'
 import BottomBar from './components/BottomBar.vue'
 
 import { useMainStore } from './stores/main'
-import { authHelper } from './stores/helpers/auth'
+import { useProfileStore } from './stores/api/profile'
 
-const auth = authHelper()
+const profileStore = useProfileStore()
 const store = useMainStore()
 
 function slideInOut() {
@@ -20,7 +20,7 @@ document.title = '!much | The auction site'
 </script>
 
 <template>
-  <RouterView name="FullPage" v-if="!auth.isLogged" />
+  <RouterView name="FullPage" v-if="!profileStore.userAccount" />
   <main class="flex h-screen bg-[#f7f7f7]" v-else>
     <SideBar class="hidden md:block" @slide-in-out="slideInOut()" />
     <BottomBar class="block md:hidden" />
@@ -31,5 +31,3 @@ document.title = '!much | The auction site'
     <RouterView name="RightPanel" class="hidden lg:block" />
   </main>
 </template>
-
-<style scoped></style>

@@ -1,28 +1,23 @@
 <script setup>
-import { onMounted, ref } from 'vue'
+import { ref } from 'vue'
 
-import { authHelper } from '../../stores/helpers/auth'
-import { loginManager } from '../../stores/helpers/login'
+import { authHelper } from '../../stores/auth/auth'
+import { loginManager } from '../../stores/auth/login'
+import { useProfileStore } from '../../stores/api/profile'
 
 import IconGuest from '../../components/icons/IconGuest.vue'
 import IconHide from '../../components/icons/IconHide.vue'
 import IconShow from '../../components/icons/IconShow.vue'
 import IconLoader from '../../components/icons/IconLoader.vue'
 
-import { useProfileStore } from '../../stores/api/profile'
-
 const store = authHelper()
-onMounted(() => {
-  store.setLogOut()
-})
-
-const loginAuth = loginManager()
 const profileStore = useProfileStore()
+const loginStore = loginManager()
 
 const show = ref(false)
 
 async function submit() {
-  await profileStore.validateUser()
+  await loginStore.validateUser()
 }
 </script>
 
@@ -36,7 +31,7 @@ async function submit() {
 
       <router-link
         to="/"
-        @click="store.setGuest()"
+        @click="loginStore.setGuest()"
         class="flex gap-3 items-center justify-center border-black/20 border p-2 rounded-lg sm:w-96 hover:bg-black/5 transition-colors"
       >
         <IconGuest />
@@ -59,7 +54,7 @@ async function submit() {
               Email
             </label>
             <input
-              v-model="loginAuth.userMail"
+              v-model="profileStore.userMail"
               id="email"
               name="email"
               type="email"
@@ -80,7 +75,7 @@ async function submit() {
             </div>
             <div class="mt-2 relative">
               <input
-                v-model="loginAuth.userPassword"
+                v-model="profileStore.userPassword"
                 id="password"
                 name="password"
                 :type="[show ? 'text' : 'password']"
@@ -100,10 +95,10 @@ async function submit() {
           <button
             type="submit"
             class="flex w-full justify-center items-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline-none"
-            :class="{ 'bg-red-600 hover:bg-red-500': profileStore.btnWarn }"
+            :class="{ 'bg-red-600 hover:bg-red-500': loginStore.btnWarn }"
           >
-            <IconLoader class="text-white" v-if="profileStore.isLoaded" />
-            <span class="font-semibold" v-else>{{ profileStore.loginMessage }}</span>
+            <IconLoader class="text-white" v-if="loginStore.isLoaded" />
+            <span class="font-semibold" v-else>{{ loginStore.loginMessage }}</span>
           </button>
         </form>
 

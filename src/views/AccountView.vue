@@ -1,20 +1,18 @@
 <script setup>
 import GuestLogin from '../components/parts/GuestLogin.vue'
-import { authHelper } from '../stores/helpers/auth'
-import { useProfileStore } from '../stores/api/profile'
 import { profileUpdate } from '../stores/helpers/update'
+import { useProfileStore } from '../stores/api/profile'
 
-const store = authHelper()
 const profileStore = useProfileStore()
 const pUpdate = profileUpdate()
 </script>
 
 <template>
-  <section class="flex flex-col px-4 pb-32 lg:pb-12 lg:px-14 flex-grow gap-12">
+  <section class="flex flex-col px-4 pb-32 lg:pb-12 md:px-14 flex-grow gap-12">
     <section class="flex flex-col xl:self-center h-full container">
       <div
         class="flex flex-col items-center justify-center center h-full self-center lg:mb-32"
-        v-if="!store.isAuth"
+        v-if="profileStore.userAccount.id === 'guest'"
       >
         <GuestLogin />
       </div>
@@ -67,7 +65,7 @@ const pUpdate = profileUpdate()
 
           <div class="border-[1px]" />
 
-          <div class="flex flex-col gap-6 sm:w-[40rem]">
+          <div class="flex flex-col gap-6 lg:w-[40rem]">
             <div class="flex flex-col sm:flex-row sm:items-center gap-4 sm:justify-between">
               <div class="text-sm text-gray-900">
                 <span class="font-semibold">Name</span>
@@ -80,7 +78,7 @@ const pUpdate = profileUpdate()
                 name="name"
                 type="name"
                 :disabled="!pUpdate.updateFields"
-                class="rounded-md border border-slate-300 py-1.5 px-2 placeholder:text-gray-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-200 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500 sm:leading-6 text-sm text-gray-500"
+                class="rounded-md border border-slate-300 py-1.5 px-2 placeholder:text-gray-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-200 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500 sm:leading-6 text-sm text-gray-500 w-72"
               />
             </div>
             <div class="flex flex-col sm:flex-row sm:items-center gap-4 sm:justify-between">
@@ -95,7 +93,7 @@ const pUpdate = profileUpdate()
                 name="username"
                 type="username"
                 :disabled="!pUpdate.updateFields"
-                class="rounded-md border border-slate-300 py-1.5 px-2 placeholder:text-gray-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-200 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500 sm:leading-6 text-sm text-gray-500"
+                class="rounded-md border border-slate-300 py-1.5 px-2 placeholder:text-gray-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-200 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500 sm:leading-6 text-sm text-gray-500 w-72"
               />
             </div>
             <div class="flex flex-col sm:flex-row sm:items-center gap-4 sm:justify-between">
@@ -110,13 +108,11 @@ const pUpdate = profileUpdate()
                 name="email"
                 type="email"
                 :disabled="!pUpdate.updateFields"
-                class="rounded-md border border-slate-300 py-1.5 px-2 placeholder:text-gray-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-200 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500 sm:leading-6 text-sm text-gray-500"
+                class="rounded-md border border-slate-300 py-1.5 px-2 placeholder:text-gray-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-200 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500 sm:leading-6 text-sm text-gray-500 w-72"
               />
             </div>
 
-            <div
-              class="text-gray-400 flex sm:items-center justify-between text-sm"
-            >
+            <div class="text-gray-400 flex sm:items-center justify-between text-sm">
               <span>User ID</span>
               <p>{{ profileStore.userAccount.id }}</p>
             </div>

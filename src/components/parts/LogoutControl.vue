@@ -1,5 +1,5 @@
 <script setup>
-import { authHelper } from '../../stores/helpers/auth';
+import { authHelper } from '../../stores/auth/auth';
 import IconLogout from '../icons/IconLogout.vue'
 
 const authStore = authHelper()

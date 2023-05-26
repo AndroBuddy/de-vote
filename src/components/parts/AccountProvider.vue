@@ -1,16 +1,9 @@
 <script setup>
-import { onMounted } from 'vue'
 import { useMainStore } from '../../stores/main'
-import { authHelper } from '../../stores/helpers/auth'
 import { useProfileStore } from '../../stores/api/profile'
 
 const store = useMainStore()
-const authStore = authHelper()
 const profileStore = useProfileStore()
-
-onMounted(() => {
-  if (!authStore.isAuth) profileStore.setGuest()
-})
 </script>
 
 <template>

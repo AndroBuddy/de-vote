@@ -4,7 +4,7 @@ import { ref } from 'vue'
 import axios from 'axios'
 
 export const useProductStore = defineStore('products', () => {
-  const baseURL = 'https://auctionsite.onrender.com'
+  const baseURL = 'http://143.110.181.19'
   const productsList = ref([
     {
       _id: String,
@@ -18,6 +18,8 @@ export const useProductStore = defineStore('products', () => {
       __v: Number
     }
   ])
+
+  productsList.value = JSON.parse(localStorage.getItem('products_list'))
 
   const productInfo = ref({
     img: String,
@@ -36,7 +38,10 @@ export const useProductStore = defineStore('products', () => {
     loader.value = true
     try {
       const data = await axios.get(`${baseURL}/auction/product`)
-      if (data.status === 200) productsList.value = data.data
+      if (data.status === 200) {
+        productsList.value = data.data
+        localStorage.setItem('products_list', JSON.stringify(data.data))
+      }
       loader.value = false
     } catch (error) {
       console.log('Something went wrong')

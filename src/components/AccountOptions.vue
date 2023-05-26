@@ -1,6 +1,7 @@
 <script setup>
 import { useMainStore } from '../stores/main'
-import { useProfileStore } from '../stores/api/profile'
+import { useProfileStore } from '../stores/api/profile';
+
 import IconClose from './icons/IconClose.vue'
 
 import anime from 'animejs/lib/anime.es'

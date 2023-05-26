@@ -1,11 +1,10 @@
+import axios from 'axios'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 
-import { loginManager } from '../helpers/login'
-import { authHelper } from '../helpers/auth'
-import router from '../../router'
-
 export const useProfileStore = defineStore('profile', () => {
+  const baseURL = 'http://143.110.181.19'
+
   const userAccount = ref({
     email: String,
     name: String,
@@ -16,40 +15,32 @@ export const useProfileStore = defineStore('profile', () => {
     request: Boolean
   })
 
-  const loginMessage = ref('Continue')
-  const btnWarn = ref(false)
-  const isLoaded = ref(false)
+  userAccount.value = JSON.parse(localStorage.getItem('session_token'))
 
-  async function validateUser() {
-    isLoaded.value = true
+  const userMail = ref('')
+  const userPassword = ref('')
+
+  async function userAuth() {
     try {
-      const user = await loginManager().userAuth()
-      if (user) {
-        isLoaded.value = false
-        userAccount.value = user
-        authHelper().setLogIn()
-        router.push({ name: 'home' })
-      } else {
-        isLoaded.value = false
-        loginMessage.value = 'Invalid Credentials • Try again'
-        btnWarn.value = true
-      }
+      const data = await axios.post(`${baseURL}/auth/sign-in`, {
+        email: userMail.value,
+        password: userPassword.value
+      })
+
+      if (data.status === 200 && 'request' in data.data) {
+        userAccount.value = data.data
+      } else return (userAccount.value.request = false)
+
+      return userAccount.value
     } catch (error) {
-      console.log('Authentication Failure')
+      console.log(error)
     }
   }
 
-  function setGuest() {
-    userAccount.value = {
-      email: '',
-      name: 'Guest',
-      username: 'Not Signed In',
-      phone: '',
-      id: 'guest1234',
-      profileUrl: '',
-      request: false
-    }
+  function resetFields() {
+    userMail.value = ''
+    userPassword.value = ''
   }
 
-  return { userAccount, loginMessage, btnWarn, isLoaded, validateUser, setGuest }
+  return { userMail, userPassword, userAccount, userAuth, resetFields }
 })
