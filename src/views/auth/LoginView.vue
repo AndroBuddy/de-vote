@@ -26,7 +26,7 @@ async function submit() {
     <section class="flex flex-col gap-8">
       <div class="flex flex-col gap-1">
         <h1>Welcome back</h1>
-        <h2 class="font-normal text-black/50">Log in to your !much account</h2>
+        <h2 class="font-normal text-black/50">Log in to your auxhive account</h2>
       </div>
 
       <router-link

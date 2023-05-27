@@ -57,7 +57,7 @@ function onLeave(el, done) {
     <section class="flex flex-col gap-8">
       <div class="flex flex-col gap-1 transition-all">
         <h1>Get Started</h1>
-        <h2 class="font-normal text-black/50">Create your !much account</h2>
+        <h2 class="font-normal text-black/50">Create your auxhive account</h2>
       </div>
 
       <section class="flex flex-col justify-center sm:w-96">

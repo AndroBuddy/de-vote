@@ -16,7 +16,7 @@ function slideInOut() {
   else animeStore.slideOut()
 }
 
-document.title = '!much | The auction site'
+document.title = `${store.appName} | Auctions`
 </script>
 
 <template>

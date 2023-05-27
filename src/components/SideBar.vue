@@ -24,7 +24,7 @@ onMounted(() => {
           :class="[collapseState.collapsed ? 'scale-100' : 'scale-0']">
           !m
         </div>
-        <h1 :class="[collapseState.collapsed ? 'opacity-0' : 'opacity-100']">!much</h1>
+        <h1 class="lowercase" :class="[collapseState.collapsed ? 'opacity-0' : 'opacity-100']">{{ store.appName }}</h1>
       </section>
       <section class="flex flex-col justify-between flex-grow">
         <section class="flex flex-col gap-8 overflow-clip">
