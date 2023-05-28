@@ -1,11 +1,13 @@
 <script setup>
 import IconBrand from './icons/IconBrand.vue'
-import IconSearch from './icons/IconSearch.vue'
+import { SearchNormal1, Refresh } from 'vue-iconsax'
+
 import AccountOptions from './AccountOptions.vue'
 import AccountProvider from './parts/AccountProvider.vue'
 import SearchBar from './parts/SearchBar.vue'
 
 import { useMainStore } from '../stores/main'
+import { useProductStore } from '../stores/api/products'
 import { onMounted } from 'vue'
 
 const store = useMainStore()
@@ -33,9 +35,16 @@ onMounted(() => {
       @click="searchStore.setSearchActive()"
       class="flex gap-2 lg:gap-4 p-3 lg:p-4 bg-white hover:bg-black/5 rounded-2xl items-center w-full lg:w-96 text-xs text-black/40 cursor-pointer"
     >
-      <IconSearch class="stroke-black w-3 h-3 md:w-5 md:h-5" />
+      <SearchNormal1 class="w-3 h-3 md:w-5 md:h-5" />
       Search products...
     </div>
+
+    <button
+      class="bg-white p-2 sm:p-3 rounded-xl hover:scale-95 hover:-translate-y-1 transition-transform"
+      @click="useProductStore().getProducts()"
+    >
+      <Refresh size="20" type="linear" />
+    </button>
 
     <AccountProvider />
   </header>

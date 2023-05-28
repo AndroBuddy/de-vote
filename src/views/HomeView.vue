@@ -1,8 +1,12 @@
 <script setup>
+import { onMounted } from 'vue';
 import ContentPanel from '../components/ContentPanel.vue'
 import { useProductStore } from '../stores/api/products'
 
 const store = useProductStore()
+onMounted(() => {
+  store.getProducts()
+})
 </script>
 
 <template>

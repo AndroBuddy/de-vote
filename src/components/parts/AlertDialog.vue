@@ -1,6 +1,6 @@
 <script setup>
 import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
-import { CheckCircleIcon } from '@heroicons/vue/24/outline'
+import { TickCircle } from 'vue-iconsax'
 
 import { useMainStore } from '../../stores/main'
 const open = useMainStore()
@@ -42,7 +42,7 @@ const open = useMainStore()
                   <div
                     class="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-blue-100 sm:mx-0 sm:h-10 sm:w-10"
                   >
-                    <CheckCircleIcon class="h-6 w-6 text-blue-600" aria-hidden="true" />
+                    <TickCircle class="h-6 w-6 text-blue-600" aria-hidden="true" />
                   </div>
                   <div class="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
                     <DialogTitle as="h3" class="text-base font-semibold leading-6 text-gray-900"

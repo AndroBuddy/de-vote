@@ -3,8 +3,9 @@ import { useProfileStore } from '../stores/api/profile'
 import { useAddProductStore } from '../stores/api/update.product'
 import { onMounted } from 'vue'
 
+import { AddCircle } from 'vue-iconsax'
+
 import GuestLogin from '../components/parts/GuestLogin.vue'
-import IconAddBtn from '../components/icons/IconAddBtn.vue'
 import IconLoader from '../components/icons/IconLoader.vue'
 import ContentPanel from '../components/ContentPanel.vue'
 import AlertDialog from '../components/parts/AlertDialog.vue'
@@ -17,6 +18,9 @@ async function submit() {
 }
 
 onMounted(async () => {
+  if (profileStore.userAccount.id === 'guest') {
+    return
+  }
   await productStore.getUserProducts()
 })
 </script>
@@ -92,8 +96,8 @@ onMounted(async () => {
               <input
                 v-model="productStore.productDuration"
                 id="duration"
-                name="date"
-                type="date"
+                name="datetime"
+                type="datetime-local"
                 class="rounded-md border border-slate-300 py-1.5 px-2 placeholder:text-gray-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-red-200 invalid:text-red-600 focus:invalid:border-red-500 focus:invalid:ring-red-500 sm:leading-6 text-sm text-gray-500 sm:w-72"
               />
             </div>
@@ -118,14 +122,14 @@ onMounted(async () => {
             >
               <IconLoader class="stroke-white w-5" v-if="productStore.loader" />
               <div class="flex gap-2 items-center" v-else>
-                <IconAddBtn class="stroke-white" /> Add Product
+                <AddCircle size="20" class="text-white" /> Add Product
               </div>
             </button>
           </form>
 
           <div class="border-[1px]" />
 
-          <div class="flex flex-col gap-6">
+          <div class="flex flex-col gap-6" v-if="productStore.userProducts">
             <h2>Listings</h2>
             <ContentPanel :items="productStore.userProducts" />
           </div>

@@ -1,9 +1,9 @@
 <script setup>
 import { useMainStore } from '../stores/main'
-import IconFavorite from './icons/IconFavorite.vue'
-
-import SkeletonLoader from '../components/parts/SkeletonLoader.vue'
 import { useProductStore } from '../stores/api/products'
+
+import { Heart } from 'vue-iconsax'
+import SkeletonLoader from '../components/parts/SkeletonLoader.vue'
 
 defineProps({
   items: Array
@@ -11,13 +11,6 @@ defineProps({
 
 const store = useMainStore()
 const productStore = useProductStore()
-
-function slideIn() {
-  if (window.innerWidth >= 1024) {
-    const animeStore = store.useAnimeStore()
-    if (!store.collapseHelper().collapsed) animeStore.slideIn()
-  }
-}
 
 function setFav(product) {
   const prodStore = useMainStore().useProductStore()
@@ -44,16 +37,17 @@ function setFav(product) {
         <div class="flex justify-between items-center">
           <router-link
             :to="`/p/${item._id}`"
-            @click="slideIn"
-            class="bg-blue-500/20 text-blue-500 py-3 px-6 rounded-xl text-sm text-center hover:scale-95 transition-transform w-min"
+            class="bg-blue-500/20 text-blue-500 py-3 px-6 rounded-xl text-sm text-center hover:-translate-y-1 transition-transform w-min"
           >
             <span class="font-semibold">{{ item.price }}</span> • Bid Now
           </router-link>
-          <IconFavorite
-            class="stroke-red-500/40 w-6 h-6 cursor-pointer hover:fill-red-500 transition-colors"
-            :class="[item.favorite ? 'fill-red-500' : '']"
+          <button
+            class="p-2.5 rounded-2xl hover:text-red-500 hover:bg-red-100 hover:-translate-y-2 transition-all"
+            :class="[item.favorite ? 'text-red-500 bg-red-100' : 'text-gray-300 bg-gray-50']"
             @click="setFav(item)"
-          />
+          >
+            <Heart size="20" type="bold" />
+          </button>
         </div>
       </div>
       <section

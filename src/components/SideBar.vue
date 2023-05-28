@@ -1,7 +1,10 @@
 <script setup>
 import { useMainStore } from '../stores/main'
-import { onMounted } from 'vue';
-import LogoutControl from './parts/LogoutControl.vue';
+import { onMounted } from 'vue'
+import LogoutControl from './parts/LogoutControl.vue'
+
+import { vsxIcon } from 'vue-iconsax'
+import IconBrand from './icons/IconBrand.vue'
 
 const store = useMainStore()
 const navGraphStore = store.useNavGraphStore()
@@ -15,32 +18,50 @@ onMounted(() => {
 </script>
 
 <template>
-  <nav class="z-20 w-80 overflow-clip shrink-0" :class="[collapseState.collapsed ? 'w-[4.5rem]' : 'w-80']">
-    <section class="flex flex-col gap-14 p-14 w-full bg-white h-screen rounded-tr-3xl rounded-br-3xl"
-      :class="[collapseState.collapsed ? 'px-6 py-14' : 'p-14']">
-      <section id="brand" class="cursor-pointer" :class="[collapseState.collapsed ? '-m-[0.4rem]' : 'm-0']"
-        @click="$emit('slideInOut')">
-        <div id="logo" class="bg-black text-white py-[0.3rem] px-[0.4rem] rounded-lg font-semibold text-sm absolute"
-          :class="[collapseState.collapsed ? 'scale-100' : 'scale-0']">
-          !m
-        </div>
-        <h1 class="lowercase" :class="[collapseState.collapsed ? 'opacity-0' : 'opacity-100']">{{ store.appName }}</h1>
+  <nav
+    class="z-20 w-80 overflow-clip shrink-0"
+    :class="[collapseState.collapsed ? 'w-[4.5rem]' : 'w-80']"
+  >
+    <section
+      class="flex flex-col gap-14 p-14 w-full bg-white h-screen rounded-tr-3xl rounded-br-3xl"
+      :class="[collapseState.collapsed ? 'px-6 py-14' : 'p-14']"
+    >
+      <section
+        id="brand"
+        class="cursor-pointer"
+        :class="[collapseState.collapsed ? '-m-[0.4rem]' : 'm-0']"
+        @click="$emit('slideInOut')"
+      >
+        <IconBrand
+          id="logo"
+          class="w-8 h-8 absolute"
+          :class="[collapseState.collapsed ? 'scale-100' : 'scale-0']"
+        />
+        <h1 class="lowercase" :class="[collapseState.collapsed ? 'opacity-0' : 'opacity-100']">
+          {{ store.appName }}
+        </h1>
       </section>
       <section class="flex flex-col justify-between flex-grow">
         <section class="flex flex-col gap-8 overflow-clip">
-          <ul class="flex flex-col gap-8 text-black/40">
+          <ul class="flex flex-col gap-8 text-gray-400">
             <li v-for="(navItem, index) in navGraphStore.navGraph[0]" :key="index">
-              <router-link :to="navItem.path" class="flex gap-4 items-center">
-                <component class="shrink-0" :is="navItem.icon" />
+              <router-link
+                :to="navItem.path"
+                class="hover:text-black transition-all duration-500 flex gap-4 items-center"
+              >
+                <vsx-icon class="shrink-0" :iconName="navItem.icon" size="20" type="linear" />
                 <span class="flex-grow whitespace-nowrap">{{ navItem.name }}</span>
               </router-link>
             </li>
           </ul>
           <div class="border-[1px]" />
-          <ul class="flex flex-col gap-8 text-black/40">
+          <ul class="flex flex-col gap-8 text-gray-400">
             <li v-for="(navItem, index) in navGraphStore.navGraph[1]" :key="index">
-              <router-link :to="navItem.path" class="flex gap-4 items-center">
-                <component class="shrink-0" :is="navItem.icon" />
+              <router-link
+                :to="navItem.path"
+                class="hover:text-black transition-all duration-500 flex gap-4 items-center"
+              >
+                <vsx-icon class="shrink-0" :iconName="navItem.icon" size="20" type="linear" />
                 <span class="flex-grow whitespace-nowrap">{{ navItem.name }}</span>
               </router-link>
             </li>

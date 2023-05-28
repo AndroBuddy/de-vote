@@ -1,21 +1,16 @@
 <script setup>
 import { onMounted } from 'vue'
-import { collapseHelper } from '../stores/helpers/collapse'
 import { useProductStore } from '../stores/api/products'
-
-import IconArrow from '../components/icons/IconArrow.vue'
-
 import { useRoute } from 'vue-router'
+
+import { ArrowLeft } from 'vue-iconsax'
 import IconLoader from '../components/icons/IconLoader.vue'
 
 const productStore = useProductStore()
 
 onMounted(() => {
   const route = useRoute().params.product
-
   productStore.setProduct(route)
-
-  if (!collapseHelper().collapsed) collapseHelper().setCollapse()
 })
 
 function routeBack() {
@@ -31,7 +26,7 @@ function routeBack() {
 
     <section class="flex flex-col gap-10 xl:self-center container" v-else>
       <button @click="routeBack" class="bg-white p-4 rounded-2xl w-min">
-        <IconArrow class="rotate-180" />
+        <ArrowLeft />
       </button>
 
       <div>

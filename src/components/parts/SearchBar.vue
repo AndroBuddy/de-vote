@@ -1,7 +1,7 @@
 <script setup>
 import { useProductStore } from '../../stores/api/products'
 import { onMounted, ref } from 'vue'
-import IconSearch from '../icons/IconSearch.vue'
+import { SearchNormal1 } from 'vue-iconsax'
 
 onMounted(() => {
   const search = document.querySelector('input[name="search"]')
@@ -25,7 +25,7 @@ const filteredList = () => {
         class="flex gap-4 p-3 lg:p-4 bg-white items-center w-full"
         :class="[filteredList().length > 0 ? 'rounded-t-2xl' : 'rounded-2xl']"
       >
-        <IconSearch class="stroke-black md:w-5 md:h-5" />
+        <SearchNormal1 class="md:w-5 md:h-5" />
         <input
           v-model="searchKey"
           type="text"

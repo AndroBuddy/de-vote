@@ -5,9 +5,7 @@ import { authHelper } from '../../stores/auth/auth'
 import { loginManager } from '../../stores/auth/login'
 import { useProfileStore } from '../../stores/api/profile'
 
-import IconGuest from '../../components/icons/IconGuest.vue'
-import IconHide from '../../components/icons/IconHide.vue'
-import IconShow from '../../components/icons/IconShow.vue'
+import { UserSquare, Eye, EyeSlash } from 'vue-iconsax'
 import IconLoader from '../../components/icons/IconLoader.vue'
 
 const store = authHelper()
@@ -34,7 +32,7 @@ async function submit() {
         @click="loginStore.setGuest()"
         class="flex gap-3 items-center justify-center border-black/20 border p-2 rounded-lg sm:w-96 hover:bg-black/5 transition-colors"
       >
-        <IconGuest />
+        <UserSquare size="20" />
         <h3>Log in as Guest User</h3>
       </router-link>
 
@@ -86,8 +84,8 @@ async function submit() {
               <div
                 class="absolute inset-y-0 right-0 p-3 flex items-center text-sm leading-5 cursor-pointer"
               >
-                <IconHide @click="show = true" :class="[show ? 'hidden' : 'block']" />
-                <IconShow @click="show = false" :class="[show ? 'block' : 'hidden']" />
+                <EyeSlash size="20" @click="show = true" :class="[show ? 'hidden' : 'block']" />
+                <Eye size="20" @click="show = false" :class="[show ? 'block' : 'hidden']" />
               </div>
             </div>
           </div>
@@ -97,7 +95,7 @@ async function submit() {
             class="flex w-full justify-center items-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline-none"
             :class="{ 'bg-red-600 hover:bg-red-500': loginStore.btnWarn }"
           >
-            <IconLoader class="text-white" v-if="loginStore.isLoaded" />
+            <IconLoader class="text-white w-4" v-if="loginStore.isLoaded" />
             <span class="font-semibold" v-else>{{ loginStore.loginMessage }}</span>
           </button>
         </form>

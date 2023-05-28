@@ -1,13 +1,13 @@
 <script setup>
 import { authHelper } from '../../stores/auth/auth';
-import IconGuest from '../icons/IconGuest.vue'
+import { UserSquare }  from 'vue-iconsax'
 
 const store = authHelper()
 </script>
 
 <template>
   <div class="flex flex-col gap-4 items-center">
-    <IconGuest class="stroke-black/20 w-32 h-32" />
+    <UserSquare size="128" class="text-gray-300" />
     <div class="flex flex-col items-center text-black/40">
       <h2 class="text-base">You are not signed in.</h2>
       <p>

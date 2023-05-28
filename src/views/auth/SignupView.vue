@@ -3,9 +3,7 @@ import { ref } from 'vue'
 import { authHelper } from '../../stores/auth/auth'
 import { useSignupStore } from '../../stores/auth/signup'
 
-import IconHide from '../../components/icons/IconHide.vue'
-import IconShow from '../../components/icons/IconShow.vue'
-import IconArrow from '../../components/icons/IconArrow.vue'
+import { ArrowLeft, ArrowRight, Eye, EyeSlash } from 'vue-iconsax'
 import anime from 'animejs'
 import IconLoader from '../../components/icons/IconLoader.vue'
 
@@ -98,8 +96,8 @@ function onLeave(el, done) {
                   <div
                     class="absolute inset-y-0 right-0 p-3 flex items-center text-sm leading-5 cursor-pointer"
                   >
-                    <IconHide @click="show = true" :class="[show ? 'hidden' : 'block']" />
-                    <IconShow @click="show = false" :class="[show ? 'block' : 'hidden']" />
+                    <EyeSlash size="20" @click="show = true" :class="[show ? 'hidden' : 'block']" />
+                    <Eye size="20" @click="show = false" :class="[show ? 'block' : 'hidden']" />
                   </div>
                 </div>
               </div>
@@ -127,7 +125,7 @@ function onLeave(el, done) {
 
             <section v-else key="2">
               <div @click="signupStore.setPrevStep()" class="w-min pb-4">
-                <IconArrow class="rotate-180" />
+                <ArrowLeft />
               </div>
 
               <div class="flex flex-col gap-2">
@@ -166,9 +164,9 @@ function onLeave(el, done) {
             type="submit"
             class="flex w-full justify-center items-center gap-2 rounded-md bg-indigo-600 px-3 py-1.5 text-sm leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
           >
-            <IconLoader v-if="signupStore.loader" />
+            <IconLoader class="text-white w-4" v-if="signupStore.loader" />
             <span class="font-semibold" v-else>{{ signupStore.btnVal }}</span>
-            <IconArrow class="stroke-white" v-if="!signupStore.nextStep" />
+            <ArrowRight size="20" v-if="!signupStore.nextStep" />
           </button>
         </form>
 

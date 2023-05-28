@@ -16,6 +16,7 @@
     "axios": "^1.4.0",
     "pinia": "^2.0.35",
     "vue": "^3.2.47",
+    "vue-iconsax": "^0.0.28",
     "vue-router": "^4.1.6"
   },
   "devDependencies": {

@@ -7,7 +7,3 @@
 .router-link-exact-active {
   @apply text-black;
 }
-
-.router-link-exact-active > svg {
-  @apply stroke-black !important;
-}
