@@ -15,6 +15,8 @@ export const useProductStore = defineStore('products', () => {
       postedBy: String,
       createdAt: String,
       updatedAt: String,
+      endtime: String,
+      status: Boolean,
       __v: Number
     }
   ])
@@ -59,11 +61,5 @@ export const useProductStore = defineStore('products', () => {
     }
   }
 
-  function setFavorite(prod) {
-    const product = prod
-    const index = productsList.value.indexOf(product)
-    productsList.value[index].favorite = !productsList.value[index].favorite
-  }
-
-  return { productsList, productInfo, loader, getProducts, setProduct, setFavorite }
+  return { productsList, productInfo, loader, getProducts, setProduct }
 })

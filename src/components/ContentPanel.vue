@@ -1,6 +1,7 @@
 <script setup>
 import { useMainStore } from '../stores/main'
 import { useProductStore } from '../stores/api/products'
+import { useFavoriteStore } from '../stores/helpers/favorite'
 
 import { Heart } from 'vue-iconsax'
 import SkeletonLoader from '../components/parts/SkeletonLoader.vue'
@@ -11,11 +12,7 @@ defineProps({
 
 const store = useMainStore()
 const productStore = useProductStore()
-
-function setFav(product) {
-  const prodStore = useMainStore().useProductStore()
-  prodStore.setFavorite(product)
-}
+const favoriteStore = useFavoriteStore()
 </script>
 
 <template>
@@ -42,9 +39,13 @@ function setFav(product) {
             <span class="font-semibold">{{ item.price }}</span> • Bid Now
           </router-link>
           <button
+            @click="favoriteStore.checkFavorite(item)"
             class="p-2.5 rounded-2xl hover:text-red-500 hover:bg-red-100 hover:-translate-y-2 transition-all"
-            :class="[item.favorite ? 'text-red-500 bg-red-100' : 'text-gray-300 bg-gray-50']"
-            @click="setFav(item)"
+            :class="[
+              item.__v === 1
+                ? 'text-red-500 bg-red-100'
+                : 'text-gray-300 bg-gray-50'
+            ]"
           >
             <Heart size="20" type="bold" />
           </button>

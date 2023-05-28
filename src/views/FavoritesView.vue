@@ -1,23 +1,21 @@
 <script setup>
-import { onMounted, ref } from 'vue'
 import { useProfileStore } from '../stores/api/profile'
-import { useMainStore } from '../stores/main'
+import { useFavoriteStore } from '../stores/helpers/favorite'
 
 import ContentPanel from '../components/ContentPanel.vue'
 import GuestLogin from '../components/parts/GuestLogin.vue'
 
-import { HeartSlash }  from 'vue-iconsax'
+import { HeartSlash } from 'vue-iconsax'
+import { onMounted, ref } from 'vue'
 
-const store = useMainStore().useProductStore()
-const favoriteList = ref([])
+const favoritesList = ref([])
 
 onMounted(() => {
-  const allProds = store.productsList
-  allProds.forEach((prod) => {
-    if (prod.favorite) {
-      favoriteList.value.push(prod)
-    }
-  })
+  if (useProfileStore().userAccount.id === 'guest') {
+    return
+  }
+  useFavoriteStore().getFavorites()
+  favoritesList.value = useFavoriteStore().favoritesList
 })
 </script>
 
@@ -31,14 +29,17 @@ onMounted(() => {
         <GuestLogin />
       </div>
 
-      <section class="flex xl:self-center justify-center h-full" v-else>
+      <section class="flex flex-col h-full" v-else>
         <div
-          class="flex flex-col items-center justify-center center h-full self-center lg:mb-32"
-          v-if="favoriteList.length == 0"
+          class="flex flex-col items-center justify-center h-full self-center lg:mb-32"
+          v-if="favoritesList?.length === 0"
         >
           <HeartSlash size="128" class="text-gray-300" />
         </div>
-        <ContentPanel title="Favorite listings" :items="favoriteList" v-else />
+        <section class="flex flex-col gap-6" v-else>
+          <h2>Favorite listings</h2>
+          <ContentPanel :items="favoritesList" />
+        </section>
       </section>
     </section>
   </section>

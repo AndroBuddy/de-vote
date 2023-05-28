@@ -7,15 +7,18 @@ import { accountMenuHelper } from '../helpers/popup'
 import { clearStore } from '../helpers/clear'
 
 import { useProductStore } from '../api/products'
+import { useFavoriteStore } from '../helpers/favorite'
 import { useSignupStore } from './signup'
 
 export const authHelper = defineStore('auth', () => {
   const productStore = useProductStore()
+  const favoriteStore = useFavoriteStore()
   const isNew = ref(false)
 
   function setLogIn(token) {
     localStorage.setItem('session_token', JSON.stringify(token))
     productStore.getProducts()
+    favoriteStore.getFavorites()
   }
 
   function setLogOut() {

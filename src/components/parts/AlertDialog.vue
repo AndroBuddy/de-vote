@@ -59,6 +59,7 @@ const open = useMainStore()
               </div>
               <div class="px-4 pb-6 sm:flex sm:flex-row-reverse sm:px-6">
                 <router-link
+                  @click="open.toggleDialog()"
                   to="/"
                   class="inline-flex w-full justify-center rounded-md bg-blue-100 px-3 py-2 text-sm font-semibold text-blue-500 hover:bg-blue-200 sm:ml-3 sm:w-auto"
                 >
