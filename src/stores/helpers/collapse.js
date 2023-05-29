@@ -7,5 +7,9 @@ export const collapseHelper = defineStore('collapse', () => {
     collapsed.value = !collapsed.value
   }
 
-  return { collapsed, setCollapse }
+  function collapseBar() {
+    collapsed.value = true
+  }
+
+  return { collapsed, setCollapse, collapseBar }
 })

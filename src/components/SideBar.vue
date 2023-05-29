@@ -11,15 +11,15 @@ const navGraphStore = store.useNavGraphStore()
 const collapseState = store.collapseHelper()
 
 onMounted(() => {
-  if (window.innerWidth < 1024) {
-    collapseState.setCollapse()
+  if (window.innerWidth < 1280) {
+    collapseState.collapseBar()
   }
 })
 </script>
 
 <template>
   <nav
-    class="z-20 w-80 overflow-clip shrink-0"
+    class="z-30 w-80 overflow-clip shrink-0 fixed left-0 top-0 2xl:static"
     :class="[collapseState.collapsed ? 'w-[4.5rem]' : 'w-80']"
   >
     <section

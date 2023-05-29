@@ -3,7 +3,7 @@ import { defineStore } from 'pinia'
 import { ref } from 'vue'
 
 export const useProfileStore = defineStore('profile', () => {
-  const baseURL = 'https://auctionsite.onrender.com'
+  const baseURL = 'https://auxhive.nagatharun.me'
 
   const userAccount = ref({
     email: String,

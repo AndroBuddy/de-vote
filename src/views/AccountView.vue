@@ -111,6 +111,21 @@ const pUpdate = profileUpdate()
                 class="rounded-md border border-slate-300 py-1.5 px-2 placeholder:text-gray-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-200 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500 sm:leading-6 text-sm text-gray-500 sm:w-72"
               />
             </div>
+            <div class="flex flex-col sm:flex-row sm:items-center gap-4 sm:justify-between">
+              <div class="text-sm text-gray-900">
+                <span class="font-semibold">Profile Image</span>
+                <p class="text-black/40">Set your profile image url.</p>
+              </div>
+              <input
+                v-model="pUpdate.url"
+                :placeholder="profileStore.userAccount.profileUrl"
+                id="url"
+                name="url"
+                type="url"
+                :disabled="!pUpdate.updateFields"
+                class="rounded-md border border-slate-300 py-1.5 px-2 placeholder:text-gray-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-200 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500 sm:leading-6 text-sm text-gray-500 sm:w-72"
+              />
+            </div>
 
             <div class="text-gray-400 flex sm:items-center justify-between text-sm">
               <span>User ID</span>

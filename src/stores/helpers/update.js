@@ -5,6 +5,7 @@ export const profileUpdate = defineStore('profileUpdate', () => {
   const name = ref('')
   const username = ref('')
   const email = ref('')
+  const url = ref('')
 
   const updateFields = ref(false)
 
@@ -12,5 +13,5 @@ export const profileUpdate = defineStore('profileUpdate', () => {
     updateFields.value = !updateFields.value
   }
 
-  return { name, username, email, updateFields, setUpdateFields }
+  return { name, username, email, url, updateFields, setUpdateFields }
 })

@@ -7,7 +7,7 @@ import { useProductStore } from './products'
 import { useMainStore } from '../main'
 
 export const useAddProductStore = defineStore('addproduct', () => {
-  const baseURL = 'https://auctionsite.onrender.com'
+  const baseURL = 'https://auxhive.nagatharun.me'
   const productStore = useProductStore()
 
   const productName = ref('')
@@ -77,6 +77,9 @@ export const useAddProductStore = defineStore('addproduct', () => {
 
       if (products.status === 200) {
         userProducts.value = products.data
+        userProducts.value.forEach((product) => {
+          product.__v = -1
+        })
         localStorage.setItem('user_products', JSON.stringify(products.data))
       }
 

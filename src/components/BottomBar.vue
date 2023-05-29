@@ -26,4 +26,7 @@ const store = useMainStore().useNavGraphStore()
 .router-link-exact-active {
   @apply py-2 px-3 bg-green-500/20 text-green-500 rounded-lg;
 }
+.router-link-exact-active > span {
+  @apply text-green-500;
+}
 </style>

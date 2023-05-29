@@ -12,7 +12,6 @@ import { onMounted } from 'vue'
 
 const store = useMainStore()
 const searchStore = store.useSearchStore()
-const dialog = store.accountMenuHelper()
 
 onMounted(() => {
   window.addEventListener('keyup', (e) => {
@@ -24,6 +23,7 @@ onMounted(() => {
 </script>
 
 <template>
+  <AccountOptions />
   <header
     class="flex w-full justify-end items-center gap-4 lg:gap-10 sticky top-0 z-20 px-4 md:px-14 py-10 bg-gradient-to-b from-[#f7f7f7f7] via-[#f7f7f7]"
   >
@@ -48,17 +48,6 @@ onMounted(() => {
 
     <AccountProvider />
   </header>
-
-  <section
-    class="flex items-center justify-center fixed z-30 h-screen w-screen"
-    v-if="dialog.accountMenu"
-  >
-    <div
-      class="absolute top-0 left-0 backdrop-blur-lg w-full h-full"
-      @click="dialog.setAccountMenu()"
-    ></div>
-    <AccountOptions />
-  </section>
 
   <Teleport to="main" v-if="searchStore.searchActive">
     <section class="flex justify-center absolute z-30 h-screen w-screen p-10">

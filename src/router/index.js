@@ -2,8 +2,6 @@ import { createRouter, createWebHistory } from 'vue-router'
 import AuthView from '../views/AuthView.vue'
 
 import HomeView from '../views/HomeView.vue'
-import ActiveBidsView from '../views/ActiveBidsView.vue'
-import FavoritesView from '../views/FavoritesView.vue'
 import { useProfileStore } from '../stores/api/profile'
 
 const router = createRouter({
@@ -17,12 +15,12 @@ const router = createRouter({
     {
       path: '/active-bids',
       name: 'active-bids',
-      component: ActiveBidsView
+      component: () => import('../views/ActiveBidsView.vue')
     },
     {
       path: '/favorites',
       name: 'favorites',
-      component: FavoritesView
+      component: () => import('../views/FavoritesView.vue')
     },
     {
       path: '/add-product',

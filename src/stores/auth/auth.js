@@ -8,17 +8,20 @@ import { clearStore } from '../helpers/clear'
 
 import { useProductStore } from '../api/products'
 import { useFavoriteStore } from '../helpers/favorite'
+import { useBiddingStore } from '../api/biddings'
 import { useSignupStore } from './signup'
 
 export const authHelper = defineStore('auth', () => {
   const productStore = useProductStore()
   const favoriteStore = useFavoriteStore()
+  const biddingStore = useBiddingStore()
   const isNew = ref(false)
 
   function setLogIn(token) {
     localStorage.setItem('session_token', JSON.stringify(token))
     productStore.getProducts()
     favoriteStore.getFavorites()
+    biddingStore.getBiddings()
   }
 
   function setLogOut() {

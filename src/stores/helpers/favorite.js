@@ -6,7 +6,7 @@ import { useProfileStore } from '../api/profile'
 import { useProductStore } from '../api/products'
 
 export const useFavoriteStore = defineStore('favorites', () => {
-  const baseURL = 'https://auctionsite.onrender.com'
+  const baseURL = 'https://auxhive.nagatharun.me'
   const favoritesList = ref([
     {
       _id: String,

@@ -4,7 +4,7 @@ import { ref } from 'vue'
 import axios from 'axios'
 
 export const useProductStore = defineStore('products', () => {
-  const baseURL = 'https://auctionsite.onrender.com'
+  const baseURL = 'https://auxhive.nagatharun.me'
   const productsList = ref([
     {
       _id: String,
