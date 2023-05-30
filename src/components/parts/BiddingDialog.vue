@@ -11,8 +11,12 @@ const open = useMainStore()
 const bidStore = useBiddingStore()
 
 const route = useRoute().params.product
-async function submit() {
-  await bidStore.placeBid(route)
+function submit() {
+  if (bidStore.bidAmount <= open.useBidderStore().biddersList[0]?.amount) {
+    window.alert('Your bid amount must be greater than the current highest bid')
+    return
+  }
+  bidStore.placeBid(route)
 }
 </script>
 
@@ -32,9 +36,7 @@ async function submit() {
       </TransitionChild>
 
       <div class="fixed inset-0 z-10 overflow-y-auto">
-        <div
-          class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0"
-        >
+        <div class="flex min-h-full justify-center p-4 text-center items-center sm:p-0">
           <TransitionChild
             as="template"
             enter="ease-out duration-300"
@@ -56,7 +58,9 @@ async function submit() {
                   <Award class="text-black" aria-hidden="true" />
                   <span>
                     <h3 class="font-normal">Highest Bid</h3>
-                    <h2 v-if="open.useBidderStore().biddersList.length !== 0">₹ {{ open.useBidderStore().biddersList[0]?.amount }}</h2>
+                    <h2 v-if="open.useBidderStore().biddersList.length !== 0">
+                      ₹ {{ open.useBidderStore().biddersList[0]?.amount }}
+                    </h2>
                     <h2 v-else>No bid yet</h2>
                   </span>
                 </div>

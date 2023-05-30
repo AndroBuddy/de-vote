@@ -4,6 +4,7 @@ import { ref } from 'vue'
 import axios from 'axios'
 import { useProfileStore } from '../api/profile'
 import { useMainStore } from '../main'
+import { useBidderStore } from './bidders'
 
 export const useBiddingStore = defineStore('biddings', () => {
   const baseURL = 'https://auxhive.nagatharun.me'
@@ -15,7 +16,8 @@ export const useBiddingStore = defineStore('biddings', () => {
       amount: String,
       status: Boolean,
       id: String,
-      userId: String
+      userId: String,
+      highBid: String
     }
   ])
 
@@ -27,7 +29,6 @@ export const useBiddingStore = defineStore('biddings', () => {
       const data = await axios.get(`${baseURL}/user/bid/${profileStore.userAccount.id}`)
       if (data.status === 200) {
         biddingsList.value = data.data
-        console.log(biddingsList.value)
         localStorage.setItem('biddings_list', JSON.stringify(biddingsList.value))
       }
     } catch (error) {
@@ -47,8 +48,13 @@ export const useBiddingStore = defineStore('biddings', () => {
         productId: pid
       })
 
+      useBidderStore().getBidders(pid)
+      getBiddings()
+
       loader.value = false
       bidAmount.value = ''
+
+      window.alert('Bid Placed Successfully')
       useMainStore().dialogOpen = false
     } catch (error) {
       console.log('Something went wrong')

@@ -30,7 +30,7 @@ export const useFavoriteStore = defineStore('favorites', () => {
     try {
       const data = await axios.get(`${baseURL}/fav/${profileStore.userAccount.id}`)
       if (data.status === 200) {
-        useProductStore().productsList.forEach((product) => {
+        useProductStore().productsList?.forEach((product) => {
           if (data.data.length === 0) product.__v = 0
           if (data.data.find((fav) => fav.productId === product._id)) product.__v = 1
           else product.__v = 0
@@ -86,7 +86,7 @@ export const useFavoriteStore = defineStore('favorites', () => {
         await removeFavorite(product._id)
       }
     } catch (error) {
-      console.log(error)
+      console.error('Guest cannot set favorites!')
     }
   }
 

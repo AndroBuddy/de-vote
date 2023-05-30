@@ -20,10 +20,10 @@ onMounted(() => {
 </script>
 
 <template>
-  <section class="flex flex-col pl-4 pb-32 md:pb-12 md:pl-14 flex-grow gap-12">
+  <section class="flex flex-col px-4 pb-32 md:pb-12 md:pl-14 flex-grow gap-12">
     <section class="flex flex-col xl:self-center h-full xl:container">
       <div
-        class="flex flex-col items-center justify-center center h-full self-center lg:mb-32"
+        class="flex flex-col items-center justify-center center h-full self-center lg:mb-32 md:mr-[2.5rem]"
         v-if="useProfileStore().userAccount.id === 'guest'"
       >
         <GuestLogin />

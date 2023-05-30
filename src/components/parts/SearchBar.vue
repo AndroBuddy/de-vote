@@ -1,7 +1,7 @@
 <script setup>
 import { useProductStore } from '../../stores/api/products'
 import { onMounted, ref } from 'vue'
-import { SearchNormal1 } from 'vue-iconsax'
+import { SearchNormal1, ArrowRight2 } from 'vue-iconsax'
 
 onMounted(() => {
   const search = document.querySelector('input[name="search"]')
@@ -44,11 +44,14 @@ const filteredList = () => {
           <li
             v-for="(product, i) in filteredList()"
             :key="i"
-            class="bg-slate-100 rounded-lg p-3 hover:bg-slate-200 hover:rounded-3xl transition-all"
+            class="bg-gray-100 rounded-lg p-6 hover:bg-gray-200 hover:rounded-3xl transition-all"
           >
-            <router-link :to="`/p/${product._id}`">
-              <h3 class="font-normal">{{ product.name }}</h3>
-              <h4>{{ product.price }}</h4>
+            <router-link :to="`/p/${product._id}`" class="flex items-center justify-between">
+              <h3>{{ product.name }}</h3>
+              <span class="flex gap-x-2">
+                <h3>₹ {{ product.price }}</h3>
+                <ArrowRight2 size="20" />
+              </span>
             </router-link>
           </li>
         </ul>

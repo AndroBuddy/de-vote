@@ -1,8 +1,9 @@
 <script setup>
-import { onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useProductStore } from '../stores/api/products'
 import { collapseHelper } from '../stores/helpers/collapse'
 import { useMainStore } from '../stores/main'
+import { useProfileStore } from '../stores/api/profile'
 import { useRoute } from 'vue-router'
 
 import { ArrowLeft, Clock } from 'vue-iconsax'
@@ -12,15 +13,27 @@ import BiddingDialog from '../components/parts/BiddingDialog.vue'
 const productStore = useProductStore()
 const store = useMainStore()
 
-onMounted(() => {
-  if (window.innerWidth < 1600) {
+const duration = ref('')
+
+onMounted(async () => {
+  if (window.innerWidth < 1600 && !collapseHelper().collapsed) {
     store.useAnimeStore().slideIn()
     collapseHelper().collapseBar()
   }
 
   const route = useRoute().params.product
-  productStore.setProduct(route)
-  store.useBidderStore().getBidders(route)
+
+  const millis = await productStore.setProduct(route)
+  setInterval(() => {
+    const time = new Date(millis - Date.parse(new Date()))
+    if (time <= 0) {
+      duration.value = -1
+      productStore.notifyEnd(route)
+      return
+    }
+    duration.value = `${time.getUTCHours()}h ${time.getUTCMinutes()}m ${time.getUTCSeconds()}s`
+  }, 1000)
+  await store.useBidderStore().getBidders(route)
 })
 
 function routeBack() {
@@ -43,10 +56,13 @@ function routeBack() {
       <div>
         <h1 class="capitalize">{{ productStore.productInfo.productname }}</h1>
         <p class="text-black/40">Listed price ₹ {{ productStore.productInfo.price }}</p>
-        <span class="flex gap-2 items-center mt-2 text-sm">
+        <div
+          class="flex gap-2 items-center mt-2 text-sm bg-red-100 text-red-600 rounded-lg p-2 w-fit"
+        >
           <Clock size="16" />
-          Ends in {{ productStore.productInfo?.endTime }}
-        </span>
+          <span v-if="duration === -1 || !duration">Ended</span>
+          <span v-else>Ends in {{ duration }}</span>
+        </div>
       </div>
 
       <section class="flex flex-col xl:flex-row xl:justify-between gap-6">
@@ -58,7 +74,11 @@ function routeBack() {
         <div class="flex flex-col xl:w-2/5 gap-6">
           <span>
             <h2>Description</h2>
-            <h3 class="font-normal mt-2">Listed by {{ productStore.productInfo.username }}</h3>
+            <h3 class="font-normal mt-2">
+              Listed by {{ productStore.productInfo.username }} &lt;{{
+                productStore.productInfo.email
+              }}&gt;
+            </h3>
           </span>
           <p class="text-gray-400">{{ productStore.productInfo.description }}</p>
 
@@ -69,12 +89,19 @@ function routeBack() {
           >
             <div class="text-white flex flex-col">
               <h4 class="text-white">Highest Bid</h4>
-              <span v-if="store.useBidderStore().biddersList.length !== 0">₹ {{ store.useBidderStore().biddersList[0]?.amount }}</span>
+              <span v-if="store.useBidderStore().biddersList.length !== 0"
+                >₹ {{ store.useBidderStore().biddersList[0]?.amount }}</span
+              >
               <span v-else>No bid yet</span>
             </div>
             <button
               @click="store.toggleDialog()"
-              class="flex justify-center items-center rounded-md bg-orange-300 px-8 py-2 text-sm font-semibold leading-6 text-black hover:bg-orange-200 focus-visible:outline-none"
+              :disabled="
+                duration === -1 ||
+                useProfileStore().userAccount.username === productStore.productInfo.username ||
+                useProfileStore().userAccount.id === 'guest'
+              "
+              class="flex justify-center items-center rounded-md bg-orange-300 px-8 py-2 text-sm font-semibold leading-6 text-black hover:bg-orange-200 focus-visible:outline-none disabled:bg-gray-400 disabled:hover:bg-gray-400 disabled:cursor-not-allowed"
             >
               Place your Bid
             </button>
