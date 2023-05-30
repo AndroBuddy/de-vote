@@ -16,7 +16,7 @@ const dialog = store.accountMenuHelper()
 
 <template>
   <TransitionRoot as="template" :show="dialog.accountMenu">
-    <Dialog as="div" class="relative z-20" @close="dialog.setAccountMenu()">
+    <Dialog as="div" class="relative z-40" @close="dialog.setAccountMenu()">
       <TransitionChild
         as="template"
         enter="ease-out duration-300"

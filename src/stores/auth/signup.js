@@ -74,6 +74,11 @@ export const useSignupStore = defineStore('signup', () => {
     }
   }
 
+  const tos = ref(false)
+  function setTos() {
+    tos.value = !tos.value
+  }
+
   return {
     name,
     username,
@@ -87,6 +92,8 @@ export const useSignupStore = defineStore('signup', () => {
     setNextStep,
     setPrevStep,
     signupUser,
-    resetFields
+    resetFields,
+    setTos,
+    tos
   }
 })

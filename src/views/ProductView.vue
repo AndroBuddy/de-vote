@@ -65,13 +65,11 @@ function routeBack() {
         </div>
       </div>
 
-      <section class="flex flex-col 2xl:flex-row 2xl:justify-between gap-6">
-        <div
-          class="flex items-center overflow-clip xl:h-3/5 2xl:h-auto 2xl:w-2/5 rounded-2xl"
-        >
-          <img :src="productStore.productInfo.img" class="" />
+      <section class="flex flex-col xl:flex-row xl:justify-between gap-6">
+        <div class="flex items-center overflow-clip xl:w-3/5 2xl:w-2/5 rounded-2xl">
+          <img :src="productStore.productInfo.img" class="rounded-2xl" />
         </div>
-        <div class="flex flex-col 2xl:w-2/5 gap-6">
+        <div class="flex flex-col xl:w-3/5 2xl:w-2/5 gap-6">
           <span>
             <h2>Description</h2>
             <h3 class="font-normal mt-2">

@@ -6,6 +6,7 @@ import { useSignupStore } from '../../stores/auth/signup'
 import { ArrowLeft, ArrowRight, Eye, EyeSlash } from 'vue-iconsax'
 import anime from 'animejs'
 import IconLoader from '../../components/icons/IconLoader.vue'
+import TermsModal from '../../components/parts/TermsModal.vue'
 
 const authStore = authHelper()
 const signupStore = useSignupStore()
@@ -51,6 +52,7 @@ function onLeave(el, done) {
 </script>
 
 <template>
+  <TermsModal />
   <section class="flex flex-col sm:items-center justify-center w-full h-full">
     <section class="flex flex-col gap-8">
       <div class="flex flex-col gap-1 transition-all">
@@ -159,6 +161,13 @@ function onLeave(el, done) {
               </div>
             </section>
           </Transition>
+
+          <p class="text-xs">
+            By creating an account you agree to our
+            <span @click="signupStore.setTos()" class="underline text-blue-700 cursor-pointer"
+              >Terms & Conditions</span
+            >
+          </p>
 
           <button
             type="submit"

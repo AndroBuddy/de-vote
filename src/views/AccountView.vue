@@ -44,7 +44,7 @@ async function submit() {
 
         <form class="flex flex-col gap-6" @submit.prevent="submit">
           <div>
-            <h2>Your Profile</h2>
+            <h1>Your Profile</h1>
             <p class="text-sm text-black/40">Review your profile details here.</p>
 
             <section class="flex gap-4 mt-4" v-if="store.updateFields">

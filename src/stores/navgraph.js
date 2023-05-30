@@ -37,10 +37,10 @@ export const useNavGraphStore = defineStore('navgraph', () => {
         icon: 'UserSquare'
       },
       {
-        name: 'Settings',
-        id: 'settings',
-        path: '/settings',
-        icon: 'Setting2'
+        name: 'About',
+        id: 'about',
+        path: '/about',
+        icon: 'Information'
       }
     ]
   ])

@@ -39,8 +39,8 @@ onMounted(async () => {
       <section class="flex flex-col gap-10 transition-transform" v-else>
         <section class="flex flex-col gap-6">
           <div>
-            <h2>Your Products</h2>
-            <p class="text-sm text-black/40">Add or review your products here.</p>
+            <h1>Your Products</h1>
+            <p class="text-black/40">Add or review your products here.</p>
           </div>
 
           <div class="border-[1px]" />

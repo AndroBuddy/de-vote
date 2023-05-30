@@ -1,19 +1,27 @@
 <script setup>
 import { useProfileStore } from '../stores/api/profile'
 import { useBiddingStore } from '../stores/api/biddings'
+import { useProductStore } from '../stores/api/products'
 import GuestLogin from '../components/parts/GuestLogin.vue'
 import { onMounted } from 'vue'
 
 import { ArrowRight2 } from 'vue-iconsax'
+import OrderSummary from '../components/parts/OrderSummary.vue'
 
-const biddings = useBiddingStore().biddingsList
+const productStore = useProductStore()
 
 onMounted(async () => {
   await useBiddingStore().getBiddings()
 })
+
+// function showBtn(bid) {
+//   if (bid?.highBid === useProfileStore().userAccount.id) return true
+//   else return false
+// }
 </script>
 
 <template>
+  <OrderSummary />
   <section class="flex flex-col px-4 pb-32 md:pb-12 md:px-14 flex-grow gap-12">
     <section class="flex flex-col gap-10 xl:self-center h-full container">
       <div
@@ -25,12 +33,20 @@ onMounted(async () => {
       <section class="flex flex-col gap-10 transition-transform" v-else>
         <section class="flex flex-col gap-6">
           <div>
-            <h2>Your Bids</h2>
-            <p class="text-sm text-black/40">Recently participated biddings.</p>
+            <h1>Your Bids</h1>
+            <p class="text-black/40">Recently participated biddings.</p>
           </div>
 
-          <ul role="list" class="divide-y divide-gray-200" v-if="biddings.length !== 0">
-            <li v-for="bid in biddings" :key="bid._id" class="flex flex-col gap-4 py-5">
+          <ul
+            role="list"
+            class="divide-y divide-gray-200"
+            v-if="useBiddingStore().biddingsList.length !== 0"
+          >
+            <li
+              v-for="bid in useBiddingStore().biddingsList"
+              :key="bid._id"
+              class="flex flex-col gap-4 py-5"
+            >
               <router-link
                 :to="`/p/${bid.id}`"
                 class="flex items-center flex-grow justify-between gap-x-6 hover:scale-[.99] transition-transform"
@@ -53,7 +69,8 @@ onMounted(async () => {
               </router-link>
               <button
                 class="bg-orange-300 text-sm font-semibold w-min px-4 py-3 rounded-xl self-end hover:bg-orange-200"
-                v-if="bid.highBid === useProfileStore().userAccount.id"
+                v-if="bid?.highBid"
+                @click="productStore.checkoutInfo(bid.id)"
               >
                 Checkout
               </button>

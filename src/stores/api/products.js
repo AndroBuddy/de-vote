@@ -54,6 +54,10 @@ export const useProductStore = defineStore('products', () => {
     }
   }
 
+  function resetList() {
+    productInfo.value = null
+  }
+
   async function setProduct(pid) {
     loader.value = true
     try {
@@ -78,5 +82,21 @@ export const useProductStore = defineStore('products', () => {
     }
   }
 
-  return { productsList, productInfo, loader, getProducts, setProduct, notifyEnd }
+  const checkout = ref(false)
+  function checkoutInfo(pid) {
+    checkout.value = true
+    setProduct(pid)
+  }
+
+  return {
+    productsList,
+    productInfo,
+    loader,
+    checkout,
+    getProducts,
+    setProduct,
+    notifyEnd,
+    checkoutInfo,
+    resetList
+  }
 })

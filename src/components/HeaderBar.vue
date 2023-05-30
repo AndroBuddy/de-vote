@@ -23,6 +23,7 @@ onMounted(() => {
 </script>
 
 <template>
+  <SearchBar />
   <AccountOptions />
   <header
     class="flex w-full justify-end items-center gap-4 lg:gap-10 sticky top-0 z-20 px-4 md:px-14 py-10 bg-gradient-to-b from-[#f5f5f5] via-[#f7f7f7]"
@@ -48,14 +49,4 @@ onMounted(() => {
 
     <AccountProvider />
   </header>
-
-  <Teleport to="main" v-if="searchStore.searchActive">
-    <section class="flex justify-center absolute z-30 h-screen w-screen p-10">
-      <div
-        @click="searchStore.setSearchActive()"
-        class="absolute top-0 left-0 backdrop-blur-lg w-full h-full"
-      ></div>
-      <SearchBar />
-    </section>
-  </Teleport>
 </template>

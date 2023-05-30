@@ -19,12 +19,13 @@ export const useUpdateProfile = defineStore('updateProfile', () => {
     loader.value = true
     try {
       const res = await axios.post(`${baseURL}/user/update/${profileStore.userAccount.id}`, {
-        email: profileEmail.value,
+        email: profileEmail.value !== '' ? profileEmail.value : profileStore.userAccount.email,
         password: profilePassword.value,
-        name: profileName.value,
-        username: profileUserName.value,
+        name: profileName.value !== '' ? profileName.value : profileStore.userAccount.name,
+        username:
+          profileUserName.value !== '' ? profileUserName.value : profileStore.userAccount.username,
         phone: '',
-        profileUrl: profileImg.value
+        profileUrl: profileImg.value !== '' ? profileImg.value : profileStore.userAccount.profileUrl
       })
 
       if (res.status === 200) {

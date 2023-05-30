@@ -37,7 +37,10 @@ onMounted(() => {
           <HeartSlash size="128" class="text-gray-300" />
         </div>
         <section class="flex flex-col gap-8 sm:gap-10" v-else>
-          <h2>Favorite listings</h2>
+          <div>
+            <h1>Your Favorites</h1>
+            <p class="text-base text-black/40">Items you like show up here</p>
+          </div>
           <ContentPanel :items="favoritesList" />
         </section>
       </section>
