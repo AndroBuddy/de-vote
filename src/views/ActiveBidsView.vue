@@ -7,7 +7,7 @@ const biddings = useBiddingStore().biddingsList
 </script>
 
 <template>
-  <section class="flex flex-col px-4 pb-32 lg:pb-12 lg:px-14 flex-grow gap-12">
+  <section class="flex flex-col px-4 pb-32 md:pb-12 md:px-14 flex-grow gap-12">
     <section class="flex flex-col gap-10 xl:self-center h-full container">
       <div
         class="flex flex-col items-center justify-center center h-full self-center lg:mb-32"
@@ -32,7 +32,7 @@ const biddings = useBiddingStore().biddingsList
                   </p>
                 </div>
               </div>
-              <div class="hidden sm:flex sm:flex-col sm:items-end">
+              <div class="flex flex-col items-end">
                 <p class="text-sm leading-6 text-gray-900">{{ bid.role }}</p>
                 <p class="mt-1 text-xs leading-5 text-gray-500">
                   {{ bid.amount }}

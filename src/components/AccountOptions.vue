@@ -43,7 +43,7 @@ const dialog = store.accountMenuHelper()
             leave-to="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
           >
             <DialogPanel
-              class="relative transform overflow-hidden rounded-lg bg-white text-left transition-all sm:my-8 sm:w-full sm:max-w-lg"
+              class="relative transform overflow-hidden rounded-lg bg-white text-left transition-all sm:max-w-lg"
             >
               <nav class="flex flex-col gap-10 p-6 w-96 bg-white rounded-3xl dialog">
                 <div class="shrink-0 mt-4">
@@ -67,9 +67,13 @@ const dialog = store.accountMenuHelper()
                 </div>
                 <ul class="flex flex-col justify-between gap-6 text-gray-400 w-full">
                   <li v-for="(navItem, index) in navStore.navGraph[1]" :key="index">
-                    <router-link :to="navItem.path" class="flex gap-4 items-center">
+                    <router-link
+                      :to="navItem.path"
+                      class="flex gap-4 items-center focus:ring-0"
+                      @click="dialog.setAccountMenu()"
+                    >
                       <vsx-icon
-                        class="shrink-0 focus:ring-0"
+                        class="shrink-0"
                         :iconName="navItem.icon"
                         size="20"
                         type="linear"

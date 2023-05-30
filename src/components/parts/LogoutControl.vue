@@ -8,7 +8,7 @@ const authStore = authHelper()
 <template>
   <button
     @click="authStore.setLogOut()"
-    class="text-red-600 flex gap-4 items-center overflow-clip cursor-pointer"
+    class="text-red-600 flex gap-4 items-center overflow-clip"
   >
     <LogoutCurve class="shrink-0" size="20" type="linear" />
     <span class="whitespace-nowrap">Logout</span>

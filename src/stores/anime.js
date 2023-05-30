@@ -42,7 +42,7 @@ export const useAnimeStore = defineStore('anime', () => {
       .timeline({
         targets: 'nav',
         width: ['4.5rem', '20rem'],
-        duration: 1000,
+        duration: 600,
         easing: 'easeInOutSine'
       })
       .add({

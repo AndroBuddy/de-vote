@@ -20,8 +20,8 @@ onMounted(() => {
 </script>
 
 <template>
-  <section class="flex flex-col px-4 pb-32 lg:pb-12 lg:px-14 flex-grow gap-12">
-    <section class="flex flex-col xl:self-center h-full container">
+  <section class="flex flex-col pl-4 pb-32 md:pb-12 md:pl-14 flex-grow gap-12">
+    <section class="flex flex-col xl:self-center h-full xl:container">
       <div
         class="flex flex-col items-center justify-center center h-full self-center lg:mb-32"
         v-if="useProfileStore().userAccount.id === 'guest'"
@@ -36,7 +36,7 @@ onMounted(() => {
         >
           <HeartSlash size="128" class="text-gray-300" />
         </div>
-        <section class="flex flex-col gap-6" v-else>
+        <section class="flex flex-col gap-8 sm:gap-10" v-else>
           <h2>Favorite listings</h2>
           <ContentPanel :items="favoritesList" />
         </section>

@@ -24,7 +24,7 @@ document.title = `${store.appName} | Auctions`
   <main class="flex h-screen bg-[#f5f5f5]" v-else>
     <SideBar class="hidden md:block" @slide-in-out="slideInOut()" />
     <BottomBar class="block md:hidden" />
-    <div class="flex flex-col flex-grow overflow-auto md:ml-10 2xl:ml-0">
+    <div class="flex flex-col flex-grow overflow-auto md:ml-20 xl:ml-0">
       <HeaderBar />
       <RouterView />
     </div>

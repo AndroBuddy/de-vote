@@ -25,7 +25,7 @@ onMounted(() => {
 <template>
   <AccountOptions />
   <header
-    class="flex w-full justify-end items-center gap-4 lg:gap-10 sticky top-0 z-20 px-4 md:px-14 py-10 bg-gradient-to-b from-[#f7f7f7f7] via-[#f7f7f7]"
+    class="flex w-full justify-end items-center gap-4 lg:gap-10 sticky top-0 z-20 px-4 md:px-14 py-10 bg-gradient-to-b from-[#f5f5f5] via-[#f7f7f7]"
   >
     <router-link class="block md:hidden" to="/">
       <IconBrand />

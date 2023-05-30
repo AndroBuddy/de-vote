@@ -28,7 +28,7 @@ function routeBack() {
 
 <template>
   <BiddingDialog />
-  <section class="flex flex-col px-4 pb-48 lg:pb-12 md:px-14 flex-grow gap-12">
+  <section class="flex flex-col px-4 pb-48 md:pb-12 md:px-14 flex-grow gap-12">
     <section class="flex items-center justify-center h-full container" v-if="productStore.loader">
       <IconLoader class="self-center text-black" />
     </section>
