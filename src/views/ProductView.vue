@@ -20,6 +20,7 @@ onMounted(() => {
 
   const route = useRoute().params.product
   productStore.setProduct(route)
+  store.useBidderStore().getBidders(route)
 })
 
 function routeBack() {
@@ -41,10 +42,10 @@ function routeBack() {
 
       <div>
         <h1 class="capitalize">{{ productStore.productInfo.productname }}</h1>
-        <p class="text-black/40">Listed price ₹{{ productStore.productInfo.price }}</p>
+        <p class="text-black/40">Listed price ₹ {{ productStore.productInfo.price }}</p>
         <span class="flex gap-2 items-center mt-2 text-sm">
           <Clock size="16" />
-          Ends in {{ productStore.productInfo.endTime }}
+          Ends in {{ productStore.productInfo?.endTime }}
         </span>
       </div>
 
@@ -68,7 +69,8 @@ function routeBack() {
           >
             <div class="text-white flex flex-col">
               <h4 class="text-white">Highest Bid</h4>
-              <span>₹2000</span>
+              <span v-if="store.useBidderStore().biddersList.length !== 0">₹ {{ store.useBidderStore().biddersList[0]?.amount }}</span>
+              <span v-else>No bid yet</span>
             </div>
             <button
               @click="store.toggleDialog()"

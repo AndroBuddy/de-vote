@@ -56,7 +56,8 @@ async function submit() {
                   <Award class="text-black" aria-hidden="true" />
                   <span>
                     <h3 class="font-normal">Highest Bid</h3>
-                    <h2>₹2000</h2>
+                    <h2 v-if="open.useBidderStore().biddersList.length !== 0">₹ {{ open.useBidderStore().biddersList[0]?.amount }}</h2>
+                    <h2 v-else>No bid yet</h2>
                   </span>
                 </div>
                 <p class="text-sm text-gray-500">

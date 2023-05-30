@@ -1,32 +1,31 @@
 import { defineStore } from 'pinia'
-import { shallowRef } from 'vue'
+import { ref } from 'vue'
+
+import axios from 'axios'
 
 export const useBidderStore = defineStore('bidder', () => {
-  const biddersList = shallowRef([
+  const baseURL = 'https://auxhive.nagatharun.me'
+
+  const biddersList = ref([
     {
-      name: 'George Kolli',
-      timestamp: '123456',
-      bid: '$200',
-      profileUri: 'https://github.com/AndroBuddy.png'
-    },
-    {
-      name: 'Maneesh Matthew',
-      timestamp: '123456',
-      bid: '$200',
-      profileUri: 'https://github.com/AndroBuddy.png'
-    },
-    {
-      name: 'Leela Paka',
-      timestamp: '123456',
-      bid: '$200',
-      profileUri: 'https://github.com/AndroBuddy.png'
+      firstname: String,
+      username: String,
+      amount: String,
+      id: String,
+      productId: String
     }
   ])
 
-  function profileUrl(src) {
-    const url = src
-    return url
+  async function getBidders(pid) {
+    try {
+      const data = await axios.get(`${baseURL}/auction/bid/${pid}`)
+      if (data.status === 200) {
+        biddersList.value = data.data
+      }
+    } catch (error) {
+      console.log(error)
+    }
   }
 
-  return { biddersList, profileUrl }
+  return { biddersList, getBidders }
 })

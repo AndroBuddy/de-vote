@@ -10,15 +10,12 @@ export const useBiddingStore = defineStore('biddings', () => {
 
   const biddingsList = ref([
     {
-      _id: '',
-      userId: '',
-      amount: '',
-      productId: '',
-      productName: '',
-      productPrice: '',
-      createdAt: '',
-      updatedAt: '',
-      __v: 0
+      productName: String,
+      price: String,
+      amount: String,
+      status: Boolean,
+      id: String,
+      userId: String
     }
   ])
 
@@ -30,6 +27,7 @@ export const useBiddingStore = defineStore('biddings', () => {
       const data = await axios.get(`${baseURL}/user/bid/${profileStore.userAccount.id}`)
       if (data.status === 200) {
         biddingsList.value = data.data
+        console.log(biddingsList.value)
         localStorage.setItem('biddings_list', JSON.stringify(biddingsList.value))
       }
     } catch (error) {

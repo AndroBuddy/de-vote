@@ -22,21 +22,18 @@ const biddings = useBiddingStore().biddingsList
             <p class="text-sm text-black/40">Recently participated biddings.</p>
           </div>
 
-          <ul role="list" class="divide-y divide-gray-100">
-            <li v-for="bid in biddings" :key="bid._id" class="flex justify-between gap-x-6 py-5">
+          <ul role="list" class="divide-y divide-gray-400">
+            <li v-for="bid in biddings" :key="bid._id" class="flex items-center justify-between gap-x-6 py-5">
               <div class="flex gap-x-4">
                 <div class="min-w-0 flex-auto">
-                  <p class="text-sm font-semibold leading-6 text-gray-900">{{ bid.productName }}</p>
-                  <p class="mt-1 truncate text-xs leading-5 text-gray-500">
-                    {{ bid.productPrice }}
+                  <p class="font-semibold leading-6 text-gray-900">{{ bid.productName }}</p>
+                  <p class="mt-1 truncate text-sm leading-5 text-gray-500">
+                    Listed at ₹ {{ bid.price }}
                   </p>
                 </div>
               </div>
               <div class="flex flex-col items-end">
-                <p class="text-sm leading-6 text-gray-900">{{ bid.role }}</p>
-                <p class="mt-1 text-xs leading-5 text-gray-500">
-                  {{ bid.amount }}
-                </p>
+                <p class="mt-1 leading-5 text-gray-500">₹ {{ bid.amount }}</p>
               </div>
             </li>
           </ul>
