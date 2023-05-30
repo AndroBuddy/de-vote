@@ -21,7 +21,7 @@ document.title = `${store.appName} | Auctions`
 
 <template>
   <RouterView name="FullPage" v-if="!profileStore.userAccount" />
-  <main class="flex h-screen bg-[#f5f5f5]" v-else>
+  <main class="flex min-h-screen md:h-screen bg-[#f5f5f5]" v-else>
     <SideBar class="hidden md:block" @slide-in-out="slideInOut()" />
     <BottomBar class="block md:hidden" />
     <div class="flex flex-col flex-grow overflow-auto md:ml-20 xl:ml-0">

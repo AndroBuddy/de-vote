@@ -13,7 +13,8 @@ const productStore = useProductStore()
 const store = useMainStore()
 
 onMounted(() => {
-  if (window.innerWidth < 1536) {
+  if (window.innerWidth < 1600) {
+    store.useAnimeStore().slideIn()
     collapseHelper().collapseBar()
   }
 
