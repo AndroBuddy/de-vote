@@ -43,7 +43,7 @@ function routeBack() {
 
 <template>
   <BiddingDialog />
-  <section class="flex flex-col px-4 pb-48 md:pb-12 md:px-14 flex-grow gap-12">
+  <section class="flex flex-col px-4 pb-48 lg:pb-12 md:px-14 flex-grow gap-12">
     <section class="flex items-center justify-center h-full container" v-if="productStore.loader">
       <IconLoader class="self-center text-black" />
     </section>
@@ -65,13 +65,13 @@ function routeBack() {
         </div>
       </div>
 
-      <section class="flex flex-col xl:flex-row xl:justify-between gap-6">
+      <section class="flex flex-col 2xl:flex-row 2xl:justify-between gap-6">
         <div
-          class="flex items-center overflow-clip h-full xl:h-3/5 2xl:h-auto 2xl:w-2/5 rounded-2xl"
+          class="flex items-center overflow-clip xl:h-3/5 2xl:h-auto 2xl:w-2/5 rounded-2xl"
         >
-          <img :src="productStore.productInfo.img" class="h-full" />
+          <img :src="productStore.productInfo.img" class="" />
         </div>
-        <div class="flex flex-col xl:w-2/5 gap-6">
+        <div class="flex flex-col 2xl:w-2/5 gap-6">
           <span>
             <h2>Description</h2>
             <h3 class="font-normal mt-2">
@@ -85,21 +85,27 @@ function routeBack() {
           <div class="border-[1px]" />
 
           <section
-            class="fixed md:static z-10 left-2 right-2 bottom-20 bg-gray-800 rounded-2xl p-4 flex items-center justify-between"
+            class="fixed lg:static z-30 left-2 right-2 bottom-20 md:bottom-2 md:left-32 md:right-16 bg-gray-800 rounded-2xl p-4 flex items-center justify-between"
           >
-            <div class="text-white flex flex-col">
+            <div
+              class="text-white flex flex-col"
+              v-if="store.useBidderStore().biddersList.length !== 0"
+            >
               <h4 class="text-white">Highest Bid</h4>
-              <span v-if="store.useBidderStore().biddersList.length !== 0"
-                >₹ {{ store.useBidderStore().biddersList[0]?.amount }}</span
-              >
-              <span v-else>No bid yet</span>
+              <span> ₹ {{ store.useBidderStore().biddersList[0]?.amount }} </span>
+            </div>
+            <div class="text-white flex flex-col" v-else>
+              <h4 class="text-white">Base Bid</h4>
+              <span> ₹ {{ productStore.productInfo.price }} </span>
             </div>
             <button
               @click="store.toggleDialog()"
               :disabled="
                 duration === -1 ||
                 useProfileStore().userAccount.username === productStore.productInfo.username ||
-                useProfileStore().userAccount.id === 'guest'
+                useProfileStore().userAccount.id === 'guest' ||
+                store.useBidderStore().biddersList[0]?.username ===
+                  useProfileStore().userAccount.username
               "
               class="flex justify-center items-center rounded-md bg-orange-300 px-8 py-2 text-sm font-semibold leading-6 text-black hover:bg-orange-200 focus-visible:outline-none disabled:bg-gray-400 disabled:hover:bg-gray-400 disabled:cursor-not-allowed"
             >

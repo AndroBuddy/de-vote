@@ -4,6 +4,7 @@ import { Award } from 'vue-iconsax'
 
 import { useMainStore } from '../../stores/main'
 import { useBiddingStore } from '../../stores/api/biddings'
+import { useProductStore } from '../../stores/api/products'
 import { useRoute } from 'vue-router'
 import IconLoader from '../icons/IconLoader.vue'
 
@@ -14,7 +15,7 @@ const route = useRoute().params.product
 function submit() {
   if (bidStore.bidAmount <= open.useBidderStore().biddersList[0]?.amount) {
     window.alert('Your bid amount must be greater than the current highest bid')
-    return
+    return false
   }
   bidStore.placeBid(route)
 }
@@ -56,12 +57,13 @@ function submit() {
                 <div class="border-[1px]" />
                 <div class="flex gap-4 items-center">
                   <Award class="text-black" aria-hidden="true" />
-                  <span>
+                  <span v-if="open.useBidderStore().biddersList.length !== 0">
                     <h3 class="font-normal">Highest Bid</h3>
-                    <h2 v-if="open.useBidderStore().biddersList.length !== 0">
-                      ₹ {{ open.useBidderStore().biddersList[0]?.amount }}
-                    </h2>
-                    <h2 v-else>No bid yet</h2>
+                    <h2>₹ {{ open.useBidderStore().biddersList[0]?.amount }}</h2>
+                  </span>
+                  <span v-else>
+                    <h3 class="font-normal">Base Bid</h3>
+                    <h2>₹ {{ useProductStore().productInfo.price }}</h2>
                   </span>
                 </div>
                 <p class="text-sm text-gray-500">

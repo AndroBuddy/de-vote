@@ -36,7 +36,7 @@ onMounted(async () => {
                 class="flex items-center flex-grow justify-between gap-x-6 hover:scale-[.99] transition-transform"
               >
                 <div class="flex gap-x-4">
-                  <div class="flex flex-col max-w-[16rem]">
+                  <div class="flex flex-col max-w-[20rem]">
                     <span
                       class="font-semibold leading-6 text-gray-900 overflow-clip text-ellipsis"
                       >{{ bid.productName }}</span
@@ -46,7 +46,7 @@ onMounted(async () => {
                     </p>
                   </div>
                 </div>
-                <div class="flex gap-x-2 items-center">
+                <div class="flex gap-x-2 items-center shrink-0">
                   <p class="mt-1 leading-5 text-gray-500">₹ {{ bid.amount }}</p>
                   <ArrowRight2 size="20" />
                 </div>

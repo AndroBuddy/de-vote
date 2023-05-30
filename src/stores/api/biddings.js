@@ -5,6 +5,7 @@ import axios from 'axios'
 import { useProfileStore } from '../api/profile'
 import { useMainStore } from '../main'
 import { useBidderStore } from './bidders'
+import { useProductStore } from './products'
 
 export const useBiddingStore = defineStore('biddings', () => {
   const baseURL = 'https://auxhive.nagatharun.me'
@@ -29,6 +30,9 @@ export const useBiddingStore = defineStore('biddings', () => {
       const data = await axios.get(`${baseURL}/user/bid/${profileStore.userAccount.id}`)
       if (data.status === 200) {
         biddingsList.value = data.data
+        biddingsList.value.forEach((element) => {
+          useProductStore().setProduct(element.id)
+        })
         localStorage.setItem('biddings_list', JSON.stringify(biddingsList.value))
       }
     } catch (error) {
