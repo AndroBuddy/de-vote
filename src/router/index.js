@@ -13,6 +13,16 @@ const router = createRouter({
       component: HomeView
     },
     {
+      path: '/ballot',
+      name: 'ballot',
+      component: () => import('../views/BuildBallotView.vue')
+    },
+    {
+      path: '/voters',
+      name: 'voters',
+      component: () => import('../views/VotersListView.vue')
+    },
+    {
       path: '/active-bids',
       name: 'active-bids',
       component: () => import('../views/ActiveBidsView.vue')
