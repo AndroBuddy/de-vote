@@ -1,6 +1,6 @@
 <script setup>
-import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
-import { useSignupStore } from '../../stores/auth/signup'
+import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue';
+import { useSignupStore } from '../../stores/auth/signup';
 </script>
 
 <template>
@@ -36,24 +36,24 @@ import { useSignupStore } from '../../stores/auth/signup'
                 class="flex flex-col gap-10 p-10 rounded-3xl w-full max-h-[90vh] overflow-scroll"
               >
                 <DialogTitle class="flex flex-col gap-2">
-                  <h1 class="text-2xl">Terms and Conditions for AuxHive</h1>
+                  <h1 class="text-2xl">Terms and Conditions for deVote</h1>
                 </DialogTitle>
 
                 <pre class="whitespace-pre-wrap">
-Welcome to AuxHive!
-These terms and conditions ("Terms") govern your use of the AuxHive auction website ("Site") and any services provided by AuxHive ("we," "us," or "our"). By registering on the AuxHive website, you agree to comply with these Terms. Please read them carefully.
+Welcome to deVote!
+These terms and conditions ("Terms") govern your use of the deVote auction website ("Site") and any services provided by deVote ("we," "us," or "our"). By registering on the deVote website, you agree to comply with these Terms. Please read them carefully.
 
 1. Acceptance of Terms
-By registering on the AuxHive website, you affirm that you are at least 18 years old and legally capable of entering into a binding agreement. If you do not agree to these Terms, please do not use the Site.
+By registering on the deVote website, you affirm that you are at least 18 years old and legally capable of entering into a binding agreement. If you do not agree to these Terms, please do not use the Site.
 
 2. Account Registration
-2.1 You must create an account on AuxHive to participate in auctions.
+2.1 You must create an account on deVote to participate in auctions.
 2.2 You agree to provide accurate and complete information during the registration process.
 2.3 You are responsible for maintaining the confidentiality of your account information, including your username and password.
 2.4 You are responsible for all activities that occur under your account. If you suspect any unauthorized use of your account, you must notify us immediately.
 
 3. Auction Process
-3.1 AuxHive acts as an online platform connecting buyers and sellers for auction transactions.
+3.1 deVote acts as an online platform connecting buyers and sellers for auction transactions.
 3.2 The Site allows registered users to bid on and purchase items listed by sellers.
 3.3 We reserve the right to remove, modify, or suspend any auction listing or cancel any bid at our discretion.
 3.4 All bids are binding. By placing a bid, you agree to purchase the item at the bid amount if you win the auction.

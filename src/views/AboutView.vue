@@ -48,7 +48,7 @@ const people = [
           <div class="flex flex-col">
             <h1 class="tracking-tight text-gray-900">Meet the team</h1>
             <p class="text-base text-gray-600">
-              The people behind AuxHive, an auction site for our software engineering project.
+              The people behind deVote, an auction site for our software engineering project.
             </p>
           </div>
           <ul role="list" class="grid gap-x-8 gap-y-12 sm:grid-cols-2 sm:gap-y-16 xl:col-span-2">
