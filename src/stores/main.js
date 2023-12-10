@@ -12,7 +12,7 @@ import { useAnimeStore } from './anime'
 import { ref } from 'vue'
 
 export const useMainStore = defineStore('main', () => {
-  const appName = ref('AuxHive')
+  const appName = ref('DeVote')
   const dialogOpen = ref(false)
 
   function toggleDialog() {
