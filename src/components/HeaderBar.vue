@@ -1,17 +1,11 @@
 <script setup>
-import IconBrand from './icons/IconBrand.vue'
-import { SearchNormal1, Refresh } from 'vue-iconsax'
-
-import AccountOptions from './AccountOptions.vue'
-import AccountProvider from './parts/AccountProvider.vue'
-import SearchBar from './parts/SearchBar.vue'
-
 import { useMainStore } from '../stores/main'
-import { useProductStore } from '../stores/api/products'
 import { onMounted } from 'vue'
+import { ReceiptEdit } from 'vue-iconsax'
 
 const store = useMainStore()
 const searchStore = store.useSearchStore()
+let ballot_title = "Employee of the Week"
 
 onMounted(() => {
   window.addEventListener('keyup', (e) => {
@@ -23,30 +17,40 @@ onMounted(() => {
 </script>
 
 <template>
-  <SearchBar />
-  <AccountOptions />
+  <!-- basic properties of header -->
   <header
-    class="flex w-full justify-end items-center gap-4 lg:gap-10 sticky top-0 z-20 px-4 md:px-14 py-10 bg-gradient-to-b from-[#f5f5f5] via-[#f7f7f7]"
+    class="flex w-full items-center gap-4 lg:gap-10 sticky top-0 z-20 rounded-bl-2xl bg-white border-b border-l border-gray"
   >
-    <router-link class="block md:hidden" to="/">
-      <IconBrand />
-    </router-link>
-
-    <div
-      @click="searchStore.setSearchActive()"
-      class="flex gap-2 lg:gap-4 p-3 lg:p-4 bg-white hover:bg-black/5 rounded-2xl items-center w-full lg:w-96 text-xs text-black/40 cursor-pointer"
-    >
-      <SearchNormal1 class="w-3 h-3 md:w-5 md:h-5" />
-      Search products...
+    <!-- Divides top half and bottom (representing page) -->
+    <div class="flex flex-col w-full">
+      <!-- Seperates header from launch poll button -->
+      <div class="flex flex-row justify-between w-full md:px-14 py-5">
+        <div class="flex flex-col gap-1">
+          <div class="flex flex-row gap-2">
+            <div class="text-lg font-bold">{{ ballot_title }}</div>
+            <div class="flex flex-col justify-center align-center">
+              <button>
+                <ReceiptEdit size="16" style="color: blue" />
+              </button>
+            </div>
+          </div>
+          <div class="flex flex-col items-center py-1 bg-orange-50 rounded-md text-orange-600 w-36">
+            <p class="text-xs">Under Construction</p>
+          </div>
+        </div>
+        <button
+          type="submit"
+          class="flex self-start justify-center items-center rounded-md bg-blue-800 px-3 py-1.5 text-sm leading-6 text-white shadow-sm hover:bg-blue-600 focus-visible:outline-none"
+        >
+          Launch Poll
+        </button>
+      </div>
+      <section class="flex gap-4 items-center justify-center pb-4">
+        <div class="border flex-grow" />
+      </section>
+      <div class="px-4 md:px-14 pb-5">
+        <div class="overview text-lg font-bold">Overview</div>
+      </div>
     </div>
-
-    <button
-      class="bg-white p-2 sm:p-3 rounded-xl hover:scale-95 hover:-translate-y-1 transition-transform"
-      @click="useProductStore().getProducts()"
-    >
-      <Refresh size="20" type="linear" />
-    </button>
-
-    <AccountProvider />
   </header>
 </template>

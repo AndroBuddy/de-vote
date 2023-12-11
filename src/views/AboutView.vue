@@ -41,7 +41,7 @@ const people = [
 </script>
 
 <template>
-  <section class="flex flex-col px-4 pb-32 md:pb-12 md:px-14 flex-grow gap-12">
+  <section class="flex flex-col pt-10 px-4 pb-32 md:pb-12 md:px-14 flex-grow gap-12">
     <section class="flex flex-col gap-10 xl:self-center container">
       <div>
         <div class="flex flex-col max-w-7xl gap-x-8 gap-y-12">

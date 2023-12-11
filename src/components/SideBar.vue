@@ -23,7 +23,7 @@ onMounted(() => {
     :class="[collapseState.collapsed ? 'w-[4.5rem]' : 'w-80']"
   >
     <section
-      class="flex flex-col gap-14 p-14 w-full bg-white h-full rounded-tr-3xl rounded-br-3xl overflow-scroll"
+      class="flex flex-col gap-14 p-14 w-full bg-white h-full overflow-scroll"
       :class="[collapseState.collapsed ? 'px-6 py-14' : 'p-14']"
     >
       <section

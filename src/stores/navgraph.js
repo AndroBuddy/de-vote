@@ -6,8 +6,8 @@ export const useNavGraphStore = defineStore('navgraph', () => {
     [
       {
         name: 'Home',
-        id: 'home',
-        path: '/',
+        id: 'admin-home',
+        path: '/admin-home',
         icon: 'Home'
       },
       {

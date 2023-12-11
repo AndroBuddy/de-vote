@@ -99,7 +99,7 @@ function onLeave(el, done) {
                     </div>
                     <button
                     type="submit"
-                    class="self-start flex justify-center items-center rounded-md bg-indigo-600 px-4 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline-none mt-4"
+                    class="self-start flex justify-center items-center rounded-md bg-blue-800 px-4 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-600 focus-visible:outline-none mt-4"
                     >
                     Add
                   </button>
@@ -127,7 +127,7 @@ function onLeave(el, done) {
             <button
               type="submit"
               @click="toggleBuildBallot"
-              class="flex w-full justify-center items-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline-none"
+              class="flex w-full justify-center items-center rounded-md bg-blue-800 px-3 py-1.5 text-sm leading-6 text-white shadow-sm hover:bg-blue-600 focus-visible:outline-none"
             >
               Build Ballot
             </button>
@@ -154,7 +154,7 @@ function onLeave(el, done) {
           <button
             type="submit"
             @click="toggleModal"
-            class="flex self-start justify-center items-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline-none"
+            class="flex self-start justify-center items-center rounded-md bg-blue-800 px-3 py-1.5 text-sm leading-6 text-white shadow-sm hover:bg-blue-600 focus-visible:outline-none"
           >
             Add Option
           </button>
