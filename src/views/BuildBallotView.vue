@@ -70,7 +70,7 @@ function onLeave(el, done) {
             leave-to="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
           >
             <DialogPanel
-              class="relative transform overflow-hidden rounded-lg bg-white text-left transition-all sm:w-[48rem]"
+              class="relative transform overflow-hidden rounded-lg bg-white text-left transition-all sm:w-[36rem]"
             >
               <section
                 class="flex flex-col gap-10 p-10 rounded-3xl w-full max-h-[90vh] overflow-scroll"
@@ -91,8 +91,6 @@ function onLeave(el, done) {
                       <input
                         id="title"
                         name="title"
-                        type="title"
-                        autocomplete="title"
                         required="true"
                         class="block rounded-md border border-slate-300 py-1.5 px-2 placeholder:text-gray-900 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 sm:leading-6"
                       />
@@ -115,7 +113,7 @@ function onLeave(el, done) {
   </TransitionRoot>
 
   <!-- Main page -->
-  <section class="flex flex-col sm:items-center justify-center w-full h-full">
+  <section class="flex flex-col sm:items-center pt-20 w-full h-full">
     <Transition @enter="onEnter" @leave="onLeave" mode="out-in">
       <section v-if="buildBallot">
         <div
