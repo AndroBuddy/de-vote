@@ -1,7 +1,7 @@
 <script setup>
 import { useMainStore } from '../stores/main'
 import { onMounted } from 'vue'
-import { ReceiptEdit, ExportCircle } from 'vue-iconsax'
+import { ReceiptEdit } from 'vue-iconsax'
 
 const store = useMainStore()
 const searchStore = store.useSearchStore()
@@ -49,33 +49,6 @@ onMounted(() => {
           </button>
         </div>
       </div>
-      <section class="flex gap-4 items-center justify-center pb-4">
-        <div class="border flex-grow" />
-      </section>
-      <div class="flex px-4 md:px-8 pb-5 justify-between items-center">
-        <div class="text-lg font-bold">Overview</div>
-        <section class='flex gap-6'>
-          <div class="flex flex-col text-xs">
-            <div class='flex gap-1'>
-              Start Date
-              <button>
-                <ExportCircle size="12" style="color: blue" />
-              </button>
-            </div>
-            <div>Dec 15 2023, 12:00PM</div>
-          </div>
-          <div class="flex flex-col text-xs">
-            <div class='flex gap-1'>
-              End Date
-              <button>
-                <ExportCircle size="12" style="color: blue" />
-              </button>
-            </div>
-            <div>Dec 15 2023, 6:00PM</div>
-          </div>
-        </section>
-      </div>
-      
     </div>
   </header>
 </template>
