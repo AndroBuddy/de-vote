@@ -1,5 +1,5 @@
 <script setup>
-import { InfoCircle, People, Setting4 } from 'vue-iconsax'
+import { InfoCircle, People, Setting4, ExportCircle } from 'vue-iconsax'
 import { ref } from 'vue'
 const ballot_url = ref('https://devote.com/aiDjfdKuyfwuefgwuifrwbi')
 const preview_url = ref('https://devote.com/yftyftyrtberqwetbDbrg')
@@ -9,16 +9,40 @@ const preview_url = ref('https://devote.com/yftyftyrtberqwetbDbrg')
 */
 function copyToClipboard(url) {
   const textToCopy = url
-  navigator.clipboard
-    .writeText(textToCopy)
-    .catch((err) => {
-      console.error('Could not copy text: ', err)
-    })
+  navigator.clipboard.writeText(textToCopy).catch((err) => {
+    console.error('Could not copy text: ', err)
+  })
 }
 </script>
 
 <template>
-  <section class="flex flex-col pt-10 px-4 pb-32 md:pb-12 md:px-8 flex-grow gap-12">
+  <!-- Header -->
+  <div
+    class="flex justify-between items-center px-4 md:px-8 py-5 rounded-bl-2xl bg-white border-b border-l border-gray"
+  >
+    <div class="text-lg font-bold">Overview</div>
+    <section class="flex gap-6">
+      <div class="flex flex-col text-xs">
+        <div class="flex gap-1">
+          Start Date
+          <button>
+            <ExportCircle size="12" style="color: blue" />
+          </button>
+        </div>
+        <div>Dec 15 2023, 12:00PM</div>
+      </div>
+      <div class="flex flex-col text-xs">
+        <div class="flex gap-1">
+          End Date
+          <button>
+            <ExportCircle size="12" style="color: blue" />
+          </button>
+        </div>
+        <div>Dec 15 2023, 6:00PM</div>
+      </div>
+    </section>
+  </div>
+  <section class="flex flex-col pt-10 px-4 pb-32 md:pb-12 md:px-14 flex-grow gap-12">
     <!-- Ballot Info -->
     <section class="flex flex-row gap-5 xl:self-center container">
       <div
@@ -68,7 +92,6 @@ function copyToClipboard(url) {
           </button>
         </div>
       </div>
-
       <div class="flex flex-col gap-5 border-black/20 bg-white border p-5 rounded-lg">
         <div class="flex flex-col gap-1">
           <p class="font-semibold">Preview URL</p>
@@ -83,7 +106,6 @@ function copyToClipboard(url) {
           </button>
         </div>
       </div>
-
       <div class="flex flex-col gap-5 border-black/20 bg-white border p-5 rounded-lg">
         <div class="flex flex-col gap-1">
           <p class="font-semibold">Voter's Registration URL</p>

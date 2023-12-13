@@ -2,39 +2,45 @@
 const people = [
   {
     name: 'Anirudh Chimpidi',
-    role: 'Frontend | UI/UX Design',
+    role: 'Frontend | Integration',
     roll: 'SE20UCSE019',
     imageUrl:
       'https://github.com/AndroBuddy.png'
   },
   {
     name: 'Sri Harsha Vandanapu',
-    role: 'Backend | Database',
+    role: 'Backend | Solidity',
     roll: 'SE20UCSE184',
     imageUrl: 'https://github.com/aryan-sri-harsha.png'
   },
   {
     name: 'Naga Tharun Makkena',
-    role: 'Backend | Auth',
+    role: 'Backend | Solidity',
     roll: 'SE20UCSE105',
     imageUrl: 'https://github.com/Naga-Tharun.png'
   },
   {
     name: 'Srikar Tadeparti',
-    role: 'Feature Developer',
+    role: 'Frontend | UI/UX Design',
     roll: 'SE20UCSE186',
     imageUrl: 'https://github.com/Srikar-D-Palmite.png'
   },
   {
     name: 'Vineel Pentrala',
-    role: 'Feature Developer',
+    role: 'Tester',
     roll: 'SE20UCSE226',
-    imageUrl: 'https://github.com/gargkeshav2002.png'
-  },
+    imageUrl: 'https://github.com/vineelx.png'
+  }
 ]
 </script>
 
 <template>
+  <!-- Header -->
+  <div
+    class="px-4 md:px-14 py-5 rounded-bl-2xl bg-white border-b border-l border-gray flex flex-row justify-between"
+  >
+    <div class="overview text-lg font-bold">About</div>
+  </div>
   <section class="flex flex-col pt-10 px-4 pb-32 md:pb-12 md:px-14 flex-grow gap-12">
     <section class="flex flex-col gap-10 xl:self-center container">
       <div>

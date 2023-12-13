@@ -18,7 +18,9 @@ onMounted(() => {
 
 <template>
   <!-- basic properties of header -->
-  <header class="flex w-full items-center gap-4 lg:gap-10 sticky top-0 z-20 bg-white border-b border-gray">
+  <header
+    class="flex w-full items-center gap-4 lg:gap-10 sticky top-0 z-20 bg-white border-b border-l border-gray"
+  >
     <!-- Divides top half and bottom (representing page) -->
     <div class="flex flex-col w-full">
       <!-- Seperates header from launch poll button -->
@@ -26,7 +28,7 @@ onMounted(() => {
         <div class="flex flex-col gap-1">
           <div class="flex items-center gap-2">
             <div class="text-lg font-bold">{{ ballot_title }}</div>
-            <div class="flex justify-center items-center">
+             <div class="flex justify-center items-center">
               <button>
                 <ReceiptEdit size="16" style="color: blue" />
               </button>
@@ -73,6 +75,7 @@ onMounted(() => {
           </div>
         </section>
       </div>
+      
     </div>
   </header>
 </template>
