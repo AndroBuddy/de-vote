@@ -19,7 +19,7 @@ onMounted(() => {
 <template>
   <!-- basic properties of header -->
   <header
-    class="flex w-full items-center gap-4 lg:gap-10 sticky top-0 z-20 rounded-bl-2xl bg-white border-b border-l border-gray"
+    class="flex w-full items-center gap-4 lg:gap-10 sticky top-0 z-20 bg-white border-b border-l border-gray"
   >
     <!-- Divides top half and bottom (representing page) -->
     <div class="flex flex-col w-full">
@@ -45,12 +45,7 @@ onMounted(() => {
           Launch Poll
         </button>
       </div>
-      <section class="flex gap-4 items-center justify-center pb-4">
-        <div class="border flex-grow" />
-      </section>
-      <div class="px-4 md:px-14 pb-5">
-        <div class="overview text-lg font-bold">Overview</div>
-      </div>
+      
     </div>
   </header>
 </template>

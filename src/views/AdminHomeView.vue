@@ -5,15 +5,17 @@ let ballot_url = ref('devote.com/aiDjfdK')
 
 function copyToClipboard() {
   const textToCopy = ballot_url.value
-  navigator.clipboard
-    .writeText(textToCopy)
-    .catch((err) => {
-      console.error('Could not copy text: ', err)
-    })
+  navigator.clipboard.writeText(textToCopy).catch((err) => {
+    console.error('Could not copy text: ', err)
+  })
 }
 </script>
 
 <template>
+  <!-- Header -->
+  <div class="px-4 md:px-14 py-5 rounded-bl-2xl bg-white border-b border-l border-gray">
+    <div class="overview text-lg font-bold">Overview</div>
+  </div>
   <section class="flex flex-col pt-10 px-4 pb-32 md:pb-12 md:px-14 flex-grow gap-12">
     <!-- Ballot Info -->
     <section class="flex flex-row gap-5 xl:self-center container">

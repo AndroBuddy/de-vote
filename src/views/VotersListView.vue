@@ -183,6 +183,23 @@ function onLeave(el, done) {
     </Dialog>
   </TransitionRoot>
 
+  <!-- Header -->
+  <div
+    class="px-4 md:px-14 pt-5 pb-3 rounded-bl-2xl bg-white border-b border-l border-gray flex flex-row justify-between"
+  >
+    <div class="overview text-lg font-bold">Voters</div>
+    <Transition @enter="onEnter" @leave="onLeave" mode="out-in">
+      <section v-if="!buildBallot">
+        <button
+          type="submit"
+          @click="toggleModal"
+          class="flex self-start justify-center items-center rounded-md bg-blue-100 px-3 py-1.5 text-sm leading-6 text-blue-800 shadow-sm hover:bg-blue-200 focus-visible:outline-none"
+        >
+          Add Voter
+        </button>
+      </section>
+    </Transition>
+  </div>
   <!-- Main page -->
   <section class="flex flex-col sm:items-center pt-20 w-full h-full">
     <Transition @enter="onEnter" @leave="onLeave" mode="out-in">
@@ -235,16 +252,7 @@ function onLeave(el, done) {
             </tbody>
           </table>
         </div>
-        <div class="pt-6">
-
-            <button
-            type="submit"
-            @click="toggleModal"
-            class="flex self-start justify-center items-center rounded-md bg-blue-800 px-3 py-1.5 text-sm leading-6 text-white shadow-sm hover:bg-blue-600 focus-visible:outline-none"
-            >
-            Add Voter
-        </button>
-    </div>
+        <div class="pt-6"></div>
       </section>
     </Transition>
   </section>

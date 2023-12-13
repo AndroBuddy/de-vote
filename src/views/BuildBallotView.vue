@@ -10,6 +10,7 @@ import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } fro
 
 let buildBallot = ref(true)
 let optionModal = ref(false)
+let changePollTitle = ref(false)
 
 function toggleBuildBallot() {
   buildBallot.value = !buildBallot.value
@@ -17,6 +18,10 @@ function toggleBuildBallot() {
 
 function toggleModal() {
   optionModal.value = !optionModal.value
+}
+
+function toggleChangePollTitle() {
+  changePollTitle.value = !changePollTitle.value
 }
 
 function onEnter(el, done) {
@@ -96,14 +101,13 @@ function onLeave(el, done) {
                       />
                     </div>
                     <button
-                    type="submit"
-                    class="self-start flex justify-center items-center rounded-md bg-blue-800 px-4 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-600 focus-visible:outline-none mt-4"
+                      type="submit"
+                      class="self-start flex justify-center items-center rounded-md bg-blue-800 px-4 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-600 focus-visible:outline-none mt-4"
                     >
-                    Add
-                  </button>
+                      Add
+                    </button>
                   </form>
-                  
-            </section>
+                </section>
               </section>
             </DialogPanel>
           </TransitionChild>
@@ -112,6 +116,10 @@ function onLeave(el, done) {
     </Dialog>
   </TransitionRoot>
 
+  <!-- Header -->
+  <div class="px-4 md:px-14 py-5 rounded-bl-2xl bg-white border-b border-l border-gray">
+    <div class="overview text-lg font-bold">Ballot</div>
+  </div>
   <!-- Main page -->
   <section class="flex flex-col sm:items-center pt-20 w-full h-full">
     <Transition @enter="onEnter" @leave="onLeave" mode="out-in">
@@ -137,9 +145,17 @@ function onLeave(el, done) {
         <div class="flex flex-col gap-3 bg-white border-black/20 border p-6 rounded-lg sm:w-96">
           <div>
             <div class="flex flex-row justify-between">
-              <span class="font-semibold leading-6 text-gray-900 overflow-clip text-ellipsis"
-                >Untitled Poll</span
-              >
+              <form v-if="changePollTitle">
+                <input />
+              </form>
+              <button @onclick="toggleChangePollTitle" v-else>
+                <span
+                  class="font-semibold leading-6 text-gray-900 overflow-clip text-ellipsis"
+                  id="poll-title"
+                >
+                  Untitled Poll (click to edit)
+                </span>
+              </button>
               <button @click="toggleBuildBallot" class="">
                 <Trash style="color: red" />
               </button>
