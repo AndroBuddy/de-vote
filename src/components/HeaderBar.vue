@@ -5,7 +5,7 @@ import { ReceiptEdit } from 'vue-iconsax'
 
 const store = useMainStore()
 const searchStore = store.useSearchStore()
-let ballot_title = "Employee of the Week"
+let ballot_title = "Election"
 
 onMounted(() => {
   window.addEventListener('keyup', (e) => {
