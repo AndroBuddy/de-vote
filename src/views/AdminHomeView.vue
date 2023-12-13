@@ -46,8 +46,7 @@ function copyToClipboard(url) {
     <!-- Ballot Info -->
     <section class="flex flex-row gap-5 xl:self-center container">
       <div
-        class="flex flex-col items-center justify-center bg-blue-50 border-blue-500 border p-4 pr-10 rounded-lg text-blue-800"
-      >
+        class="flex flex-col items-center justify-center bg-blue-50 border-blue-500 border p-4 pr-10 rounded-lg text-blue-800">
         <div class="flex flex-row items-center gap-3">
           <InfoCircle size="30" />
           <div class="flex flex-col">
@@ -57,8 +56,7 @@ function copyToClipboard(url) {
         </div>
       </div>
       <div
-        class="flex flex-col items-center justify-center bg-orange-50 border-orange-500 border p-4 pr-10 rounded-lg text-orange-600"
-      >
+        class="flex flex-col items-center justify-center bg-orange-50 border-orange-500 border p-4 pr-10 rounded-lg text-orange-600">
         <div class="flex flex-row items-center gap-3">
           <Setting4 size="30" />
           <div class="flex flex-col">
@@ -68,8 +66,7 @@ function copyToClipboard(url) {
         </div>
       </div>
       <div
-        class="flex flex-col items-center justify-center bg-green-50 border-green-500 border p-4 pr-10 rounded-lg text-green-800"
-      >
+        class="flex flex-col items-center justify-center bg-green-50 border-green-500 border p-4 pr-10 rounded-lg text-green-800">
         <div class="flex flex-row items-center gap-3">
           <People size="30" />
           <div class="flex flex-col">
