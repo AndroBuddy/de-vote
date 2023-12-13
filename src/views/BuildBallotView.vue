@@ -117,7 +117,7 @@ function onLeave(el, done) {
   </TransitionRoot>
 
   <!-- Header -->
-  <div class="px-4 md:px-14 py-5 rounded-bl-2xl bg-white border-b border-l border-gray">
+  <div class="px-4 md:px-8 py-5 rounded-bl-2xl bg-white border-b border-l border-gray">
     <div class="overview text-lg font-bold">Ballot</div>
   </div>
   <!-- Main page -->
@@ -153,7 +153,7 @@ function onLeave(el, done) {
                   class="font-semibold leading-6 text-gray-900 overflow-clip text-ellipsis"
                   id="poll-title"
                 >
-                  Untitled Poll (click to edit)
+                  Election
                 </span>
               </button>
               <button @click="toggleBuildBallot" class="">

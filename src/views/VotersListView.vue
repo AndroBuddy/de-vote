@@ -185,9 +185,10 @@ function onLeave(el, done) {
 
   <!-- Header -->
   <div
-    class="px-4 md:px-14 pt-5 pb-3 rounded-bl-2xl bg-white border-b border-l border-gray flex flex-row justify-between"
+    class="px-4 md:px-8 pt-5 pb-3 rounded-bl-2xl bg-white border-b border-l border-gray flex flex-row justify-between"
   >
     <div class="overview text-lg font-bold">Voters</div>
+    <div v-if="buildBallot" class="p-4"></div>
     <Transition @enter="onEnter" @leave="onLeave" mode="out-in">
       <section v-if="!buildBallot">
         <button

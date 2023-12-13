@@ -28,14 +28,9 @@ const router = createRouter({
       component: () => import('../views/VotersListView.vue')
     },
     {
-      path: '/active-bids',
-      name: 'active-bids',
-      component: () => import('../views/ActiveBidsView.vue')
-    },
-    {
-      path: '/favorites',
-      name: 'favorites',
-      component: () => import('../views/FavoritesView.vue')
+      path: '/submitted',
+      name: 'vote-submitted',
+      component: () => import('../views/VoteSubmittedView.vue')
     },
     {
       path: '/add-product',
@@ -51,6 +46,11 @@ const router = createRouter({
       path: '/about',
       name: 'about',
       component: () => import('../views/AboutView.vue')
+    },
+    {
+      path: '/vote',
+      name: 'vote',
+      component:  () => import('../views/VotingView.vue')
     },
     {
       path: '/p/:product',
