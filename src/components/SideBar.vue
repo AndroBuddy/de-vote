@@ -19,7 +19,7 @@ onMounted(() => {
 
 <template>
   <nav
-    class="z-30 w-80 overflow-clip h-screen shrink-0 fixed left-0 top-0 xl:static"
+    class="z-30 w-80 overflow-clip h-screen shrink-0 fixed left-0 top-0 xl:static border-r"
     :class="[collapseState.collapsed ? 'w-[4.5rem]' : 'w-80']"
   >
     <section
