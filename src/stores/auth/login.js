@@ -17,7 +17,7 @@ export const loginManager = defineStore('login', () => {
       if (user) {
         isLoaded.value = false
         authHelper().setLogIn(user)
-        router.push({ name: 'home' })
+        router.push({ name: 'admin-home' })
       } else {
         isLoaded.value = false
         loginMessage.value = 'Invalid Credentials • Try again'
@@ -40,7 +40,7 @@ export const loginManager = defineStore('login', () => {
 
   function setGuest() {
     authHelper().setGuest(guestUser.value)
-    router.push({ name: 'home' })
+    router.push({ name: 'admin-home' })
   }
 
   return { loginMessage, btnWarn, isLoaded, validateUser, setGuest }

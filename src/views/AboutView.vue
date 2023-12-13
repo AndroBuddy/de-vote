@@ -5,7 +5,7 @@ const people = [
     role: 'Frontend | UI/UX Design',
     roll: 'SE20UCSE019',
     imageUrl:
-      'https://media.licdn.com/dms/image/C4D03AQFgx7qsXrSewQ/profile-displayphoto-shrink_200_200/0/1662054895906?e=1691020800&v=beta&t=3rfvnuMFG8Q7TYSUT560FOY96Fb9Trmupwb0zfBaBI4'
+      'https://github.com/AndroBuddy.png'
   },
   {
     name: 'Sri Harsha Vandanapu',
@@ -26,17 +26,11 @@ const people = [
     imageUrl: 'https://github.com/Srikar-D-Palmite.png'
   },
   {
-    name: 'Keshav Garg',
+    name: 'Vineel Pentrala',
     role: 'Feature Developer',
-    roll: 'SE20UCSE065',
+    roll: 'SE20UCSE226',
     imageUrl: 'https://github.com/gargkeshav2002.png'
   },
-  {
-    name: 'Vivek Dhir',
-    role: 'Tester',
-    roll: 'SE20UCSE159',
-    imageUrl: 'https://github.com/vivekdhir77.png'
-  }
 ]
 </script>
 
