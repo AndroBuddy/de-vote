@@ -6,6 +6,12 @@ import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } fro
 
 let buildBallot = ref(true)
 let optionModal = ref(false)
+let voters = ref([{name:"Srikar Tadeparti", age: 21, region:"Hyderabad", voterID: 123456789101}])
+let firstName = ref('')
+let lastName = ref('')
+let age = ref()
+let region = ref('')
+let voterID = ref()
 
 function toggleBuildBallot() {
   buildBallot.value = !buildBallot.value
@@ -13,6 +19,30 @@ function toggleBuildBallot() {
 
 function toggleModal() {
   optionModal.value = !optionModal.value
+}
+
+function clearFormFields() {
+  firstName.value = ''
+  lastName.value = ''
+  age.value = ''
+  region.value = ''
+  voterID.value = ''
+}
+
+async function submitAddVoter() {
+  const formData = {
+    name: firstName.value + lastName.value,
+    age: age.value,
+    region: region.value,
+    voterID: voterID.value
+  }
+  voters.value.push(formData)
+  clearFormFields()
+  toggleModal()
+}
+
+function deleteVoter(index) {
+  voters.value.splice(index, 1);
 }
 
 function onEnter(el, done) {
@@ -77,10 +107,10 @@ function onLeave(el, done) {
                 </DialogTitle>
 
                 <section class="flex flex-col justify-center">
-                  <form class="flex flex-col gap-4" @submit.prevent="submit">
+                  <form class="flex flex-col gap-4" @submit.prevent="submitAddVoter">
                     <div class="flex flex-col gap-2">
-                      <div class="flex flex-row gap-5">
-                        <div class="flex flex-col gap-2">
+                      <div class="flex justify-between gap-4">
+                        <div class="flex flex-col gap-2 w-full">
                           <label
                             for="first-name"
                             class="block text-sm font-medium leading-6 text-gray-900 after:content-['*']"
@@ -94,10 +124,11 @@ function onLeave(el, done) {
                             autocomplete="fname"
                             placeholder="First Name"
                             required="true"
+                            v-model="firstName"
                             class="block rounded-md border border-slate-300 w-full py-1.5 px-2 placeholder:text-gray-400 placeholder:text-xs focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 sm:leading-6 invalid:border-red-200 invalid:text-red-600 focus:invalid:border-red-500 focus:invalid:ring-red-500"
                           />
                         </div>
-                        <div class="flex flex-col gap-2">
+                        <div class="flex flex-col gap-2 w-full">
                           <label
                             for="last-name"
                             class="block text-sm font-medium leading-6 text-gray-900 after:content-['*']"
@@ -111,6 +142,7 @@ function onLeave(el, done) {
                             autocomplete="lname"
                             placeholder="Last Name"
                             required="true"
+                            v-model="lastName"
                             class="block rounded-md border border-slate-300 w-full py-1.5 px-2 placeholder:text-gray-400 placeholder:text-xs focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 sm:leading-6 invalid:border-red-200 invalid:text-red-600 focus:invalid:border-red-500 focus:invalid:ring-red-500"
                           />
                         </div>
@@ -130,6 +162,7 @@ function onLeave(el, done) {
                         autocomplete="age"
                         placeholder="Age"
                         required="true"
+                        v-model="age"
                         class="block rounded-md border border-slate-300 py-1.5 px-2 placeholder:text-gray-400 placeholder:text-xs focus:outline-none focus:border-sky-500 invalid:border-red-200 invalid:text-red-600 focus:invalid:border-red-500 focus:invalid:ring-red-500 focus:ring-1 focus:ring-sky-500 sm:leading-6"
                       />
                     </div>
@@ -147,6 +180,7 @@ function onLeave(el, done) {
                         autocomplete="region"
                         placeholder="Region"
                         required="true"
+                        v-model="region"
                         class="block rounded-md border border-slate-300 py-1.5 px-2 placeholder:text-gray-400 placeholder:text-xs focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 sm:leading-6 invalid:border-red-200 invalid:text-red-600 focus:invalid:border-red-500 focus:invalid:ring-red-500"
                       />
                     </div>
@@ -155,15 +189,16 @@ function onLeave(el, done) {
                         for="voter-id"
                         class="block text-sm font-medium leading-6 text-gray-900 after:content-['*']"
                       >
-                        Voter ID (Aadhar)
+                        Voter ID (Aadhar No.)
                       </label>
                       <input
                         id="voter-id"
                         name="voter-id"
-                        type="text"
+                        type="number"
                         autocomplete="voterID"
                         placeholder="Voter ID"
                         required="true"
+                        v-model="voterID"
                         class="block rounded-md border border-slate-300 py-1.5 px-2 placeholder:text-gray-400 placeholder:text-xs focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 sm:leading-6 invalid:border-red-200 invalid:text-red-600 focus:invalid:border-red-500 focus:invalid:ring-red-500"
                       />
                     </div>
@@ -226,23 +261,25 @@ function onLeave(el, done) {
           >
             <thead class="text-black font-semibold bg-gray-200 dark:bg-gray-700 dark:text-gray-400">
               <tr>
-                <th scope="col" class="px-6 py-3">Email Address</th>
-                <th scope="col" class="px-6 py-3">Wallet ID</th>
-                <th scope="col" class="px-6 py-3">First Name</th>
-                <th scope="col" class="px-6 py-3">Last Name</th>
+                <th scope="col" class="px-6 py-3">Name</th>
+                <th scope="col" class="px-6 py-3">Age</th>
+                <th scope="col" class="px-6 py-3">Region</th>
+                <th scope="col" class="px-6 py-3">Aadhar No.</th>
                 <th scope="col" class="px-6 py-3"></th>
               </tr>
             </thead>
-            <tbody>
+            <tbody v-for="(voter, index) in voters" :key="voter[0]">
               <tr
                 class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
               >
-                <td class="px-6 py-4">example@mahindrauniversity.edu.in</td>
-                <td class="px-6 py-4">0x12345678</td>
-                <td class="px-6 py-4">DeVote</td>
-                <td class="px-6 py-4">Team</td>
+                <td class="px-6 py-4">{{ voter.name }}</td>
+                <td class="px-6 py-4">{{ voter.age }}</td>
+                <td class="px-6 py-4">{{ voter.region }}</td>
+                <td class="px-6 py-4">{{ voter.voterID }}</td>
                 <td class="px-6 py-4">
-                  <button>
+                  <button
+                  @click="deleteVoter(index)"
+                  >
                     <Trash style="color: red" />
                   </button>
                 </td>

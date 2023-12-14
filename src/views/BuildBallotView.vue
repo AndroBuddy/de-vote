@@ -11,6 +11,35 @@ import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } fro
 let buildBallot = ref(true)
 let optionModal = ref(false)
 let changePollTitle = ref(false)
+let options = ref([])
+let nominee = ref('')
+let region = ref('')
+let location = ref('')
+let party = ref('')
+
+function clearFormFields() {
+  nominee.value = ''
+  location.value = ''
+  party.value = ''
+  region.value = ''
+}
+
+async function submitOption() {
+  const formData = {
+    nominee: nominee.value,
+    location: location.value,
+    region: region.value,
+    party: party.value
+  }
+  options.value.push(formData)
+  clearFormFields()
+  toggleModal()
+}
+
+function deleteOption(index) {
+  options.value.splice(index, 1);
+}
+
 
 function toggleBuildBallot() {
   buildBallot.value = !buildBallot.value
@@ -22,10 +51,6 @@ function toggleModal() {
 
 function toggleChangePollTitle() {
   changePollTitle.value = !changePollTitle.value
-}
-
-function submitOption() {
-  
 }
 
 function onEnter(el, done) {
@@ -89,7 +114,7 @@ function onLeave(el, done) {
                 </DialogTitle>
 
                 <section class="flex flex-col justify-center">
-                  <form class="flex flex-col gap-4" @submit.prevent="submit">
+                  <form class="flex flex-col gap-4" @submit.prevent="submitOption">
                     <div class="flex flex-col gap-2">
                       <label
                         for="nominee"
@@ -103,6 +128,7 @@ function onLeave(el, done) {
                         type="text"
                         placeholder="Nominee"
                         required="true"
+                        v-model="nominee"
                         class="block rounded-md border border-slate-300 py-1.5 px-2 placeholder:text-gray-400 placeholder:text-xs focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 sm:leading-6 invalid:border-red-200 invalid:text-red-600 focus:invalid:border-red-500 focus:invalid:ring-red-500"
                       />
                     </div>
@@ -119,6 +145,7 @@ function onLeave(el, done) {
                         type="text"
                         placeholder="Region"
                         required="true"
+                        v-model="region"
                         class="block rounded-md border border-slate-300 py-1.5 px-2 placeholder:text-gray-400 placeholder:text-xs focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 sm:leading-6 invalid:border-red-200 invalid:text-red-600 focus:invalid:border-red-500 focus:invalid:ring-red-500"
                       />
                     </div>
@@ -135,6 +162,7 @@ function onLeave(el, done) {
                         type="text"
                         placeholder="Location"
                         required="true"
+                        v-model="location"
                         class="block rounded-md border border-slate-300 py-1.5 px-2 placeholder:text-gray-400 placeholder:text-xs focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 sm:leading-6 invalid:border-red-200 invalid:text-red-600 focus:invalid:border-red-500 focus:invalid:ring-red-500"
                       />
                     </div>
@@ -151,12 +179,12 @@ function onLeave(el, done) {
                         type="text"
                         placeholder="Party"
                         required="true"
+                        v-model="party"
                         class="block rounded-md border border-slate-300 py-1.5 px-2 placeholder:text-gray-400 placeholder:text-xs focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 sm:leading-6 invalid:border-red-200 invalid:text-red-600 focus:invalid:border-red-500 focus:invalid:ring-red-500"
                       />
                     </div>
                     <button
                       type="submit"
-                      @onclick="submitOption"
                       class="self-start flex justify-center items-center rounded-md bg-blue-800 px-4 py-1.5 text-sm leading-6 text-white shadow-sm hover:bg-blue-600 focus-visible:outline-none mt-4"
                     >
                       Add
@@ -197,7 +225,7 @@ function onLeave(el, done) {
       </section>
 
       <section v-else key="2">
-        <div class="flex flex-col gap-3 bg-white border-black/20 border p-6 rounded-lg sm:w-96">
+        <div class="flex flex-col gap-3 bg-white border-black/20 border p-6 rounded-lg">
           <div>
             <div class="flex flex-row justify-between">
               <form v-if="changePollTitle">
@@ -211,9 +239,6 @@ function onLeave(el, done) {
                   Election Ballot
                 </span>
               </button>
-              <button @click="toggleBuildBallot" class="">
-                <Trash style="color: red" />
-              </button>
             </div>
             <p class="mt-1 truncate text-sm leading-5 text-gray-500">
               Add nominees to your election ballot
@@ -222,6 +247,27 @@ function onLeave(el, done) {
           <section class="flex gap-4 items-center justify-center pb-4">
             <div class="border flex-grow" />
           </section>
+          <table
+            class="w-full border-separate border-spacing-y-1 table-auto text-left rtl:text-right text-gray-600 dark:text-gray-400"
+          >
+            <tbody v-for="(option, index) in options" :key="option[0]">
+              <tr
+                class="bg-white border border-black dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+              >
+                <td class="px-6 py-4">Option {{ index+1 }} — {{ option.nominee }}</td>
+                <td class="px-6 py-4">{{ option.region }}</td>
+                <td class="px-6 py-4">{{ option.location }}</td>
+                <td class="px-6 py-4">{{ option.party }}</td>
+                <td class="px-6 py-4">
+                  <button
+                  @click="deleteOption(index)"
+                  >
+                    <Trash style="color: black" />
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
           <button
             type="submit"
             @click="toggleModal"
