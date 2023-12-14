@@ -1,5 +1,5 @@
 <script setup>
-import IconBrand from '../components/icons/IconBrand.vue'
+import VoterHeaderBar from '../components/parts/VoterHeaderBar.vue';
 
 let results = [
   { votes: 18, name: 'Narendra Modi', color: "bg-blue-800" },
@@ -16,12 +16,7 @@ function calculateWidth(votes) {
 
 <template>
   <!-- Header -->
-  <div class="px-4 md:px-8 py-5 bg-white border-b border-gray">
-    <div class="overview text-lg font-bold flex flex-row gap-2">
-      <IconBrand />
-      <h1 class="lowercase">devote</h1>
-    </div>
-  </div>
+  <VoterHeaderBar />
   <!-- Main page -->
   <section class="flex flex-col sm:items-center pt-20 w-full h-full">
     <div class="flex flex-col gap-7 items-center w-full">

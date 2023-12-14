@@ -1,7 +1,9 @@
 <script setup>
 import { ref } from 'vue'
 import anime from 'animejs'
-import IconBrand from '../components/icons/IconBrand.vue'
+import router from '../router';
+import VoterHeaderBar from '../components/parts/VoterHeaderBar.vue';
+
 
 let formPage = ref(2)
 
@@ -18,6 +20,10 @@ async function submit() {
   {
     nextFormPage()
   }
+}
+
+async function submitForm() {
+  router.push("/voter/submitted")
 }
 
 function onEnter(el, done) {
@@ -45,14 +51,9 @@ function onLeave(el, done) {
 
 <template>
   <!-- Header -->
-  <div class="px-4 md:px-8 py-5 bg-white">
-    <div class="overview text-lg font-bold flex flex-row gap-2">
-      <IconBrand />
-      <h1 class="lowercase">devote</h1>
-    </div>
-  </div>
+  <VoterHeaderBar />
   <!-- Main page -->
-  <section class="flex flex-col sm:items-center pt-20 w-full h-full">
+  <section class="flex flex-col sm:items-center pt-20 w-full h-full bg-gray-100">
     <Transition @enter="onEnter" @leave="onLeave" mode="out-in">
       <section v-if="formPage == 2">
         <div class="flex flex-col gap-3 items-center justify-center sm:w-96">
@@ -171,7 +172,7 @@ function onLeave(el, done) {
       </form>
       <section v-else-if="formPage == 4">
         <div class="flex flex-col gap-3 bg-white border-black/20 border p-6 rounded-lg sm:w-96">
-          <form class="flex flex-col gap-4" @submit.prevent="submit">
+          <form class="flex flex-col gap-4" @submit.prevent="submitForm">
             <span class="text-lg font-bold">Election</span>
             <span class="text-md">Choose your candidate</span>
             <ul
@@ -184,6 +185,7 @@ function onLeave(el, done) {
                     type="radio"
                     value=""
                     name="list-radio"
+                    required
                     class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                   />
                   <label
@@ -199,6 +201,7 @@ function onLeave(el, done) {
                     id="list-radio-id"
                     type="radio"
                     value=""
+                    required
                     name="list-radio"
                     class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                   />
@@ -215,6 +218,7 @@ function onLeave(el, done) {
                     id="list-radio-military"
                     type="radio"
                     value=""
+                    required
                     name="list-radio"
                     class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                   />
@@ -228,11 +232,10 @@ function onLeave(el, done) {
             </ul>
             <button
               type="submit"
-              @onclick="nextFormPage"
               class="self-start flex justify-center items-center rounded-md bg-blue-800 px-4 py-1.5 text-sm leading-6 text-white shadow-sm hover:bg-blue-600 focus-visible:outline-none mt-4"
             >
               Submit
-            </button>
+          </button>
           </form>
         </div>
       </section>
