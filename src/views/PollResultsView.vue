@@ -23,20 +23,15 @@ function calculateWidth(votes) {
       <h2>Live Election Results</h2>
       <div class="flex flex-row gap-5">
         <div class="flex flex-col gap-7 items-center justify-center sm:w-96">
-          <div
-            v-for="candidate in results"
-            v-bind:key="candidate"
-            class="flex flex-col gap-2 bg-white border-black/20 border p-4 rounded-lg sm:w-96"
-          >
+          <div v-for="candidate in results" v-bind:key="candidate"
+            class="flex flex-col gap-2 bg-white border-black/20 border p-4 rounded-lg sm:w-96">
             <div class="flex flex-row justify-between">
               <span class=""> {{ candidate.name }} </span>
               {{ Math.round((candidate.votes / totalVotes) * 100) }}%
             </div>
-            <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
-              <div
-                :class="[candidate.color, 'h-2.5', 'rounded-full']"
-                :style="{ width: calculateWidth(candidate.votes) + '%' }"
-              ></div>
+            <div class="w-full bg-gray-200 rounded-full h-2.5">
+              <div :class="[candidate.color, 'h-2.5', 'rounded-full']"
+                :style="{ width: calculateWidth(candidate.votes) + '%' }"></div>
             </div>
             <span class="text-xs text-gray-600">{{ candidate.votes }} votes</span>
           </div>

@@ -176,9 +176,9 @@ function onLeave(el, done) {
             <span class="text-lg font-bold">Election</span>
             <span class="text-md">Choose your candidate</span>
             <ul
-              class="w-full text-sm font-medium text-gray-900 bg-white border-gray-200 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+              class="w-full text-sm font-medium text-gray-900 bg-white border-gray-200"
             >
-              <li class="w-full border-t border-gray-200 rounded-t-lg dark:border-gray-600">
+              <li class="w-full border-t border-gray-200 rounded-t-lg">
                 <div class="flex items-center ps-3">
                   <input
                     id="list-radio-license"
@@ -186,16 +186,16 @@ function onLeave(el, done) {
                     value=""
                     name="list-radio"
                     required
-                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-2"
                   />
                   <label
                     for="list-radio-license"
-                    class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                    class="w-full py-3 ms-2 text-sm font-medium text-gray-900"
                     >Narendra Modi
                   </label>
                 </div>
               </li>
-              <li class="w-full border-t border-gray-200 rounded-t-lg dark:border-gray-600">
+              <li class="w-full border-t border-gray-200 rounded-t-lg">
                 <div class="flex items-center ps-3">
                   <input
                     id="list-radio-id"
@@ -203,16 +203,16 @@ function onLeave(el, done) {
                     value=""
                     required
                     name="list-radio"
-                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300focus:ring-2"
                   />
                   <label
                     for="list-radio-id"
-                    class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                    class="w-full py-3 ms-2 text-sm font-medium text-gray-900"
                     >Joe Biden</label
                   >
                 </div>
               </li>
-              <li class="w-full border-t border-gray-200 rounded-t-lg dark:border-gray-600">
+              <li class="w-full border-t border-gray-200 rounded-t-lg">
                 <div class="flex items-center ps-3">
                   <input
                     id="list-radio-military"
@@ -220,11 +220,11 @@ function onLeave(el, done) {
                     value=""
                     required
                     name="list-radio"
-                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-2"
                   />
                   <label
                     for="list-radio-military"
-                    class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                    class="w-full py-3 ms-2 text-sm font-medium text-gray-900"
                     >Naga Tharun</label
                   >
                 </div>

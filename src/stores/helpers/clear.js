@@ -7,6 +7,7 @@ export const clearStore = defineStore('clear', () => {
     localStorage.removeItem('user_products')
     localStorage.removeItem('favorites_list')
     localStorage.removeItem('biddings_list')
+    localStorage.removeItem('ballot_options')
   }
 
   return { clearOut }

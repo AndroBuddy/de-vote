@@ -1,21 +1,20 @@
 <script setup>
-//   import 'vuesax/dist/vuesax.css' //Vuesax styles
-//   import { vsDialog } from 'vuesax'
-// import { WalletAdd } from 'vue-iconsax'
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { DirectboxDefault, Trash } from 'vue-iconsax'
 import anime from 'animejs'
-// import AddOptionModal from '../components/parts/AddOptionModal.vue'
+
 import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
 
-let buildBallot = ref(true)
-let optionModal = ref(false)
-let changePollTitle = ref(false)
-let options = ref([])
-let nominee = ref('')
-let region = ref('')
-let location = ref('')
-let party = ref('')
+const buildBallot = ref(true)
+const optionModal = ref(false)
+const changePollTitle = ref(false)
+
+const options = ref([])
+
+const nominee = ref('')
+const region = ref('')
+const location = ref('')
+const party = ref('')
 
 function clearFormFields() {
   nominee.value = ''
@@ -32,6 +31,7 @@ async function submitOption() {
     party: party.value
   }
   options.value.push(formData)
+  localStorage.setItem('ballot_options', JSON.stringify(options.value))
   clearFormFields()
   toggleModal()
 }
@@ -74,41 +74,34 @@ function onLeave(el, done) {
     complete: done
   })
 }
+
+onMounted(() => {
+  const ballot_options = localStorage.getItem('ballot_options')
+  if (ballot_options) {
+    options.value = JSON.parse(ballot_options)
+  }
+})
 </script>
 
 <template>
   <!-- Modal -->
   <TransitionRoot as="template" :show="optionModal">
     <Dialog as="div" class="relative z-40" @close="toggleModal">
-      <TransitionChild
-        as="template"
-        enter="ease-out duration-300"
-        enter-from="opacity-0"
-        enter-to="opacity-100"
-        leave="ease-in duration-200"
-        leave-from="opacity-100"
-        leave-to="opacity-0"
-      >
+      <TransitionChild as="template" enter="ease-out duration-300" enter-from="opacity-0" enter-to="opacity-100"
+        leave="ease-in duration-200" leave-from="opacity-100" leave-to="opacity-0">
         <div class="fixed inset-0 bg-black/25" />
       </TransitionChild>
 
       <div class="fixed inset-0 z-10 overflow-y-auto">
         <div class="flex min-h-full justify-center p-4 text-center items-center sm:p-0">
-          <TransitionChild
-            as="template"
-            enter="ease-out duration-300"
+          <TransitionChild as="template" enter="ease-out duration-300"
             enter-from="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-            enter-to="opacity-100 translate-y-0 sm:scale-100"
-            leave="ease-in duration-200"
+            enter-to="opacity-100 translate-y-0 sm:scale-100" leave="ease-in duration-200"
             leave-from="opacity-100 translate-y-0 sm:scale-100"
-            leave-to="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-          >
+            leave-to="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95">
             <DialogPanel
-              class="relative transform overflow-hidden rounded-lg bg-white text-left transition-all sm:w-[36rem]"
-            >
-              <section
-                class="flex flex-col gap-10 p-10 rounded-3xl w-full max-h-[90vh] overflow-scroll"
-              >
+              class="relative transform overflow-hidden rounded-lg bg-white text-left transition-all sm:w-[36rem]">
+              <section class="flex flex-col gap-10 p-10 rounded-3xl w-full max-h-[90vh] overflow-scroll">
                 <DialogTitle class="flex flex-col gap-2">
                   <h1 class="text-2xl">Add Option</h1>
                 </DialogTitle>
@@ -116,77 +109,37 @@ function onLeave(el, done) {
                 <section class="flex flex-col justify-center">
                   <form class="flex flex-col gap-4" @submit.prevent="submitOption">
                     <div class="flex flex-col gap-2">
-                      <label
-                        for="nominee"
-                        class="block text-sm font-medium leading-6 text-gray-900 after:content-['*']"
-                      >
+                      <label for="nominee" class="block text-sm font-medium leading-6 text-gray-900 after:content-['*']">
                         Nominee Name
                       </label>
-                      <input
-                        id="nominee"
-                        name="nominee"
-                        type="text"
-                        placeholder="Nominee"
-                        required="true"
+                      <input id="nominee" name="nominee" type="text" placeholder="Nominee" required="true"
                         v-model="nominee"
-                        class="block rounded-md border border-slate-300 py-1.5 px-2 placeholder:text-gray-400 placeholder:text-xs focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 sm:leading-6 invalid:border-red-200 invalid:text-red-600 focus:invalid:border-red-500 focus:invalid:ring-red-500"
-                      />
+                        class="block rounded-md border border-slate-300 py-1.5 px-2 placeholder:text-gray-400 placeholder:text-xs focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 sm:leading-6 invalid:border-red-200 invalid:text-red-600 focus:invalid:border-red-500 focus:invalid:ring-red-500" />
                     </div>
                     <div class="flex flex-col gap-2">
-                      <label
-                        for="region"
-                        class="block text-sm font-medium leading-6 text-gray-900 after:content-['*']"
-                      >
+                      <label for="region" class="block text-sm font-medium leading-6 text-gray-900 after:content-['*']">
                         Region
                       </label>
-                      <input
-                        id="region"
-                        name="region"
-                        type="text"
-                        placeholder="Region"
-                        required="true"
-                        v-model="region"
-                        class="block rounded-md border border-slate-300 py-1.5 px-2 placeholder:text-gray-400 placeholder:text-xs focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 sm:leading-6 invalid:border-red-200 invalid:text-red-600 focus:invalid:border-red-500 focus:invalid:ring-red-500"
-                      />
+                      <input id="region" name="region" type="text" placeholder="Region" required="true" v-model="region"
+                        class="block rounded-md border border-slate-300 py-1.5 px-2 placeholder:text-gray-400 placeholder:text-xs focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 sm:leading-6 invalid:border-red-200 invalid:text-red-600 focus:invalid:border-red-500 focus:invalid:ring-red-500" />
                     </div>
                     <div class="flex flex-col gap-2">
-                      <label
-                        for="location"
-                        class="block text-sm font-medium leading-6 text-gray-900 after:content-['*']"
-                      >
+                      <label for="location" class="block text-sm font-medium leading-6 text-gray-900 after:content-['*']">
                         Location
                       </label>
-                      <input
-                        id="location"
-                        name="location"
-                        type="text"
-                        placeholder="Location"
-                        required="true"
+                      <input id="location" name="location" type="text" placeholder="Location" required="true"
                         v-model="location"
-                        class="block rounded-md border border-slate-300 py-1.5 px-2 placeholder:text-gray-400 placeholder:text-xs focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 sm:leading-6 invalid:border-red-200 invalid:text-red-600 focus:invalid:border-red-500 focus:invalid:ring-red-500"
-                      />
+                        class="block rounded-md border border-slate-300 py-1.5 px-2 placeholder:text-gray-400 placeholder:text-xs focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 sm:leading-6 invalid:border-red-200 invalid:text-red-600 focus:invalid:border-red-500 focus:invalid:ring-red-500" />
                     </div>
                     <div class="flex flex-col gap-2">
-                      <label
-                        for="party"
-                        class="block text-sm font-medium leading-6 text-gray-900 after:content-['*']"
-                      >
+                      <label for="party" class="block text-sm font-medium leading-6 text-gray-900 after:content-['*']">
                         Party
                       </label>
-                      <input
-                        id="party"
-                        name="party"
-                        type="text"
-                        placeholder="Party"
-                        required="true"
-                        v-model="party"
-                        class="block rounded-md border border-slate-300 py-1.5 px-2 placeholder:text-gray-400 placeholder:text-xs focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 sm:leading-6 invalid:border-red-200 invalid:text-red-600 focus:invalid:border-red-500 focus:invalid:ring-red-500"
-                      />
+                      <input id="party" name="party" type="text" placeholder="Party" required="true" v-model="party"
+                        class="block rounded-md border border-slate-300 py-1.5 px-2 placeholder:text-gray-400 placeholder:text-xs focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 sm:leading-6 invalid:border-red-200 invalid:text-red-600 focus:invalid:border-red-500 focus:invalid:ring-red-500" />
                     </div>
-                    <button
-                      type="submit"
-                      class="self-start flex justify-center items-center rounded-md bg-blue-800 px-4 py-1.5 text-sm leading-6 text-white shadow-sm hover:bg-blue-600 focus-visible:outline-none mt-4"
-                    >
+                    <button type="submit"
+                      class="self-start flex justify-center items-center rounded-md bg-blue-800 px-4 py-1.5 text-sm leading-6 text-white shadow-sm hover:bg-blue-600 focus-visible:outline-none mt-4">
                       Add
                     </button>
                   </form>
@@ -207,17 +160,12 @@ function onLeave(el, done) {
   <section class="flex flex-col sm:items-center pt-20 w-full h-full">
     <Transition @enter="onEnter" @leave="onLeave" mode="out-in">
       <section v-if="buildBallot">
-        <div
-          class="flex flex-col gap-3 items-center justify-center border-black/20 border p-10 rounded-lg sm:w-96"
-        >
+        <div class="flex flex-col gap-3 items-center justify-center border-black/20 border p-10 rounded-lg sm:w-96">
           <DirectboxDefault size="40" />
           <h5>Build your first poll</h5>
           <section class="flex flex-col justify-center">
-            <button
-              type="submit"
-              @click="toggleBuildBallot"
-              class="flex w-full justify-center items-center rounded-md bg-blue-800 px-3 py-1.5 text-sm leading-6 text-white shadow-sm hover:bg-blue-600 focus-visible:outline-none"
-            >
+            <button type="submit" @click="toggleBuildBallot"
+              class="flex w-full justify-center items-center rounded-md bg-blue-800 px-3 py-1.5 text-sm leading-6 text-white shadow-sm hover:bg-blue-600 focus-visible:outline-none">
               Build Ballot
             </button>
           </section>
@@ -232,10 +180,7 @@ function onLeave(el, done) {
                 <input />
               </form>
               <button @onclick="toggleChangePollTitle" v-else>
-                <span
-                  class="font-semibold leading-6 text-gray-900 overflow-clip text-ellipsis"
-                  id="poll-title"
-                >
+                <span class="font-semibold leading-6 text-gray-900 overflow-clip text-ellipsis" id="poll-title">
                   Election Ballot
                 </span>
               </button>
@@ -247,32 +192,24 @@ function onLeave(el, done) {
           <section class="flex gap-4 items-center justify-center pb-4">
             <div class="border flex-grow" />
           </section>
-          <table
-            class="w-full border-separate border-spacing-y-1 table-auto text-left rtl:text-right text-gray-600 dark:text-gray-400"
-          >
+          <table class="w-full border-separate border-spacing-y-1 table-auto text-left rtl:text-right text-gray-600">
             <tbody v-for="(option, index) in options" :key="option[0]">
-              <tr
-                class="bg-white border border-black dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
-              >
-                <td class="px-6 py-4">Option {{ index+1 }} — {{ option.nominee }}</td>
-                <td class="px-6 py-4">{{ option.region }}</td>
-                <td class="px-6 py-4">{{ option.location }}</td>
-                <td class="px-6 py-4">{{ option.party }}</td>
-                <td class="px-6 py-4">
-                  <button
-                  @click="deleteOption(index)"
-                  >
-                    <Trash style="color: black" />
+              <tr class="grid grid-cols-6 gap-10">
+                <td class="py-4">Nominee {{ index + 1 }}</td>
+                <td class="py-4 font-bold">{{ option.nominee }}</td>
+                <td class="py-4 font-bold">{{ option.region }}</td>
+                <td class="py-4 font-bold">{{ option.location }}</td>
+                <td class="py-4 font-bold">{{ option.party }}</td>
+                <td class="py-4 font-bold flex items-center justify-end">
+                  <button @click="deleteOption(index)">
+                    <Trash style="color: red" />
                   </button>
                 </td>
               </tr>
             </tbody>
           </table>
-          <button
-            type="submit"
-            @click="toggleModal"
-            class="flex self-start justify-center items-center rounded-md bg-blue-800 px-3 py-1.5 text-sm leading-6 text-white shadow-sm hover:bg-blue-600 focus-visible:outline-none"
-          >
+          <button type="submit" @click="toggleModal"
+            class="flex self-start justify-center items-center rounded-md bg-blue-800 px-3 py-1.5 text-sm leading-6 text-white shadow-sm hover:bg-blue-600 focus-visible:outline-none">
             Add Nominee
           </button>
         </div>

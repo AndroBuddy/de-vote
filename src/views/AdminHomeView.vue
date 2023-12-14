@@ -17,9 +17,7 @@ function copyToClipboard(url) {
 
 <template>
   <!-- Header -->
-  <div
-    class="flex justify-between items-center px-4 md:px-8 py-5 bg-white border-b border-gray"
-  >
+  <div class="flex justify-between items-center px-4 md:px-8 py-5 bg-white border-b border-gray">
     <div class="text-lg font-bold">Overview</div>
     <section class="flex gap-6">
       <div class="flex flex-col text-xs">
