@@ -33,9 +33,9 @@ const router = createRouter({
       component: () => import('../views/VoteSubmittedView.vue')
     },
     {
-      path: '/add-product',
-      name: 'add-product',
-      component: () => import('../views/AddProductView.vue')
+      path: '/results',
+      name: 'poll-results',
+      component: () => import('../views/PollResultsView.vue')
     },
     {
       path: '/account',
