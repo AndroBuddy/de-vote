@@ -36,9 +36,7 @@ const people = [
 
 <template>
   <!-- Header -->
-  <div
-    class="px-4 md:px-14 py-5 rounded-bl-2xl bg-white border-b border-l border-gray flex flex-row justify-between"
-  >
+  <div class="flex justify-between items-center px-4 md:px-8 py-5 bg-white border-b border-gray">
     <div class="overview text-lg font-bold">About</div>
   </div>
   <section class="flex flex-col pt-10 px-4 pb-32 md:pb-12 md:px-14 flex-grow gap-12">

@@ -29,19 +29,24 @@ export const loginManager = defineStore('login', () => {
   }
 
   const guestUser = ref({
-    email: '',
-    name: 'Guest',
-    username: 'Not Signed In',
-    phone: '',
+    email: 'guest@test.com',
+    name: 'Power User',
+    username: 'guestTester',
+    phone: '0000000000',
     id: 'guest',
     profileUrl: '',
-    request: false
+    request: false,
+    admin: false
   })
 
   function setGuest() {
     authHelper().setGuest(guestUser.value)
-    router.push({ name: 'admin-home' })
   }
 
-  return { loginMessage, btnWarn, isLoaded, validateUser, setGuest }
+  function setVoterGuest() {
+    guestUser.value.admin = true
+    authHelper().setGuest(guestUser.value)
+  }
+
+  return { loginMessage, btnWarn, isLoaded, validateUser, setGuest, setVoterGuest }
 })

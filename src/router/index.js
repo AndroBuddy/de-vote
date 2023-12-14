@@ -1,7 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import AuthView from '../views/AuthView.vue'
+import VoterAuthView from '../views/VoterAuthView.vue'
 
-import HomeView from '../views/HomeView.vue'
+import VoterView from '../views/VoterView.vue'
+import LandingView from '../views/LandingView.vue'
 import { useProfileStore } from '../stores/api/profile'
 
 const router = createRouter({
@@ -9,8 +11,10 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: HomeView
+      name: 'landing',
+      components: {
+        FullPage: LandingView
+      }
     },
     {
       path: '/admin-home',
@@ -28,14 +32,28 @@ const router = createRouter({
       component: () => import('../views/VotersListView.vue')
     },
     {
-      path: '/submitted',
-      name: 'vote-submitted',
-      component: () => import('../views/VoteSubmittedView.vue')
-    },
-    {
-      path: '/results',
-      name: 'poll-results',
-      component: () => import('../views/PollResultsView.vue')
+      path: '/voter',
+      name: 'voter-home',
+      components: {
+        FullPage: VoterView
+      },
+      children: [
+        {
+          path: 'submitted',
+          name: 'vote-submitted',
+          component: () => import('../views/VoteSubmittedView.vue')
+        },
+        {
+          path: 'results',
+          name: 'poll-results',
+          component: () => import('../views/PollResultsView.vue')
+        },
+        {
+          path: 'vote',
+          name: 'vote',
+          component: () => import('../views/VotingView.vue')
+        }
+      ]
     },
     {
       path: '/account',
@@ -48,24 +66,30 @@ const router = createRouter({
       component: () => import('../views/AboutView.vue')
     },
     {
-      path: '/vote',
-      name: 'vote',
-      component:  () => import('../views/VotingView.vue')
-    },
-    {
-      path: '/p/:product',
-      name: 'product',
-      components: {
-        default: () => import('../views/ProductView.vue'),
-        RightPanel: () => import('../components/RightPanel.vue')
-      }
-    },
-    {
       path: '/:pathMatch(.*)*',
       name: 'NotFound',
       components: {
         FullPage: () => import('../views/NotFound.vue')
       }
+    },
+    {
+      path: '/voter',
+      name: 'voter',
+      components: {
+        FullPage: VoterAuthView
+      },
+      children: [
+        {
+          path: 'login',
+          name: 'voter-login',
+          component: () => import('../views/voter/LoginView.vue')
+        },
+        {
+          path: 'signup',
+          name: 'voter-signup',
+          component: () => import('../views/voter/SignupView.vue')
+        }
+      ]
     },
     {
       path: '/auth',
@@ -90,13 +114,18 @@ const router = createRouter({
 })
 
 router.beforeEach(async (to) => {
-  const publicRoutes = ['/auth/login', '/auth/signup']
+  const publicRoutes = ['/auth/login', '/auth/signup', '/voter/login', '/voter/signup', '/']
   const authRequired = !publicRoutes.includes(to.path)
   const auth = useProfileStore()
 
   if (authRequired && !auth.userAccount) {
     auth.returnUrl = to.fullPath
-    return { name: 'login' }
+
+    if (to.path.includes('/voter')) {
+      return { name: 'voter-login' }
+    } else {
+      return { name: 'login' }
+    }
   }
 })
 

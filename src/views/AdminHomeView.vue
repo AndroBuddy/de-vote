@@ -18,7 +18,7 @@ function copyToClipboard(url) {
 <template>
   <!-- Header -->
   <div
-    class="flex justify-between items-center px-4 md:px-8 py-5 rounded-bl-2xl bg-white border-b border-l border-gray"
+    class="flex justify-between items-center px-4 md:px-8 py-5 bg-white border-b border-gray"
   >
     <div class="text-lg font-bold">Overview</div>
     <section class="flex gap-6">
@@ -44,7 +44,7 @@ function copyToClipboard(url) {
   </div>
   <section class="flex flex-col pt-10 px-4 pb-32 md:pb-12 md:px-14 flex-grow gap-12">
     <!-- Ballot Info -->
-    <section class="flex flex-row gap-5 xl:self-center container">
+    <section class="flex flex-row gap-5 xl:self-center">
       <div
         class="flex flex-col items-center justify-center bg-blue-50 border-blue-500 border p-4 pr-10 rounded-lg text-blue-800">
         <div class="flex flex-row items-center gap-3">

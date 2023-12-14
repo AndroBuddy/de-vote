@@ -19,7 +19,7 @@ onMounted(() => {
 <template>
   <!-- basic properties of header -->
   <header
-    class="flex w-full items-center gap-4 lg:gap-10 sticky top-0 z-20 bg-white border-b border-l border-gray"
+    class="flex w-full items-center gap-4 lg:gap-10 sticky top-0 z-20 bg-white border-b border-gray"
   >
     <!-- Divides top half and bottom (representing page) -->
     <div class="flex flex-col w-full">

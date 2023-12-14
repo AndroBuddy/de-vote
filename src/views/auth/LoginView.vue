@@ -28,12 +28,12 @@ async function submit() {
       </div>
 
       <router-link
-        to="/"
+        to="/admin-home"
         @click="loginStore.setGuest()"
         class="flex gap-3 items-center justify-center border-black/20 border p-2 rounded-lg sm:w-96 hover:bg-black/5 transition-colors"
       >
         <UserSquare size="20" />
-        <h3>Log in as Guest User</h3>
+        <h3>Log in as Test User</h3>
       </router-link>
 
       <section class="flex gap-4 items-center justify-center">
