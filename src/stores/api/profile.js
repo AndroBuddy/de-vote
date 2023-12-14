@@ -12,7 +12,8 @@ export const useProfileStore = defineStore('profile', () => {
     phone: Number,
     id: String,
     profileUrl: String,
-    request: Boolean
+    request: Boolean,
+    admin: Boolean
   })
 
   userAccount.value = JSON.parse(localStorage.getItem('session_token'))

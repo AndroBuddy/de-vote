@@ -20,7 +20,7 @@ document.title = `${store.appName} | Auctions`
 </script>
 
 <template>
-  <RouterView name="FullPage" v-if="!profileStore.userAccount" />
+  <RouterView name="FullPage" v-if="!profileStore.userAccount || profileStore.userAccount.admin === true" />
   <main class="flex min-h-screen md:h-screen bg-[#f5f5f5]" v-else>
     <SideBar class="hidden md:block" @slide-in-out="slideInOut()" />
     <BottomBar class="block md:hidden" />
