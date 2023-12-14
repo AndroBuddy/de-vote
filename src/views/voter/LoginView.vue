@@ -1,5 +1,6 @@
 <script setup>
 import { loginManager } from '../../stores/auth/login'
+import VoterLoginHeader from '../../components/login/VoterLoginHeader.vue'
 
 import { UserSquare } from 'vue-iconsax'
 
@@ -7,6 +8,8 @@ const loginStore = loginManager()
 </script>
 
 <template>
+  <main class="flex flex-col items-center lg:items-start w-screen h-screen p-6">
+    <VoterLoginHeader />
   <section class="flex flex-col sm:items-center justify-center w-full h-full">
     <section class="flex flex-col gap-8">
       <div class="flex flex-col gap-1">
@@ -22,4 +25,5 @@ const loginStore = loginManager()
       </router-link>
     </section>
   </section>
+  </main>
 </template>

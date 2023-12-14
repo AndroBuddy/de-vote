@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import AuthView from '../views/AuthView.vue'
-import VoterAuthView from '../views/VoterAuthView.vue'
+// import VoterAuthView from '../views/VoterAuthView.vue'
 
 import VoterView from '../views/VoterView.vue'
 import LandingView from '../views/LandingView.vue'
@@ -32,30 +32,6 @@ const router = createRouter({
       component: () => import('../views/VotersListView.vue')
     },
     {
-      path: '/voter',
-      name: 'voter-home',
-      components: {
-        FullPage: VoterView
-      },
-      children: [
-        {
-          path: 'submitted',
-          name: 'vote-submitted',
-          component: () => import('../views/VoteSubmittedView.vue')
-        },
-        {
-          path: 'results',
-          name: 'poll-results',
-          component: () => import('../views/PollResultsView.vue')
-        },
-        {
-          path: 'vote',
-          name: 'vote',
-          component: () => import('../views/VotingView.vue')
-        }
-      ]
-    },
-    {
       path: '/account',
       name: 'account',
       component: () => import('../views/AccountView.vue')
@@ -74,9 +50,9 @@ const router = createRouter({
     },
     {
       path: '/voter',
-      name: 'voter',
+      name: 'voter-auth',
       components: {
-        FullPage: VoterAuthView
+        FullPage: VoterView
       },
       children: [
         {
@@ -88,6 +64,21 @@ const router = createRouter({
           path: 'signup',
           name: 'voter-signup',
           component: () => import('../views/voter/SignupView.vue')
+        },
+        {
+          path: 'submitted',
+          name: 'vote-submitted',
+          component: () => import('../views/VoteSubmittedView.vue')
+        },
+        {
+          path: 'results',
+          name: 'poll-results',
+          component: () => import('../views/PollResultsView.vue')
+        },
+        {
+          path: 'vote',
+          name: 'vote',
+          component: () => import('../views/VotingView.vue')
         }
       ]
     },
