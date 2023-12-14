@@ -40,11 +40,11 @@ export const loginManager = defineStore('login', () => {
   })
 
   function setGuest() {
+    guestUser.value.admin = true
     authHelper().setGuest(guestUser.value)
   }
 
   function setVoterGuest() {
-    guestUser.value.admin = true
     authHelper().setGuest(guestUser.value)
   }
 
