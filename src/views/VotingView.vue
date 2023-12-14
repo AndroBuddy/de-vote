@@ -13,7 +13,7 @@ function validateDetails() {
   return true
 }
 
-function voterLogin() {
+async function submit() {
   if (validateDetails())
   {
     nextFormPage()
@@ -45,7 +45,7 @@ function onLeave(el, done) {
 
 <template>
   <!-- Header -->
-  <div class="px-4 md:px-8 py-5 bg-white border-b border-gray">
+  <div class="px-4 md:px-8 py-5 bg-white">
     <div class="overview text-lg font-bold flex flex-row gap-2">
       <IconBrand />
       <h1 class="lowercase">devote</h1>
@@ -69,7 +69,7 @@ function onLeave(el, done) {
           </section>
         </div>
       </section>
-      <section v-else-if="formPage == 3">
+      <form @submit.prevent="submit" v-else-if="formPage == 3">
         <div class="flex flex-col gap-4 bg-white border-black/20 border p-6 rounded-lg sm:w-96">
           <h2>Enter your details to Vote</h2>
           <div class="flex flex-col gap-2">
@@ -163,13 +163,12 @@ function onLeave(el, done) {
           </div>
           <button
             type="submit"
-            @click="voterLogin"
             class="flex w-full justify-center items-center rounded-md bg-blue-800 px-3 py-1.5 text-sm leading-6 text-white shadow-sm hover:bg-blue-600 focus-visible:outline-none"
           >
             Log in to Vote
           </button>
         </div>
-      </section>
+      </form>
       <section v-else-if="formPage == 4">
         <div class="flex flex-col gap-3 bg-white border-black/20 border p-6 rounded-lg sm:w-96">
           <form class="flex flex-col gap-4" @submit.prevent="submit">
